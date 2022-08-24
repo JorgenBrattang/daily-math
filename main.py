@@ -1,105 +1,11 @@
-import gspread
-from google.oauth2.service_account import Credentials
-
-
-SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-    ]
-
-CREDS = Credentials.from_service_account_file('creds.json')
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('daily-math')
-
-# Sets up the variables
-# wks = worksheet
-users_wks = SHEET.worksheet("users")
-data = users_wks.get_all_values()
-
-
-def create_username():
-    """ Creates new user name """
-    user_input = input("Enter your name: ")
-    return user_input.lower()
-
-
-def create_user_pin():
-    """ Creates new user pin code """
-    return int(input("Enter your pin code: "))
-
-
-def update_users_worksheet(user_name, pin_code):
-    """
-    Creates a list from the user inputs and updates the
-    google sheet with the user input from
-    functions create_user_name() and create_user_pin()
-    """
-    create_list = [user_name, pin_code]
-    users_wks.append_row(create_list)
-
-
-def check_if_exists():
-    """
-    Checks if the name already exists
-    """
-    username = create_username()
-    user_pin = int(create_user_pin())
-    user_cell = users_wks.find(username, in_column=1)
-    if user_cell is not None:
-        print("The user name exists")
-        # Access the pin code from google sheet with usernames
-        pin_code = int(users_wks.cell(user_cell.row, 2).value)
-        if pin_code == user_pin:
-            success_login()
-        else:
-            print("Pin code and does not match!")
-            # Asks for the pin code if it was not the same
-            while True:
-                is_this_you = input(f"Are you {username}? Enter Y or N: ")
-                # if yes, user get another chance to enter a correct pin number
-                if is_this_you.lower() == "y":
-                    user_pin = int(create_user_pin())
-                    if pin_code == user_pin:
-                        success_login()
-                    else:
-                        failed_login(username, user_pin)
-                # If no, repeat the step above to enter a new username and pin
-                elif is_this_you.lower() == "n":
-                    check_if_exists()
-                    break
-                else:
-                    print(f"\nPlease {username}, enter the key Y or N")
-    else:
-        # If the user name does not exist do this:
-        update_users_worksheet(username, user_pin)
-        print(f"\nSuccessfully created account: {username}")
-
-
-def success_login():
-    """
-    If you entered the right pin code, print successfull login and
-    exit the application. This will change!
-    """
-    print("Successfull login")
-    exit()
-
-
-def failed_login(username, user_pin):
-    """
-    If you entered the wrong pin code, print wrong pin and
-    you entered wrong pin code.
-    """
-    print(f"\nWrong pin code for {username}, try again")
-    print(f"\nYou entered pin code {user_pin}")
+import login
 
 
 def main():
     """
     Runs the programs functions.
     """
-    check_if_exists()
+    login.check_if_exists()
 
 
 main()
