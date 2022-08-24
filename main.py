@@ -19,7 +19,7 @@ users_wks = SHEET.worksheet("users")
 data = users_wks.get_all_values()
 
 
-def create_user_name():
+def create_username():
     """ Creates new user name """
     user_input = input("Enter your name: ")
     return user_input.lower()
@@ -27,7 +27,7 @@ def create_user_name():
 
 def create_user_pin():
     """ Creates new user pin code """
-    return input("Enter your pin code: ")
+    return int(input("Enter your pin code: "))
 
 
 def update_users_worksheet(user_name, pin_code):
@@ -44,23 +44,36 @@ def check_if_exists():
     """
     Checks if the name already exists
     """
-    user_name = create_user_name()
-    user_cell = users_wks.find(user_name, in_column=1)
+    username = create_username()
+    user_pin = int(create_user_pin())
+    user_cell = users_wks.find(username, in_column=1)
     if user_cell is not None:
         print("The user name exists")
-        print(f"Search value: {users_wks.cell(user_cell.row, 2).value}")
-        return create_user_name()
+        # Access the pin code from google sheet with usernames 
+        pin_code = int(users_wks.cell(user_cell.row, 2).value)
+        print(f"\nSearched type: {type(pin_code)}")
+        print(f"Searched value: {pin_code}")
+        print(f"\nThis your input type: {type(user_pin)}")
+        print(f"This your input pin: {user_pin}\n")
+        if pin_code is user_pin:
+            print("Successfull login")
+        else:
+            print("Pin code and does not match!")
+        
+        # else:
+        #     return create_username()
     else:
-        return user_name
+        return username
 
 
 def main():
     """
     Runs the programs functions.
     """
-    user_str = check_if_exists()
-    pin_int = create_user_pin()
-    update_users_worksheet(user_str, pin_int)
+    check_if_exists()
+    # user_str = check_if_exists()
+    # pin_int = create_user_pin()
+    # update_users_worksheet(user_str, pin_int)
 
 
 main()
