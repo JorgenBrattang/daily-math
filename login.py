@@ -1,5 +1,6 @@
 import scope
-import main
+import success_login
+
 
 # Sets up the variables
 # wks = worksheet
@@ -27,13 +28,6 @@ def update_users_worksheet(user_name, pin_code):
     users_wks.append_row(create_list)
 
 
-def success_login():
-    """
-    If you entered the right pin code, print successfull login.
-    """
-    print("Successfull login")
-
-
 def check_if_exists():
     """
     Checks if the name already exists and tests the pin code, and
@@ -47,7 +41,7 @@ def check_if_exists():
         # Access the pin code from google sheet with usernames
         pin_code = int(users_wks.cell(user_cell.row, 2).value)
         if pin_code == user_pin:
-            success_login()
+            success_login.success_login(username)
         else:
             print("Pin code and does not match!")
             # Asks for the pin code if it was not the same
@@ -57,9 +51,7 @@ def check_if_exists():
                 if is_this_you.lower() == "y":
                     user_pin = int(create_user_pin())
                     if pin_code == user_pin:
-                        success_login()
-                        # ---------- Get the username into the main.py -------
-                        main.welcome_user(username)
+                        success_login.success_login(username)
                     else:
                         failed_login(username, user_pin)
                 # If no, repeat the step above to enter a new username and pin

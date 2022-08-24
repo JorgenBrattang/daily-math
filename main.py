@@ -14,23 +14,25 @@ def welcome():
     print(message)
 
 
-def welcome_user(username):
-    """
-    Welcomes you to the game
-    """
-    message = """
-    Welcome
-    """
-    print(message)
-    print(username)
-
-
 def main():
     """
     Runs the programs functions.
     """
     welcome()
     login.check_if_exists()
+    test = login.success_login()
+    print(test)
+
+
+# def welcome_user(username):
+#     """
+#     Welcomes you to the game
+#     """
+#     message = """
+#     Welcome
+#     """
+#     print(message)
+#     print(username)
 
 
 main()
