@@ -1,6 +1,6 @@
 ## Feature / Task list
 - Welcome message
-- Ask if its the first time.
+- Enter user name
     - Explain that user input i stored in non secured fasion, use fictional enquiry.
     - If first time, create account otherwise move on.
 - User login

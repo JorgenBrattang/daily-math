@@ -1,4 +1,5 @@
 import scope
+import main
 
 # Sets up the variables
 # wks = worksheet
@@ -26,9 +27,16 @@ def update_users_worksheet(user_name, pin_code):
     users_wks.append_row(create_list)
 
 
+def success_login():
+    """
+    If you entered the right pin code, print successfull login.
+    """
+    print("Successfull login")
+
+
 def check_if_exists():
     """
-    Checks if the name already exists and tests the pin code, and 
+    Checks if the name already exists and tests the pin code, and
     if it doesn't exists, creates a new user.
     """
     username = create_username()
@@ -50,6 +58,8 @@ def check_if_exists():
                     user_pin = int(create_user_pin())
                     if pin_code == user_pin:
                         success_login()
+                        # ---------- Get the username into the main.py -------
+                        main.welcome_user(username)
                     else:
                         failed_login(username, user_pin)
                 # If no, repeat the step above to enter a new username and pin
@@ -62,15 +72,6 @@ def check_if_exists():
         # If the user name does not exist do this:
         update_users_worksheet(username, user_pin)
         print(f"\nSuccessfully created account: {username}")
-
-
-def success_login():
-    """
-    If you entered the right pin code, print successfull login and
-    exit the application. This will change!
-    """
-    print("Successfull login")
-    exit()
 
 
 def failed_login(username, user_pin):
