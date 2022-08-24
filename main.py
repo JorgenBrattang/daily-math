@@ -49,21 +49,50 @@ def check_if_exists():
     user_cell = users_wks.find(username, in_column=1)
     if user_cell is not None:
         print("The user name exists")
-        # Access the pin code from google sheet with usernames 
+        # Access the pin code from google sheet with usernames
         pin_code = int(users_wks.cell(user_cell.row, 2).value)
-        print(f"\nSearched type: {type(pin_code)}")
-        print(f"Searched value: {pin_code}")
-        print(f"\nThis your input type: {type(user_pin)}")
-        print(f"This your input pin: {user_pin}\n")
         if pin_code == user_pin:
-            print("Successfull login")
+            success_login()
         else:
             print("Pin code and does not match!")
-        
-        # else:
-        #     return create_username()
+            # Asks for the pin code if it was not the same
+            while True:
+                is_this_you = input(f"Are you {username}? Enter Y or N: ")
+                # if yes, user get another chance to enter a correct pin number
+                if is_this_you.lower() == "y":
+                    user_pin = int(create_user_pin())
+                    if pin_code == user_pin:
+                        success_login()
+                    else:
+                        failed_login(username, user_pin)
+                # If no, repeat the step above to enter a new username and pin
+                elif is_this_you.lower() == "n":
+                    check_if_exists()
+                    break
+                else:
+                    print(f"\nPlease {username}, enter the key Y or N")
     else:
-        return username
+        # If the user name does not exist do this:
+        update_users_worksheet(username, user_pin)
+        print(f"\nSuccessfully created account: {username}")
+
+
+def success_login():
+    """
+    If you entered the right pin code, print successfull login and
+    exit the application. This will change!
+    """
+    print("Successfull login")
+    exit()
+
+
+def failed_login(username, user_pin):
+    """
+    If you entered the wrong pin code, print wrong pin and
+    you entered wrong pin code.
+    """
+    print(f"\nWrong pin code for {username}, try again")
+    print(f"\nYou entered pin code {user_pin}")
 
 
 def main():
@@ -71,9 +100,6 @@ def main():
     Runs the programs functions.
     """
     check_if_exists()
-    # user_str = check_if_exists()
-    # pin_int = create_user_pin()
-    # update_users_worksheet(user_str, pin_int)
 
 
 main()
