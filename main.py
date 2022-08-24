@@ -14,15 +14,39 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('daily-math')
 
 
-def create_user():
-    """ Creates new user """
-    print("Create your login name: ")
-    user_str = input("Enter your name: ")
-    print(f"The chosen name is {user_str}\n")
-
-    print("Create your pin code: ")
-    pin_code = input("Enter your pin code: ")
-    print(f"The chosen pin code is {pin_code}")
+users_worksheet = SHEET.worksheet("users")
 
 
-create_user()
+def create_user_name():
+    """ Creates new user name """
+    return input("Enter your name: ")
+
+
+def create_user_pin():
+    """ Creates new user pin code """
+    return input("Enter your pin code: ")
+
+
+def update_users_worksheet(user_name, pin_code):
+    """
+    Creates a list from the user inputs and updates the
+    google sheet with the user input from
+    functions create_user_name() and create_user_pin()
+    """
+    create_list = [user_name, pin_code]
+    users_worksheet.append_row(create_list)
+
+
+def main():
+    """
+    Runs the programs functions.
+    """
+    user_str = create_user_name()
+    pin_int = create_user_pin()
+    update_users_worksheet(user_str, pin_int)
+    data = users_worksheet.get_all_values()
+    print(data)
+
+
+main()
+
