@@ -55,7 +55,7 @@ def check_if_exists():
         print(f"Searched value: {pin_code}")
         print(f"\nThis your input type: {type(user_pin)}")
         print(f"This your input pin: {user_pin}\n")
-        if pin_code is user_pin:
+        if pin_code == user_pin:
             print("Successfull login")
         else:
             print("Pin code and does not match!")
