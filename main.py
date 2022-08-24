@@ -45,14 +45,13 @@ def check_if_exists():
     Checks if the name already exists
     """
     user_name = create_user_name()
-    # user_pin = create_user_pin()
     user_cell = users_wks.find(user_name, in_column=1)
     if user_cell is not None:
         print("The user name exists")
         print(f"Search value: {users_wks.cell(user_cell.row, 2).value}")
-        # if pin_cell is not None:
-        #     print("Does not match")
         return create_user_name()
+    else:
+        return user_name
 
 
 def main():
