@@ -24,11 +24,17 @@ def welcome():
 
 def create_username():
     """ Creates new user name """
-    user_input = input("Enter your name: ")
-    return user_input.lower()
+    while True:
+        username = input("Enter your name: ")
+        if username.isalpha():
+            return username.lower()
+            break
+        print("Incorrect name, only letters allowed. Please try again")
+    # user_input = input("Enter your name: ")
+    # return user_input.lower()
 
 
-def create_birth_year(username):
+def create_birth_year():
     """ Creates new user age """
     print("")
     print("Please enter a 4 digit year of birth")
@@ -41,7 +47,7 @@ def create_birth_year(username):
         print("Incorrect year of birth. Please try again")
 
 
-def create_user_pin(username):
+def create_user_pin():
     """ Creates new user pin code """
     print("")
     print("Please enter a 4 digit pin code")
@@ -70,7 +76,7 @@ def check_if_exists():
     if it doesn't exists, creates a new user.
     """
     username = create_username()
-    user_pin = int(create_user_pin(username))
+    user_pin = int(create_user_pin())
     user_cell = users_wks.find(username, in_column=1)
     if user_cell is not None:
         # Access the pin code from google sheet with usernames
@@ -86,7 +92,7 @@ def check_if_exists():
                 is_this_you = input(f"Are you {username}? Enter Y or N: ")
                 # if yes, user get another chance to enter a correct pin number
                 if is_this_you.lower() == "y":
-                    user_pin = int(create_user_pin(username))
+                    user_pin = int(create_user_pin())
                     if pin_code == user_pin:
                         success_login(username)
                         break
@@ -101,7 +107,7 @@ def check_if_exists():
                     print(f"\nPlease {username}, enter the key Y or N")
     else:
         # If the user name does not exist do this:
-        birth_year = create_birth_year(username)
+        birth_year = create_birth_year()
         update_users_worksheet(username, user_pin, birth_year, date_today())
         print(f"\nYour account is setup {username}\nPlease proceed to login\n")
         check_if_exists()
