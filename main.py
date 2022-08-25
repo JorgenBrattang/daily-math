@@ -7,6 +7,7 @@ import scope
 # wks = worksheet
 users_wks = scope.SHEET.worksheet("users")
 quotes_wks = scope.SHEET.worksheet("quotes")
+questions_1_wks = scope.SHEET.worksheet("questions-1")
 
 
 def welcome():
@@ -191,7 +192,7 @@ def random_qoutes():
     qoutes = quotes_wks.cell(random_number, 1).value
     author = quotes_wks.cell(random_number, 2).value
     print(f"    {qoutes}\n    - {author}")
-
+ 
 
 def calculate_age(username):
     """
@@ -211,6 +212,18 @@ def instructions(username):
     print("    1. Age 3-5 with numbers between 1-10")
     print("    2. Age 6-12 with numbers between 1-25")
     print("    3. Age 12+ with numbers between 1-100")
+
+
+def questions_level_1():
+    """
+    Age 3-5 random questions
+    """
+    print("")
+    length = questions_1_wks.row_count
+    random_number = randint(2, length)
+    question = questions_1_wks.cell(random_number, 1).value
+    answer = questions_1_wks.cell(random_number, 2).value
+    return [question, answer]
 
 
 def choose_difficulty(username):
@@ -233,7 +246,9 @@ def choose_difficulty(username):
                 print("")
                 user_input = input("Are you sure? Enter Y or N: ")
                 if user_input.lower() == "y":
-                    print("Go ahead and learn!")  # <--- Here is the next step
+                    list = questions_level_1()
+                    print(list)
+                    print(list[0])
                     break
                 elif user_input.lower() == "n":
                     print("")
@@ -242,7 +257,6 @@ def choose_difficulty(username):
                 else:
                     print(f"\nPlease {username}, enter the key Y or N")
             # ----------------------------------- Make function later
-        print("Age 3-5")
     elif choice_input == 2:
         if your_age > 13:
             # ----------------------------------- Make function later
@@ -253,7 +267,9 @@ def choose_difficulty(username):
                 print("")
                 user_input = input("Are you sure? Enter Y or N: ")
                 if user_input.lower() == "y":
-                    print("Go ahead and learn!")  # <--- Here is the next step
+                    list = questions_level_1()
+                    print(list[0])
+                    print(list)
                     break
                 elif user_input.lower() == "n":
                     print("")
@@ -262,9 +278,9 @@ def choose_difficulty(username):
                 else:
                     print(f"\nPlease {username}, enter the key Y or N")
             # ----------------------------------- Make function later
-        print("Age 6-12")
     elif choice_input == 3:
-        print("Age 12+")
+        list = questions_level_1()
+        print(list[0])
     else:
         message = "Pick a number between 1 and 3!"
         print(f"\nIt's not that hard {username}...\n{message}\n")
@@ -280,3 +296,4 @@ def start():
 
 
 start()
+# questions_level_1()
