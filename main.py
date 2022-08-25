@@ -226,17 +226,21 @@ def questions_level_1():
     return [question, answer]
 
 
-def answer_question():
+def answer_question(username):
     """
     Here you will get to answer the question given to you.
     """
     question_list_1 = questions_level_1()
-    print(question_list_1[0])
-    user_input = input("Enter your answer here: ")
-    if user_input == question_list_1[1]:
-        print("Correct")
-    else:
-        print("Try again!")
+    while True:
+        print("")
+        print(question_list_1[0])
+        user_input = input("Enter your answer here: ")
+        if user_input == question_list_1[1]:
+            print("")
+            print("Correct!")
+            break
+        else:
+            print(f"\nNot correct, keep trying {username}!")
 
 
 def choose_difficulty(username):
@@ -259,7 +263,7 @@ def choose_difficulty(username):
                 print("")
                 user_input = input("Are you sure? Enter Y or N: ")
                 if user_input.lower() == "y":
-                    answer_question()
+                    answer_question(username)
                     break
                 elif user_input.lower() == "n":
                     print("")
@@ -278,7 +282,7 @@ def choose_difficulty(username):
                 print("")
                 user_input = input("Are you sure? Enter Y or N: ")
                 if user_input.lower() == "y":
-                    answer_question()
+                    answer_question(username)
                     break
                 elif user_input.lower() == "n":
                     print("")
@@ -288,7 +292,7 @@ def choose_difficulty(username):
                     print(f"\nPlease {username}, enter the key Y or N")
             # ----------------------------------- Make function later
     elif choice_input == 3:
-        answer_question()
+        answer_question(username)
     else:
         message = "Pick a number between 1 and 3!"
         print(f"\nIt's not that hard {username}...\n{message}\n")
