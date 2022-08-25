@@ -3,6 +3,11 @@ from random import randint
 from datetime import date
 import scope
 
+# Sets up the variables
+# wks = worksheet
+users_wks = scope.SHEET.worksheet("users")
+quotes_wks = scope.SHEET.worksheet("quotes")
+
 
 def welcome():
     """
@@ -17,39 +22,45 @@ def welcome():
     print(message)
 
 
-# Sets up the variables
-# wks = worksheet
-users_wks = scope.SHEET.worksheet("users")
-quotes_wks = scope.SHEET.worksheet("quotes")
-
-
 def create_username():
     """ Creates new user name """
     user_input = input("Enter your name: ")
     return user_input.lower()
 
 
+def create_birth_year(username):
+    """ Creates new user age """
+    print("")
+    print("Please enter a 4 digit year of birth")
+    while True:
+        birth_year = int(input("Enter your year of birth: "))
+        length = len(str(birth_year))
+        if length == 4:
+            return birth_year
+            break
+        print("Incorrect year of birth. Please try again")
+
+
 def create_user_pin(username):
     """ Creates new user pin code """
-    try:
-        user_pin = int(input(f"\n{username}, enter your 4 digits pin code: "))
-        length = len(str(user_pin))
-        if length != 4:
-            print(f"\nEnter 4 digits, you entered {length} digits\n")
-            create_user_pin(username)
-        return user_pin
-    except ValueError:
-        print(f"\nYou entered not only digits... for that... Start over!")
-        check_if_exists()
+    print("")
+    print("Please enter a 4 digit pin code")
+    while True:
+        birth_year = int(input("Enter your pin code: "))
+        length = len(str(birth_year))
+        if length == 4:
+            return birth_year
+            break
+        print("Incorrect pin code. Please try again")
 
 
-def update_users_worksheet(user_name, pin_code):
+def update_users_worksheet(user_name, pin_code, birth_year, date):
     """
     Creates a list from the user inputs and updates the
     google sheet with the user input from
     functions create_user_name() and create_user_pin()
     """
-    create_list = [user_name, pin_code]
+    create_list = [user_name, pin_code, birth_year, date]
     users_wks.append_row(create_list)
 
 
@@ -67,9 +78,11 @@ def check_if_exists():
         if pin_code == user_pin:
             success_login(username)
         else:
+            print("")
             print("Pin code and does not match!")
             # Asks for the pin code if it was not the same
             while True:
+                print("")
                 is_this_you = input(f"Are you {username}? Enter Y or N: ")
                 # if yes, user get another chance to enter a correct pin number
                 if is_this_you.lower() == "y":
@@ -81,13 +94,15 @@ def check_if_exists():
                         failed_login(username, user_pin)
                 # If no, repeat the step above to enter a new username and pin
                 elif is_this_you.lower() == "n":
+                    print("")
                     check_if_exists()
                     break
                 else:
                     print(f"\nPlease {username}, enter the key Y or N")
     else:
         # If the user name does not exist do this:
-        update_users_worksheet(username, user_pin)
+        birth_year = create_birth_year(username)
+        update_users_worksheet(username, user_pin, birth_year, date_today())
         print(f"\nYour account is setup {username}\nPlease proceed to login\n")
         check_if_exists()
 
@@ -126,7 +141,7 @@ def latest_login(username):
     row_select = user_cell.row
     message = "You have 5 points left to complete the day"
     # checks the value of date in google sheets
-    users_latest_login = users_wks.cell(row_select, 3).value
+    users_latest_login = users_wks.cell(row_select, 4).value
     if date_today() == users_latest_login:
         # Print out a message how many points are left for today.
         print(f"\n{message}: 5\n")
@@ -136,14 +151,15 @@ def latest_login(username):
         print(f"\n{message}: 15\n")
         choose_difficulty(username)
         # Updates the date cell with todays date
-        users_wks.update_cell(row_select, 3, date_today())
+        users_wks.update_cell(row_select, 4, date_today())
 
 
 def welcome_to_daily_math(username):
     """
     Welcome you to daily math and gives random motivational qoute.
     """
-    print(f"\nWelcome to Daily Math {username}, may your calculations be true!\n")
+    print(f"\nWelcome to Daily Math {username}\nMay your calculations be true!")
+    print("")
     print(f"Todays date is: {date_today()}\n")
     random_qoutes()
 
@@ -152,11 +168,13 @@ def random_qoutes():
     """
     Gives you an random qoute from google sheets
     """
+    print("This is your motivation quote for this session:")
+    print("")
     length = quotes_wks.row_count
     random_number = randint(2, length)
     qoutes = quotes_wks.cell(random_number, 1).value
     author = quotes_wks.cell(random_number, 2).value
-    print(f"{qoutes}\n    - {author}")
+    print(f"    {qoutes}\n    - {author}")
 
 
 def choose_difficulty(username):
