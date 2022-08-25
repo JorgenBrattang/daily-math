@@ -1,5 +1,6 @@
 import scope
 from random import randint
+from datetime import date
 
 
 def welcome():
@@ -95,6 +96,35 @@ def success_login(username):
     """
     print("Successfull login")
     welcome_to_daily_math(username)
+    latest_login(username)
+
+
+def date_today():
+    """
+    Gives you the todays date with this format: August 25, 2022
+    """
+    return date.today().strftime("%B %d, %Y")
+
+
+def latest_login(username):
+    """
+    Sets the date you latest logged in.
+    """
+    # Finds the user
+    user_cell = users_wks.find(username, in_column=1)
+    # Selects the row
+    row_select = user_cell.row
+    message = "You have 5 points left to complete the day"
+    # checks the value of date in google sheets
+    users_latest_login = users_wks.cell(row_select, 3).value
+    if date_today() == users_latest_login:
+        # Print out a message how many points are left for today.
+        print(f"{message}: 5")
+    else:
+        # Print and (soon) sets the number of points are left.
+        print(f"{message}: 15")
+        # Updates the date cell with todays date
+        users_wks.update_cell(row_select, 3, date_today())
 
 
 def welcome_to_daily_math(username):
@@ -116,12 +146,12 @@ def random_qoutes():
     print(f"{qoutes}\n    - {author}")
 
 
-def main():
+def start():
     """
-    Runs the programs functions.
+    Starts the program
     """
     welcome()
     check_if_exists()
 
 
-main()
+start()
