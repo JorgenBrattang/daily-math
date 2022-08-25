@@ -25,3 +25,9 @@ Google sheet tasks:
     - Different score on each level.
 - Corresponding equations on the questions for each level.
 - Different messages, example "Welcome message".
+
+
+
+## Credit
+Quotes of the day:
+https://www.brainyquote.com/topics/motivational-quotes
