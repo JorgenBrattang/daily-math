@@ -1,6 +1,7 @@
-import scope
+""" Imports """
 from random import randint
 from datetime import date
+import scope
 
 
 def welcome():
@@ -28,9 +29,18 @@ def create_username():
     return user_input.lower()
 
 
-def create_user_pin():
+def create_user_pin(username):
     """ Creates new user pin code """
-    return int(input("Enter your pin code: "))
+    try:
+        user_pin = int(input(f"\n{username}, enter your 4 digits pin code: "))
+        length = len(str(user_pin))
+        if length != 4:
+            print(f"\nEnter 4 digits, you entered {length} digits\n")
+            create_user_pin(username)
+        return user_pin
+    except ValueError:
+        print(f"\nYou entered not only digits... for that... Start over!")
+        check_if_exists()
 
 
 def update_users_worksheet(user_name, pin_code):
@@ -49,7 +59,7 @@ def check_if_exists():
     if it doesn't exists, creates a new user.
     """
     username = create_username()
-    user_pin = int(create_user_pin())
+    user_pin = int(create_user_pin(username))
     user_cell = users_wks.find(username, in_column=1)
     if user_cell is not None:
         # Access the pin code from google sheet with usernames
@@ -63,7 +73,7 @@ def check_if_exists():
                 is_this_you = input(f"Are you {username}? Enter Y or N: ")
                 # if yes, user get another chance to enter a correct pin number
                 if is_this_you.lower() == "y":
-                    user_pin = int(create_user_pin())
+                    user_pin = int(create_user_pin(username))
                     if pin_code == user_pin:
                         success_login(username)
                         break
