@@ -220,8 +220,7 @@ def choose_difficulty(username):
         - School
         - Real life
     """
-    your_age = 31
-    # your_age = calculate_age(username)
+    your_age = calculate_age(username)
     instructions(username)
     choice_input = int(input("Pick a number between 1 and 3: "))
     if choice_input == 1:
@@ -239,6 +238,7 @@ def choose_difficulty(username):
                 elif user_input.lower() == "n":
                     print("")
                     choose_difficulty(username)
+                    break
                 else:
                     print(f"\nPlease {username}, enter the key Y or N")
             # ----------------------------------- Make function later
@@ -258,6 +258,7 @@ def choose_difficulty(username):
                 elif user_input.lower() == "n":
                     print("")
                     choose_difficulty(username)
+                    break
                 else:
                     print(f"\nPlease {username}, enter the key Y or N")
             # ----------------------------------- Make function later
@@ -278,8 +279,4 @@ def start():
     check_if_exists()
 
 
-# start()
-
-choose_difficulty("test")
-
-
+start()
