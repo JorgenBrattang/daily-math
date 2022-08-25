@@ -87,6 +87,7 @@ def check_if_exists():
             print("")
             print("Pin code and does not match!")
             # Asks for the pin code if it was not the same
+            # ----------------------------------- Make function later
             while True:
                 print("")
                 is_this_you = input(f"Are you {username}? Enter Y or N: ")
@@ -105,6 +106,7 @@ def check_if_exists():
                     break
                 else:
                     print(f"\nPlease {username}, enter the key Y or N")
+            # ----------------------------------- Make function later
     else:
         # If the user name does not exist do this:
         birth_year = create_birth_year()
@@ -137,17 +139,25 @@ def date_today():
     return date.today().strftime("%B %d, %Y")
 
 
-def latest_login(username):
-    """
-    Sets the date you latest logged in.
+def find_user(username):
+    """ 
+    Finds the user from the google sheet.
     """
     # Finds the user
     user_cell = users_wks.find(username, in_column=1)
     # Selects the row
-    row_select = user_cell.row
-    message = "You have 5 points left to complete the day"
+    return user_cell.row
+
+
+def latest_login(username):
+    """
+    Checks if the latest date you logged in match todays, and if
+    not it changes it to today.
+    """
+    row_select = find_user(username)
     # checks the value of date in google sheets
     users_latest_login = users_wks.cell(row_select, 4).value
+    message = "You have 5 points left to complete the day"
     if date_today() == users_latest_login:
         # Print out a message how many points are left for today.
         print(f"\n{message}: 5\n")
@@ -183,6 +193,26 @@ def random_qoutes():
     print(f"    {qoutes}\n    - {author}")
 
 
+def calculate_age(username):
+    """
+    This calculates your age based on your of birth and todays date.
+    """
+    year_now = date.today().strftime("%Y")
+    row_select = find_user(username)
+    year_of_birth = users_wks.cell(row_select, 3).value
+    return (int(year_now)) - (int(year_of_birth))
+
+
+def instructions(username):
+    """
+    Prints the instructions for the difficulty levels
+    """
+    print(f"{username} you now have three choices of difficulty")
+    print("    1. Age 3-5 with numbers between 1-10")
+    print("    2. Age 6-12 with numbers between 1-25")
+    print("    3. Age 12+ with numbers between 1-100")
+
+
 def choose_difficulty(username):
     """
     Here you get a choice to choose your difficulty level
@@ -190,17 +220,50 @@ def choose_difficulty(username):
         - School
         - Real life
     """
-    print(f"{username} you now have three choices of difficulty")
-    print("    1. Preschool which are numbers between 1-10")
-    print("    2. School which are numbers between 1-50")
-    print("    3. Real life which are numbers between 1-100")
+    your_age = 31
+    # your_age = calculate_age(username)
+    instructions(username)
     choice_input = int(input("Pick a number between 1 and 3: "))
     if choice_input == 1:
-        print("Preschool")
+        if your_age > 5:
+            # ----------------------------------- Make function later
+            print("")
+            print(f"Your age is {your_age}, this is for age 3-5.")
+            print("But if you really wanna do it, go ahead, I believe in you!")
+            while True:
+                print("")
+                user_input = input("Are you sure? Enter Y or N: ")
+                if user_input.lower() == "y":
+                    print("Go ahead and learn!")  # <--- Here is the next step
+                    break
+                elif user_input.lower() == "n":
+                    print("")
+                    choose_difficulty(username)
+                else:
+                    print(f"\nPlease {username}, enter the key Y or N")
+            # ----------------------------------- Make function later
+        print("Age 3-5")
     elif choice_input == 2:
-        print("School")
+        if your_age > 13:
+            # ----------------------------------- Make function later
+            print("")
+            print(f"Your age is {your_age}, this is for age 6-12.")
+            print("But if you really wanna do it, go ahead, I believe in you!")
+            while True:
+                print("")
+                user_input = input("Are you sure? Enter Y or N: ")
+                if user_input.lower() == "y":
+                    print("Go ahead and learn!")  # <--- Here is the next step
+                    break
+                elif user_input.lower() == "n":
+                    print("")
+                    choose_difficulty(username)
+                else:
+                    print(f"\nPlease {username}, enter the key Y or N")
+            # ----------------------------------- Make function later
+        print("Age 6-12")
     elif choice_input == 3:
-        print("Real life")
+        print("Age 12+")
     else:
         message = "Pick a number between 1 and 3!"
         print(f"\nIt's not that hard {username}...\n{message}\n")
@@ -215,4 +278,8 @@ def start():
     check_if_exists()
 
 
-start()
+# start()
+
+choose_difficulty("test")
+
+
