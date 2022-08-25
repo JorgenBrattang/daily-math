@@ -78,7 +78,8 @@ def check_if_exists():
     else:
         # If the user name does not exist do this:
         update_users_worksheet(username, user_pin)
-        print(f"\nSuccessfully created account: {username}")
+        print(f"\nYour account is setup {username}\nPlease proceed to login\n")
+        check_if_exists()
 
 
 def failed_login(username, user_pin):
@@ -94,7 +95,6 @@ def success_login(username):
     """
     If you entered the right pin code, print successfull login.
     """
-    print("Successfull login")
     welcome_to_daily_math(username)
     latest_login(username)
 
@@ -119,10 +119,10 @@ def latest_login(username):
     users_latest_login = users_wks.cell(row_select, 3).value
     if date_today() == users_latest_login:
         # Print out a message how many points are left for today.
-        print(f"{message}: 5")
+        print(f"\n{message}: 5")
     else:
         # Print and (soon) sets the number of points are left.
-        print(f"{message}: 15")
+        print(f"\n{message}: 15")
         # Updates the date cell with todays date
         users_wks.update_cell(row_select, 3, date_today())
 
@@ -131,7 +131,8 @@ def welcome_to_daily_math(username):
     """
     Welcome you to daily math and gives random motivational qoute.
     """
-    print(f"Welcome to Daily Math {username}, may your calculations be true!")
+    print(f"\nWelcome to Daily Math {username}, may your calculations be true!\n")
+    print(f"Todays date is: {date_today()}\n")
     random_qoutes()
 
 
