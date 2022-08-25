@@ -129,10 +129,12 @@ def latest_login(username):
     users_latest_login = users_wks.cell(row_select, 3).value
     if date_today() == users_latest_login:
         # Print out a message how many points are left for today.
-        print(f"\n{message}: 5")
+        print(f"\n{message}: 5\n")
+        choose_difficulty(username)
     else:
         # Print and (soon) sets the number of points are left.
-        print(f"\n{message}: 15")
+        print(f"\n{message}: 15\n")
+        choose_difficulty(username)
         # Updates the date cell with todays date
         users_wks.update_cell(row_select, 3, date_today())
 
@@ -155,6 +157,30 @@ def random_qoutes():
     qoutes = quotes_wks.cell(random_number, 1).value
     author = quotes_wks.cell(random_number, 2).value
     print(f"{qoutes}\n    - {author}")
+
+
+def choose_difficulty(username):
+    """
+    Here you get a choice to choose your difficulty level
+        - Preschool
+        - School
+        - Real life
+    """
+    print(f"{username} you now have three choices of difficulty")
+    print("    1. Preschool which are numbers between 1-10")
+    print("    2. School which are numbers between 1-50")
+    print("    3. Real life which are numbers between 1-100")
+    choice_input = int(input("Pick a number between 1 and 3: "))
+    if choice_input == 1:
+        print("Preschool")
+    elif choice_input == 2:
+        print("School")
+    elif choice_input == 3:
+        print("Real life")
+    else:
+        message = "Pick a number between 1 and 3!"
+        print(f"\nIt's not that hard {username}...\n{message}\n")
+        choose_difficulty(username)
 
 
 def start():
