@@ -112,6 +112,7 @@ def check_if_exists():
         # If the user name does not exist do this:
         birth_year = create_birth_year()
         update_users_worksheet(username, user_pin, birth_year, date_today())
+        reset_treats(username)
         print(f"\nYour account is setup {username}\nPlease proceed to login\n")
         check_if_exists()
 
@@ -155,6 +156,7 @@ def latest_login(username):
     Checks if the latest date you logged in match todays, and if
     not it changes it to today.
     """
+    # Finds the users row
     row_select = find_user(username)
     # checks the value of date in google sheets
     users_latest_login = users_wks.cell(row_select, 4).value
@@ -169,6 +171,7 @@ def latest_login(username):
         choose_difficulty(username)
         # Updates the date cell with todays date
         users_wks.update_cell(row_select, 4, date_today())
+        reset_treats(username)
 
 
 def welcome_to_daily_math(username):
@@ -238,6 +241,7 @@ def answer_question(username):
         if user_input == question_list_1[1]:
             print("")
             print("Correct!")
+            earn_treats(username)
             break
         else:
             print(f"\nNot correct, keep trying {username}!")
@@ -246,9 +250,9 @@ def answer_question(username):
 def choose_difficulty(username):
     """
     Here you get a choice to choose your difficulty level
-        - Preschool
-        - School
-        - Real life
+        - Age 3-5 with numbers between 1-10
+        - Age 6-12 with numbers between 1-25
+        - Age 12+ with numbers between 1-100
     """
     your_age = calculate_age(username)
     instructions(username)
@@ -299,6 +303,30 @@ def choose_difficulty(username):
         choose_difficulty(username)
 
 
+def earn_treats(username):
+    """
+    Give the user treats for each completed question.
+    """
+    # Finds the users row
+    row_select = find_user(username)
+    # checks the value of treats in google sheets
+    users_treats = users_wks.cell(row_select, 5).value
+    # Sets the users_treats to be int and adds more readability
+    increase_treats = int(users_treats)
+    # Access the users worksheets and increases the treats by 1
+    users_wks.update_cell(row_select, 5, increase_treats+1)
+
+
+def reset_treats(username):
+    """
+    Resets the users treats for a new day.
+    """
+    # Finds the users row
+    row_select = find_user(username)
+    # Access the users worksheets and sets the treats back to 0
+    users_wks.update_cell(row_select, 5, 0)
+
+
 def start():
     """
     Starts the program
@@ -308,4 +336,3 @@ def start():
 
 
 start()
-# questions_level_1()
