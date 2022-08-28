@@ -31,3 +31,8 @@ Google sheet tasks:
 ## Credit
 Quotes of the day:
 https://www.brainyquote.com/topics/motivational-quotes
+
+Math questions
+- https://www.kidzone.ws/math/wordproblems.htm
+
+- https://www.cuemath.com/learn/fun-maths-questions/#30%20Fun%20Maths%20Questions%20with%20answers

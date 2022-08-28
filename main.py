@@ -8,6 +8,8 @@ import scope
 users_wks = scope.SHEET.worksheet("users")
 quotes_wks = scope.SHEET.worksheet("quotes")
 questions_1_wks = scope.SHEET.worksheet("questions-1")
+questions_2_wks = scope.SHEET.worksheet("questions-2")
+questions_3_wks = scope.SHEET.worksheet("questions-3")
 
 
 def welcome_message():
@@ -16,9 +18,6 @@ def welcome_message():
     """
     message = """
     Welcome player, please login and enjoy your daily math.
-    If you need help with your questions just follow the
-    instructions while they are presented.
-    Now enjoy your stay!
     """
     print(message)
 
@@ -240,37 +239,43 @@ def instructions(username):
     print("")
     message = "you now have three choices of difficulty"
     print(f"{make_capitalize(username)} {message}")
-    print("    1. Age 3-5 with numbers between 1-10")
-    print("    2. Age 6-12 with numbers between 1-25")
-    print("    3. Age 12+ with numbers between 1-100")
+    print("    1. Age 3-5")
+    print("    2. Age 6-12")
+    print("    3. Age 12+")
 
 
-def questions_level_1():
+def random_questions(num):
     """
-    Age 3-5 random questions
+    Random question
     """
+    if num == 1:
+        worksheet = questions_1_wks
+    elif num == 2:
+        worksheet = questions_2_wks
+    elif num == 3:
+        worksheet = questions_3_wks
     print("")
-    length = questions_1_wks.row_count
+    length = worksheet.row_count
     random_number = randint(2, length)
-    question = questions_1_wks.cell(random_number, 1).value
-    answer = questions_1_wks.cell(random_number, 2).value
+    question = worksheet.cell(random_number, 1).value
+    answer = worksheet.cell(random_number, 2).value
     return [question, answer]
 
 
-def answer_question(username):
+def answer_question(username, num):
     """
     Here you will get to answer the question given to you.
     """
-    question_list_1 = questions_level_1()
+    question_list = random_questions(num)
     tries = 0
     while True:
         print("")
-        print(question_list_1[0])
+        print(question_list[0])
         user_input = input("Enter your answer here: ")
-        if user_input == question_list_1[1]:
+        if user_input == question_list[1]:
             print(f"That is correct {make_capitalize(username)}, good work!")
             earn_treats(username)
-            another_question(username)
+            another_question(username, num)
             break
         else:
             tries += 1
@@ -282,10 +287,10 @@ def answer_question(username):
                     choice_input = int(input("Enter number here: "))
                     if choice_input == 1:
                         print("")
-                        print(f"The answer is {question_list_1[1]}")
-                        another_question(username)
+                        print(f"The answer is {question_list[1]}")
+                        another_question(username, num)
                     elif choice_input == 2:
-                        answer_question(username)
+                        answer_question(username, num)
                     else:
                         message = "Pick a number between 1 and 2!"
                         not_that_hard(username)
@@ -299,7 +304,7 @@ def not_that_hard(username):
     print(f"\nIt's not that hard {make_capitalize(username)}...")
 
 
-def another_question(username):
+def another_question(username, num):
     """
     Asks if you want another question in the same difficulty
     """
@@ -308,7 +313,7 @@ def another_question(username):
         print("")
         user_input = input("Do you want to continue? Enter Y or N: ")
         if user_input.lower() == "y":
-            answer_question(username)
+            answer_question(username, num)
             break
         elif user_input.lower() == "n":
             print("")
@@ -328,14 +333,15 @@ def make_capitalize(username):
 def choose_difficulty(username):
     """
     Here you get a choice to choose your difficulty level
-        - Age 3-5 with numbers between 1-10
-        - Age 6-12 with numbers between 1-25
-        - Age 12+ with numbers between 1-100
+        - Age 3-5
+        - Age 6-12
+        - Age 12+
     """
     your_age = calculate_age(username)
     instructions(username)
     choice_input = int(input("Pick a number between 1 and 3: "))
     if choice_input == 1:
+        num = 1
         if your_age > 5:
             # ----------------------------------- Make function later
             print("")
@@ -345,7 +351,7 @@ def choose_difficulty(username):
                 print("")
                 user_input = input("Are you sure? Enter Y or N: ")
                 if user_input.lower() == "y":
-                    answer_question(username)
+                    answer_question(username, num)
                     break
                 elif user_input.lower() == "n":
                     print("")
@@ -355,8 +361,9 @@ def choose_difficulty(username):
                     print(f"\nPlease {username}, enter the key Y or N")
             # ----------------------------------- Make function later
         else:
-            answer_question(username)
+            answer_question(username, num)
     elif choice_input == 2:
+        num = 2
         if your_age > 13:
             # ----------------------------------- Make function later
             print("")
@@ -366,7 +373,7 @@ def choose_difficulty(username):
                 print("")
                 user_input = input("Are you sure? Enter Y or N: ")
                 if user_input.lower() == "y":
-                    answer_question(username)
+                    answer_question(username, num)
                     break
                 elif user_input.lower() == "n":
                     print("")
@@ -376,9 +383,10 @@ def choose_difficulty(username):
                     print(f"\nPlease {username}, enter the key Y or N")
             # ----------------------------------- Make function later
         else:
-            answer_question(username)
+            answer_question(username, num)
     elif choice_input == 3:
-        answer_question(username)
+        num = 3
+        answer_question(username, num)
     else:
         message = "Pick a number between 1 and 3!"
         print(f"\nIt's not that hard {make_capitalize(username)}...")
