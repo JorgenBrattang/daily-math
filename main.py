@@ -61,13 +61,13 @@ def create_user_pin():
         print("Incorrect pin code. Please try again")
 
 
-def update_users_worksheet(user_name, pin_code, birth_year, date):
+def update_users_worksheet(user_name, pin_code, birth_year, date_time):
     """
     Creates a list from the user inputs and updates the
     google sheet with the user input from
     functions create_user_name() and create_user_pin()
     """
-    create_list = [user_name, pin_code, birth_year, date]
+    create_list = [user_name, pin_code, birth_year, date_time]
     users_wks.append_row(create_list)
 
 
@@ -239,12 +239,31 @@ def answer_question(username):
         print(question_list_1[0])
         user_input = input("Enter your answer here: ")
         if user_input == question_list_1[1]:
-            print("")
-            print("Correct!")
+            another_question(username)
             earn_treats(username)
             break
         else:
             print(f"\nNot correct, keep trying {username}!")
+
+
+def another_question(username):
+    """
+    Asks if you want another question in the same difficulty
+    """
+    print("")
+    print(f"That is correct {username}, good work!")
+    while True:
+        print("")
+        user_input = input("Do you want to continue? Enter Y or N: ")
+        if user_input.lower() == "y":
+            answer_question(username)
+            break
+        elif user_input.lower() == "n":
+            print("")
+            choose_difficulty(username)  # Maybe add a menu here.
+            break
+        else:
+            print(f"\nPlease {username}, enter the key Y or N")
 
 
 def choose_difficulty(username):
@@ -276,6 +295,8 @@ def choose_difficulty(username):
                 else:
                     print(f"\nPlease {username}, enter the key Y or N")
             # ----------------------------------- Make function later
+        else:
+            answer_question(username)
     elif choice_input == 2:
         if your_age > 13:
             # ----------------------------------- Make function later
@@ -295,6 +316,8 @@ def choose_difficulty(username):
                 else:
                     print(f"\nPlease {username}, enter the key Y or N")
             # ----------------------------------- Make function later
+        else:
+            answer_question(username)
     elif choice_input == 3:
         answer_question(username)
     else:
