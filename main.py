@@ -1,6 +1,7 @@
 """ Imports """
 from random import randint
 from datetime import date
+from readchar import readkey, key
 import scope
 
 # Sets up the variables
@@ -272,6 +273,7 @@ def answer_question(username, num):
         print("")
         print(question_list[0])
         user_input = input("Enter your answer here: ")
+        # if user_input -------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         if user_input == question_list[1]:
             print(f"That is correct {make_capitalize(username)}, good work!")
             earn_treats(username)
@@ -453,4 +455,14 @@ def menu(username):
             print("Enter only digits!")
 
 
-login_screen()
+# login_screen()
+
+input("Press Any Key to continue...")
+
+# while True:
+#     k = readkey()
+#     if k == "a":
+#         print("pressed A")
+#     if k == key.ENTER:
+#         print("You pressed Enter")
+#         break
