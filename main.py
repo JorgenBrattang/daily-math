@@ -262,6 +262,7 @@ def answer_question(username):
     Here you will get to answer the question given to you.
     """
     question_list_1 = questions_level_1()
+    tries = 0
     while True:
         print("")
         print(question_list_1[0])
@@ -271,8 +272,31 @@ def answer_question(username):
             another_question(username)
             break
         else:
-            print(f"\nNot correct, keep trying {make_capitalize(username)}!")
+            tries += 1
+            if tries == 3:
+                while True:
+                    print("")
+                    print("Press 1 for solution.")
+                    print("Press 2 for to keep trying.")
+                    choice_input = int(input("Enter number here: "))
+                    if choice_input == 1:
+                        print("")
+                        print(f"The answer is {question_list_1[1]}")
+                        # New question?
+                        quit()
+                    elif choice_input == 2:
+                        answer_question(username)
+                    else:
+                        message = "Pick a number between 1 and 2!"
+                        not_that_hard(username)
+                        print(message)
+            print(tries)
+            print(f"\nWrong answer, keep trying {make_capitalize(username)}!")
 
+
+def not_that_hard(username):
+    """ Prints out not that hard and username """
+    print(f"\nIt's not that hard {make_capitalize(username)}...")
 
 def another_question(username):
     """
