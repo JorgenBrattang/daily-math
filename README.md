@@ -36,3 +36,8 @@ Math questions
 - https://www.kidzone.ws/math/wordproblems.htm
 
 - https://www.cuemath.com/learn/fun-maths-questions/#30%20Fun%20Maths%20Questions%20with%20answers
+
+- https://littlelearningcorner.com/2021/11/fun-math-questions-for-kids-k-2.html
+## Great Tutorials
+- Register Keypresses
+https://pypi.org/project/readchar/
