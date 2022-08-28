@@ -95,23 +95,32 @@ def check_if_exists(*args):
     Checks if the name already exists and tests the pin code, and
     if it doesn't exists, creates a new user.
     """
-    # Gets the argument new_user which holds True or False
     while True:
+        # Gets the argument new_user which holds True or False
         for arg in args:
             new_user = arg
+        # Defines the username from the function
         username = create_username()
+        # Checks the users wks for the username
         user_cell = users_wks.find(username, in_column=1)
+        # If it doesn't exist
         if user_cell is not None:
             if new_user is True:
                 print("This exists already, try another.")
+            # new_user is False
             else:
                 break
+        # If it does exist
         else:
+            # If the user cell dont exist
             if user_cell is None:
+                # And new_user is True
                 if new_user is True:
                     break
+                # Or if new_user is False,
+                # So it's and existing user trying to login
                 else:
-                    print("This account dont exist")
+                    print("This account don't exist")
                     # ----------------------------------- Make function later
                     while True:
                         question_user = input("Try again? Enter Y or N: ")
