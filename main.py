@@ -108,20 +108,23 @@ def check_if_exists(*args):
                 break
         else:
             if user_cell is None:
-                print("This account dont exist")
-                # ----------------------------------- Make function later
-                while True:
-                    question_user = input("Try again? Enter Y or N: ")
-                    print("")
-                    if question_user.lower() == "y":
-                        check_if_exists(False)
-                        break
-                    elif question_user.lower() == "n":
-                        start()
-                    else:
+                if new_user is True:
+                    break
+                else:
+                    print("This account dont exist")
+                    # ----------------------------------- Make function later
+                    while True:
+                        question_user = input("Try again? Enter Y or N: ")
                         print("")
-                        print("Please enter the key Y or N.")
-                # ----------------------------------- Make function later
+                        if question_user.lower() == "y":
+                            check_if_exists(False)
+                            break
+                        elif question_user.lower() == "n":
+                            start()
+                        else:
+                            print("")
+                            print("Please enter the key Y or N.")
+                    # ----------------------------------- Make function later
             else:
                 break
     user_pin = int(create_user_pin())
@@ -209,7 +212,7 @@ def latest_login(username):
     row_select = find_user(username)
     # checks the value of date in google sheets
     users_latest_login = users_wks.cell(row_select, 4).value
-    message = "You have 5 points left to complete the day"
+    message = "Pensil 5 points left to complete the day"
     if date_today() == users_latest_login:
         # Print out a message how many points are left for today.
         print(f"\n{message}: 5\n")
@@ -217,10 +220,11 @@ def latest_login(username):
     else:
         # Print and (soon) sets the number of points are left.
         print(f"\n{message}: 15\n")
-        choose_difficulty(username)
         # Updates the date cell with todays date
+        print("This is working.. kinda")
         users_wks.update_cell(row_select, 4, date_today())
         reset_treats(username)
+        choose_difficulty(username)
 
 
 def welcome_to_daily_math(username):
@@ -289,8 +293,8 @@ def answer_question(username):
         print(question_list_1[0])
         user_input = input("Enter your answer here: ")
         if user_input == question_list_1[1]:
-            another_question(username)
             earn_treats(username)
+            another_question(username)
             break
         else:
             print(f"\nNot correct, keep trying {make_capitalize(username)}!")
