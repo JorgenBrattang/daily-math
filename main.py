@@ -1,4 +1,5 @@
 """ Imports """
+from dataclasses import dataclass
 from random import randint
 from datetime import date
 import scope
@@ -23,6 +24,26 @@ def welcome():
     print(message)
 
 
+def ask_new_user():
+    """ Ask if you are a new user """
+    print("Are you a new user?")
+    new_user = True
+    # ----------------------------------- Make function later
+    while True:
+        question_user = input("Enter Y or N: ")
+        if question_user.lower() == "y":
+            check_if_exists(new_user)
+            break
+        elif question_user.lower() == "n":
+            new_user = False
+            check_if_exists(new_user)
+            break
+        else:
+            print("")
+            print("Please enter the key Y or N.")
+    # ----------------------------------- Make function later
+
+
 def create_username():
     """ Creates new user name """
     while True:
@@ -31,8 +52,6 @@ def create_username():
             return username.lower()
             break
         print("Incorrect name, only letters allowed. Please try again")
-    # user_input = input("Enter your name: ")
-    # return user_input.lower()
 
 
 def create_birth_year():
@@ -71,14 +90,23 @@ def update_users_worksheet(user_name, pin_code, birth_year, date_time):
     users_wks.append_row(create_list)
 
 
-def check_if_exists():
+def check_if_exists(*args):
     """
     Checks if the name already exists and tests the pin code, and
     if it doesn't exists, creates a new user.
     """
+    # Gets the argument new_user which holds True or False
+    for arg in args:
+        new_user = arg
     username = create_username()
-    user_pin = int(create_user_pin())
     user_cell = users_wks.find(username, in_column=1)
+    if new_user is True:
+        print("This exists already, try another.")
+        username = create_username()
+    else:
+        print("This account doesn't exist try again")
+        username = create_username()
+    user_pin = int(create_user_pin())
     if user_cell is not None:
         # Access the pin code from google sheet with usernames
         pin_code = int(users_wks.cell(user_cell.row, 2).value)
@@ -91,8 +119,10 @@ def check_if_exists():
             # ----------------------------------- Make function later
             while True:
                 print("")
-                is_this_you = input(f"Are you {make_capitalize(username)}? Enter Y or N: ")
-                # if yes, user get another chance to enter a correct pin number
+                print("Enter Y or N")
+                is_this_you = input(f"Are you {make_capitalize(username)}?")
+                
+                # if yes, user get another chance to enter a correct pin
                 if is_this_you.lower() == "y":
                     user_pin = int(create_user_pin())
                     if pin_code == user_pin:
@@ -106,14 +136,16 @@ def check_if_exists():
                     check_if_exists()
                     break
                 else:
-                    print(f"\nPlease {make_capitalize(username)}, enter the key Y or N")
-            # ----------------------------------- Make function later
+                    print(f"\nPlease {make_capitalize(username)}.")
+                    print("Enter the key Y or N")
+        # ----------------------------------- Make function later
     else:
         # If the user name does not exist do this:
         birth_year = create_birth_year()
         update_users_worksheet(username, user_pin, birth_year, date_today())
         reset_treats(username)
-        print(f"\nYour account is setup {make_capitalize(username)}\nPlease proceed to login\n")
+        print(f"\nYour account is setup {make_capitalize(username)}")
+        print("Please proceed to login\n")
         check_if_exists()
 
 
@@ -330,7 +362,8 @@ def choose_difficulty(username):
         answer_question(username)
     else:
         message = "Pick a number between 1 and 3!"
-        print(f"\nIt's not that hard {make_capitalize(username)}...\n{message}\n")
+        print(f"\nIt's not that hard {make_capitalize(username)}...")
+        print(f"{message}\n")
         choose_difficulty(username)
 
 
@@ -366,4 +399,5 @@ def start():
     check_if_exists()
 
 
-start()
+# start()
+ask_new_user()
