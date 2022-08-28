@@ -268,6 +268,7 @@ def answer_question(username):
         print(question_list_1[0])
         user_input = input("Enter your answer here: ")
         if user_input == question_list_1[1]:
+            print(f"That is correct {make_capitalize(username)}, good work!")
             earn_treats(username)
             another_question(username)
             break
@@ -282,8 +283,7 @@ def answer_question(username):
                     if choice_input == 1:
                         print("")
                         print(f"The answer is {question_list_1[1]}")
-                        # New question?
-                        quit()
+                        another_question(username)
                     elif choice_input == 2:
                         answer_question(username)
                     else:
@@ -298,12 +298,12 @@ def not_that_hard(username):
     """ Prints out not that hard and username """
     print(f"\nIt's not that hard {make_capitalize(username)}...")
 
+
 def another_question(username):
     """
     Asks if you want another question in the same difficulty
     """
     print("")
-    print(f"That is correct {make_capitalize(username)}, good work!")
     while True:
         print("")
         user_input = input("Do you want to continue? Enter Y or N: ")
