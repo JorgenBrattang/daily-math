@@ -133,32 +133,6 @@ def check_if_exists(*args):
         pin_code = int(users_wks.cell(user_cell.row, 2).value)
         if pin_code == user_pin:
             success_login(username)
-        else:
-            print("")
-            print("Pin code and does not match!")
-            # Asks for the pin code if it was not the same
-            # ----------------------------------- Make function later
-            while True:
-                print("")
-                print("Enter Y or N")
-                is_this_you = input(f"Are you {make_capitalize(username)}?")
-                # if yes, user get another chance to enter a correct pin
-                if is_this_you.lower() == "y":
-                    user_pin = int(create_user_pin())
-                    if pin_code == user_pin:
-                        success_login(username)
-                        break
-                    else:
-                        failed_login(username, user_pin)
-                # If no, repeat the step above to enter a new username and pin
-                elif is_this_you.lower() == "n":
-                    print("")
-                    check_if_exists()
-                    break
-                else:
-                    print(f"\nPlease {make_capitalize(username)}.")
-                    print("Enter the key Y or N")
-        # ----------------------------------- Make function later
     else:
         # If the user name does not exist do this:
         birth_year = create_birth_year()
@@ -167,15 +141,6 @@ def check_if_exists(*args):
         print(f"\nYour account is setup {make_capitalize(username)}")
         print("Please proceed to login\n")
         check_if_exists(False)
-
-
-def failed_login(username, user_pin):
-    """
-    If you entered the wrong pin code, print wrong pin and
-    you entered wrong pin code.
-    """
-    print(f"\nWrong pin code for {make_capitalize(username)}, try again")
-    print(f"\nYou entered pin code {user_pin}")
 
 
 def success_login(username):
