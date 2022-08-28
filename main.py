@@ -91,7 +91,7 @@ def check_if_exists():
             # ----------------------------------- Make function later
             while True:
                 print("")
-                is_this_you = input(f"Are you {username}? Enter Y or N: ")
+                is_this_you = input(f"Are you {make_capitalize(username)}? Enter Y or N: ")
                 # if yes, user get another chance to enter a correct pin number
                 if is_this_you.lower() == "y":
                     user_pin = int(create_user_pin())
@@ -106,14 +106,14 @@ def check_if_exists():
                     check_if_exists()
                     break
                 else:
-                    print(f"\nPlease {username}, enter the key Y or N")
+                    print(f"\nPlease {make_capitalize(username)}, enter the key Y or N")
             # ----------------------------------- Make function later
     else:
         # If the user name does not exist do this:
         birth_year = create_birth_year()
         update_users_worksheet(username, user_pin, birth_year, date_today())
         reset_treats(username)
-        print(f"\nYour account is setup {username}\nPlease proceed to login\n")
+        print(f"\nYour account is setup {make_capitalize(username)}\nPlease proceed to login\n")
         check_if_exists()
 
 
@@ -122,7 +122,7 @@ def failed_login(username, user_pin):
     If you entered the wrong pin code, print wrong pin and
     you entered wrong pin code.
     """
-    print(f"\nWrong pin code for {username}, try again")
+    print(f"\nWrong pin code for {make_capitalize(username)}, try again")
     print(f"\nYou entered pin code {user_pin}")
 
 
@@ -178,7 +178,8 @@ def welcome_to_daily_math(username):
     """
     Welcome you to daily math and gives random motivational qoute.
     """
-    print(f"\nWelcome to Daily Math {username}\nMay your calculations be true!")
+    print(f"\nWelcome to Daily Math {make_capitalize(username)}")
+    print("May your calculations be true!")
     print("")
     print(f"Todays date is: {date_today()}\n")
     random_qoutes()
@@ -211,7 +212,7 @@ def instructions(username):
     """
     Prints the instructions for the difficulty levels
     """
-    print(f"{username} you now have three choices of difficulty")
+    print(f"{make_capitalize(username)} you now have three choices of difficulty")
     print("    1. Age 3-5 with numbers between 1-10")
     print("    2. Age 6-12 with numbers between 1-25")
     print("    3. Age 12+ with numbers between 1-100")
@@ -243,7 +244,7 @@ def answer_question(username):
             earn_treats(username)
             break
         else:
-            print(f"\nNot correct, keep trying {username}!")
+            print(f"\nNot correct, keep trying {make_capitalize(username)}!")
 
 
 def another_question(username):
@@ -251,7 +252,7 @@ def another_question(username):
     Asks if you want another question in the same difficulty
     """
     print("")
-    print(f"That is correct {username}, good work!")
+    print(f"That is correct {make_capitalize(username)}, good work!")
     while True:
         print("")
         user_input = input("Do you want to continue? Enter Y or N: ")
@@ -264,6 +265,13 @@ def another_question(username):
             break
         else:
             print(f"\nPlease {username}, enter the key Y or N")
+
+
+def make_capitalize(username):
+    """
+    Makes the username uppercase for readability.
+    """
+    return username.capitalize()
 
 
 def choose_difficulty(username):
@@ -322,7 +330,7 @@ def choose_difficulty(username):
         answer_question(username)
     else:
         message = "Pick a number between 1 and 3!"
-        print(f"\nIt's not that hard {username}...\n{message}\n")
+        print(f"\nIt's not that hard {make_capitalize(username)}...\n{message}\n")
         choose_difficulty(username)
 
 
