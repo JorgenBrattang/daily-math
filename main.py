@@ -1,5 +1,4 @@
 """ Imports """
-from dataclasses import dataclass
 from random import randint
 from datetime import date
 import scope
@@ -31,6 +30,7 @@ def ask_new_user():
     # ----------------------------------- Make function later
     while True:
         question_user = input("Enter Y or N: ")
+        print("")
         if question_user.lower() == "y":
             check_if_exists(new_user)
             break
@@ -96,16 +96,34 @@ def check_if_exists(*args):
     if it doesn't exists, creates a new user.
     """
     # Gets the argument new_user which holds True or False
-    for arg in args:
-        new_user = arg
-    username = create_username()
-    user_cell = users_wks.find(username, in_column=1)
-    if new_user is True:
-        print("This exists already, try another.")
+    while True:
+        for arg in args:
+            new_user = arg
         username = create_username()
-    else:
-        print("This account doesn't exist try again")
-        username = create_username()
+        user_cell = users_wks.find(username, in_column=1)
+        if user_cell is not None:
+            if new_user is True:
+                print("This exists already, try another.")
+            else:
+                break
+        else:
+            if user_cell is None:
+                print("This account dont exist")
+                # ----------------------------------- Make function later
+                while True:
+                    question_user = input("Try again? Enter Y or N: ")
+                    print("")
+                    if question_user.lower() == "y":
+                        check_if_exists(False)
+                        break
+                    elif question_user.lower() == "n":
+                        start()
+                    else:
+                        print("")
+                        print("Please enter the key Y or N.")
+                # ----------------------------------- Make function later
+            else:
+                break
     user_pin = int(create_user_pin())
     if user_cell is not None:
         # Access the pin code from google sheet with usernames
@@ -121,7 +139,6 @@ def check_if_exists(*args):
                 print("")
                 print("Enter Y or N")
                 is_this_you = input(f"Are you {make_capitalize(username)}?")
-                
                 # if yes, user get another chance to enter a correct pin
                 if is_this_you.lower() == "y":
                     user_pin = int(create_user_pin())
@@ -146,7 +163,7 @@ def check_if_exists(*args):
         reset_treats(username)
         print(f"\nYour account is setup {make_capitalize(username)}")
         print("Please proceed to login\n")
-        check_if_exists()
+        check_if_exists(False)
 
 
 def failed_login(username, user_pin):
@@ -396,8 +413,7 @@ def start():
     Starts the program
     """
     welcome()
-    check_if_exists()
+    ask_new_user()
 
 
-# start()
-ask_new_user()
+start()
