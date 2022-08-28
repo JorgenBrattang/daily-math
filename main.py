@@ -10,7 +10,7 @@ quotes_wks = scope.SHEET.worksheet("quotes")
 questions_1_wks = scope.SHEET.worksheet("questions-1")
 
 
-def welcome():
+def welcome_message():
     """
     Welcomes you to the game
     """
@@ -129,7 +129,7 @@ def check_if_exists(*args):
                             check_if_exists(False)
                             break
                         elif question_user.lower() == "n":
-                            start()
+                            menu(username)
                         else:
                             print("")
                             print("Please enter the key Y or N.")
@@ -186,11 +186,11 @@ def latest_login(username):
     row_select = find_user(username)
     # checks the value of date in google sheets
     users_latest_login = users_wks.cell(row_select, 4).value
-    message = "Pensil 5 points left to complete the day"
+    message = "You got 5 points left to complete the day"
     if date_today() == users_latest_login:
         # Print out a message how many points are left for today.
         print(f"\n{message}: 5\n")
-        choose_difficulty(username)
+        menu(username)
     else:
         # Print and (soon) sets the number of points are left.
         print(f"\n{message}: 15\n")
@@ -198,7 +198,7 @@ def latest_login(username):
         print("This is working.. kinda")
         users_wks.update_cell(row_select, 4, date_today())
         reset_treats(username)
-        choose_difficulty(username)
+        menu(username)
 
 
 def welcome_to_daily_math(username):
@@ -216,13 +216,11 @@ def random_qoutes():
     """
     Gives you an random qoute from google sheets
     """
-    print("This is your motivation quote for this session:")
-    print("")
     length = quotes_wks.row_count
     random_number = randint(2, length)
     qoutes = quotes_wks.cell(random_number, 1).value
     author = quotes_wks.cell(random_number, 2).value
-    print(f"    {qoutes}\n    - {author}")
+    print(f"{qoutes}\n    - {author}")
  
 
 def calculate_age(username):
@@ -239,7 +237,9 @@ def instructions(username):
     """
     Prints the instructions for the difficulty levels
     """
-    print(f"{make_capitalize(username)} you now have three choices of difficulty")
+    print("")
+    message = "you now have three choices of difficulty"
+    print(f"{make_capitalize(username)} {message}")
     print("    1. Age 3-5 with numbers between 1-10")
     print("    2. Age 6-12 with numbers between 1-25")
     print("    3. Age 12+ with numbers between 1-100")
@@ -312,7 +312,7 @@ def another_question(username):
             break
         elif user_input.lower() == "n":
             print("")
-            choose_difficulty(username)  # Maybe add a menu here.
+            menu(username)
             break
         else:
             print(f"\nPlease {username}, enter the key Y or N")
@@ -410,12 +410,39 @@ def reset_treats(username):
     users_wks.update_cell(row_select, 5, 0)
 
 
-def start():
+def login_screen():
     """
-    Starts the program
+    First thing you see and that you need to login / register to move on.
     """
-    welcome()
+    welcome_message()
     ask_new_user()
 
 
-start()
+def menu(username):
+    """
+    This is where you return to when your done with certain things
+    """
+    print("Menu, select what you want to do.")
+    print("1. Question")
+    print("2. Motivational quote")
+    print("3. Quit")
+    while True:
+        user_input = input("Enter number here: ")
+        integer = user_input.isnumeric()
+        if integer is True:
+            if user_input == "1":
+                choose_difficulty(username)
+                quit()
+            elif user_input == "2":
+                random_qoutes()
+                print("")
+                menu(username)
+            elif user_input == "3":
+                quit()
+            else:
+                print("press a number between 1-3")
+        else:
+            print("Enter only digits!")
+
+
+login_screen()
