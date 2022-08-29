@@ -43,7 +43,7 @@ def input_message():
     return "                           Enter here: "
 
 
-def start_new_screen():
+def new_screen():
     """ Starts new screen """
     clear_screen()
     space_top()
@@ -54,7 +54,7 @@ def welcome_message():
     """
     Welcomes you to the game
     """
-    start_new_screen()
+    new_screen()
     center_text("Welcome player, please login and enjoy your daily math.")
 
 
@@ -82,7 +82,7 @@ def ask_new_user():
 
 def create_username():
     """ Creates new user name """
-    start_new_screen()
+    new_screen()
     center_text("Enter a name, use only letters.")
     while True:
         sleep(0.5)
@@ -104,7 +104,7 @@ def create_username():
 
 def create_user_pin():
     """ Creates new user pin code """
-    start_new_screen()
+    new_screen()
     center_text("Please enter a 4 digit pin code")
     while True:
         try:
@@ -127,7 +127,7 @@ def create_user_pin():
 
 def create_birth_year():
     """ Creates new user age """
-    start_new_screen()
+    new_screen()
     center_text("Please enter a 4 digit year of birth")
     while True:
         try:
@@ -215,7 +215,7 @@ def check_if_exists(new_user):
         birth_year = create_birth_year()
         update_users_worksheet(username, user_pin, birth_year, date_today())
         reset_treats(username)
-        start_new_screen()
+        new_screen()
         center_text("Your account is setup")
         center_text("Please proceed to login\n")
         center_text("Press any key to continue...")
@@ -229,15 +229,32 @@ def check_if_exists(new_user):
                 break
 
 
+def press_any_key():
+    """ Press any key to continue """
+    center_text("Press any key to continue...")
+    while True:
+        k = readkey()
+        if k == key.ENTER:
+            new_screen()
+            break
+        if k != key.ENTER:
+            new_screen()
+            break
+
+
 def welcome_to_daily_math(username):
     """
     Welcome you to daily math and gives random motivational qoute.
     """
-    center_text(f"\nWelcome to Daily Math {make_capitalize(username)}")
+    new_screen()
+    center_text("Welcome to Daily Math " + make_capitalize(username))
     center_text("May your calculations be true!")
+    center_text("Todays date is: " + date_today())
     print("")
-    center_text(f"Todays date is: {date_today()}\n")
+    press_any_key()
     random_qoutes()
+    print("")
+    press_any_key()
 
 
 def latest_login(username):
@@ -250,7 +267,8 @@ def latest_login(username):
     # checks the value of date in google sheets
     users_latest_login = users_wks.cell(row_select, 4).value
     test = "5"
-    message = "You need " + test + "treats to complete this day!"
+    message = "You need " + test + " treats to complete this day!"
+    print("")
     if date_today() == users_latest_login:
         # Print out a message how many points are left for today.
         center_text(message)
@@ -513,28 +531,37 @@ def menu(username):
     """
     This is where you return to when your done with certain things
     """
-    center_text("Menu, select what you want to do.")
+    center_text("Menu, press the number to continue")
     center_text("1. Question")
     center_text("2. Motivational quote")
     center_text("3. Quit")
     while True:
-        user_input = input("Enter number here: ")
-        integer = user_input.isnumeric()
-        if integer is True:
-            if user_input == "1":
-                choose_difficulty(username)
-                quit()
-            elif user_input == "2":
-                random_qoutes()
-                print("")
-                menu(username)
-            elif user_input == "3":
-                quit()
-            else:
-                center_text("press a number between 1-3")
+        k = readkey()
+        if k == "1":
+            choose_difficulty(username)
+        elif k == "2":
+            clear_screen()
+            space_top()
+            random_qoutes()
+            press_any_key()
+            menu(username)
+        elif k == "3":
+            print("")
+            center_text("Are you sure? Y or N")
+            while True:
+                k = readkey()
+                if k == "y":
+                    quit()
+                elif k == "n":
+                    clear_screen()
+                    menu(username)
+                elif k != "y":
+                    clear_screen()
+                    space_top()
+                    center_text("Press Y for yes and N for no")
         else:
-            center_text("Enter only digits!")
+            print("Did not press 1, 2 or 3.. Try again")
 
 
-login_screen()
-# create_user_pin()
+# login_screen()
+menu("test")
