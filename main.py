@@ -29,10 +29,10 @@ def clear_screen():
 def center_text(message):
     """ Center the text """
     length = 79 - (len(message))
-    print(message.center(len(message) + length))
+    console.print(message.center(len(message) + length))
 
 
-def adjust_text_top():
+def space_top():
     """ Creates 5 break lines when called """
     for x in range(5):
         print("")
@@ -43,7 +43,7 @@ def welcome_message():
     Welcomes you to the game
     """
     clear_screen()
-    adjust_text_top()
+    space_top()
     center_text("Welcome player, please login and enjoy your daily math.")
 
 
@@ -55,29 +55,40 @@ def ask_new_user():
     while True:
         k = readkey()
         if k == "y":
-            # clear_screen()
+            clear_screen()
             check_if_exists(new_user)
             break
         elif k == "n":
-            # clear_screen()
+            clear_screen()
             new_user = False
             check_if_exists(new_user)
             break
         elif k != "y":
-            center_text("Press Y for yes and N for no?")
-
-
-# ------------ Nothing below this is any concern now! ------------------
+            center_text("Press Y for yes and N for no")
 
 
 def create_username():
     """ Creates new user name """
+    sleep(0.5)
+    space_top()
+    center_text("Enter a name, only letters allowed.")
+    sleep(1)
     while True:
-        username = input("Enter your name: ")
+        sleep(0.5)
+        username = input("                  Enter your name: ")
         if username.isalpha():
-            return username.lower()
-            break
-        print("Incorrect name, only letters allowed. Please try again")
+            if len(username) > 15:
+                clear_screen()
+                center_text("To many characters, please limit yourself to 15.")
+            else:
+                return username.lower()
+                break
+        sleep(1)
+        clear_screen()
+        space_top()
+        center_text("Please try again")
+        sleep(1)
+        center_text("Also only alphabetic characters allowed.")
 
 
 def create_birth_year():
@@ -87,6 +98,8 @@ def create_birth_year():
     while True:
         birth_year = int(input("Enter your year of birth: "))
         length = len(str(birth_year))
+        if birth_year is not int:
+            print("no!")
         if length == 4:
             return birth_year
             break
@@ -95,24 +108,49 @@ def create_birth_year():
 
 def create_user_pin():
     """ Creates new user pin code """
-    print("")
-    print("Please enter a 4 digit pin code")
+    clear_screen()
+    space_top()
+    sleep(0.5)
+    center_text("Please enter a 4 digit pin code")
     while True:
-        birth_year = int(input("Enter your pin code: "))
-        length = len(str(birth_year))
-        if length == 4:
-            return birth_year
+        try:
+            sleep(0.5)
+            user_pin = int(input("                     Enter your pin code: "))
             break
-        print("Incorrect pin code. Please try again")
+        except ValueError:
+            clear_screen()
+            space_top()
+            sleep(1)
+            center_text("That's not a valid option!")
+            sleep(1)
+            center_text("Use 4 digits to create a pin code")
+            
 
 
-def update_users_worksheet(user_name, pin_code, birth_year, date_time):
+    # while True:
+    #     sleep(1)
+    #     user_pin = input("                       Enter your pin code: ")
+    #     length = len(user_pin)
+    #     if user_pin is not int:
+    #         clear_screen()
+    #         space_top()
+    #         sleep(1)
+    #         center_text("Incorrect pin code.")
+    #         sleep(1)
+    #         center_text("Use only 4 digits. Please try again")
+    #     if length == 4:
+    #         print(type(user_pin))
+    #         return user_pin
+    #         break
+
+
+def update_users_worksheet(user_name, user_pin, birth_year, date_time):
     """
     Creates a list from the user inputs and updates the
     google sheet with the user input from
     functions create_user_name() and create_user_pin()
     """
-    create_list = [user_name, pin_code, birth_year, date_time]
+    create_list = [user_name, user_pin, birth_year, date_time]
     users_wks.append_row(create_list)
 
 
@@ -132,7 +170,10 @@ def check_if_exists(*args):
         # If it doesn't exist
         if user_cell is not None:
             if new_user is True:
-                print("This exists already, try another.")
+                print("")
+                center_text("This exists already, try another.")
+                sleep(3)
+                clear_screen()
             # new_user is False
             else:
                 break
@@ -485,17 +526,5 @@ def menu(username):
             print("Enter only digits!")
 
 
-login_screen()
-
-# input("Press Any Key to continue...")
-
-# while True:
-#     k = readkey()
-#     if k == "a":
-#         print("pressed A")
-#     if k == key.ENTER:
-#         print("You pressed Enter")
-#         break
-
-
-# controll_size = "###############################################################################"
+# login_screen()
+create_user_pin()
