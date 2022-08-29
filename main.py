@@ -1,10 +1,13 @@
-""" Imports """
 from random import randint
 from datetime import date
-# from readchar import readkey, key
+from rich.console import Console
+from readchar import readkey, key
+from time import sleep
+import os
 import scope
+console = Console()
 
-# Sets up the variables
+
 # wks = worksheet
 users_wks = scope.SHEET.worksheet("users")
 quotes_wks = scope.SHEET.worksheet("quotes")
@@ -13,35 +16,54 @@ questions_2_wks = scope.SHEET.worksheet("questions-2")
 questions_3_wks = scope.SHEET.worksheet("questions-3")
 
 
+# -------- Credit code ----------
+def clear_screen():
+    """ 
+    Clears the screen when called.
+    Credits: https://teamtreehouse.com/community/using-a-clearscreen-in-pycharm
+    """
+    os.system('cls' if os.name == 'nt' else 'clear')
+# -------- ........... ----------
+
+
+def center_text(message):
+    """ Center the text """
+    length = 79 - (len(message))
+    print(message.center(len(message) + length))
+
+
+def adjust_text_top():
+    """ Creates 5 break lines when called """
+    for x in range(5):
+        print("")
+
+
 def welcome_message():
     """
     Welcomes you to the game
     """
-    message = """
-    Welcome player, please login and enjoy your daily math.
-    """
-    print(message)
+    clear_screen()
+    adjust_text_top()
+    center_text("Welcome player, please login and enjoy your daily math.")
 
 
 def ask_new_user():
     """ Ask if you are a new user """
-    print("Are you a new user?")
+    center_text("Are you a new user? Yes or No")
     new_user = True
-    # ----------------------------------- Make function later
     while True:
-        question_user = input("Enter Y or N: ")
-        print("")
-        if question_user.lower() == "y":
+        k = readkey()
+        if k == "y":
+            clear_screen()
             check_if_exists(new_user)
             break
-        elif question_user.lower() == "n":
+        elif k == "n":
+            clear_screen()
             new_user = False
             check_if_exists(new_user)
             break
-        else:
-            print("")
-            print("Please enter the key Y or N.")
-    # ----------------------------------- Make function later
+        elif k != "y":
+            print(center_text("Press Y for yes and N for no?"))
 
 
 def create_username():
@@ -470,3 +492,6 @@ login_screen()
 #     if k == key.ENTER:
 #         print("You pressed Enter")
 #         break
+
+
+# controll_size = "###############################################################################"

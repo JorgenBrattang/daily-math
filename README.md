@@ -37,6 +37,15 @@ Math questions
 
 - https://www.cuemath.com/learn/fun-maths-questions/#30%20Fun%20Maths%20Questions%20with%20answers
 
+### Credited Code
+
+- https://teamtreehouse.com/community/using-a-clearscreen-in-pycharm
+```python
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+```
+
+
 - https://littlelearningcorner.com/2021/11/fun-math-questions-for-kids-k-2.html
 ## Great Tutorials
 - Register Keypresses
