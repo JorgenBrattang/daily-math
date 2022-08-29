@@ -38,12 +38,23 @@ def space_top():
         print("")
 
 
+def input_message():
+    """ Enter here string """
+    return "                           Enter here: "
+
+
+def start_new_screen():
+    """ Starts new screen """
+    clear_screen()
+    space_top()
+    sleep(0.5)
+
+
 def welcome_message():
     """
     Welcomes you to the game
     """
-    clear_screen()
-    space_top()
+    start_new_screen()
     center_text("Welcome player, please login and enjoy your daily math.")
 
 
@@ -51,7 +62,7 @@ def ask_new_user():
     """ Ask if you are a new user """
     new_user = True
     while True:
-        sleep(1)
+        sleep(0.5)
         center_text("Are you a new user? Y or N")
         k = readkey()
         if k == "y":
@@ -71,13 +82,11 @@ def ask_new_user():
 
 def create_username():
     """ Creates new user name """
-    sleep(0.5)
-    space_top()
-    center_text("Enter a name, only letters allowed.")
-    sleep(1)
+    start_new_screen()
+    center_text("Enter a name, use only letters.")
     while True:
         sleep(0.5)
-        username = input("                           Enter here: ")
+        username = input(input_message())
         if username.isalpha():
             if len(username) > 15:
                 clear_screen()
@@ -93,31 +102,14 @@ def create_username():
         center_text("Also only alphabetic characters allowed.")
 
 
-def create_birth_year():
-    """ Creates new user age """
-    print("")
-    print("Please enter a 4 digit year of birth")
-    while True:
-        birth_year = int(input("Enter your year of birth: "))
-        length = len(str(birth_year))
-        if birth_year is not int:
-            print("no!")
-        if length == 4:
-            return birth_year
-            break
-        print("Incorrect year of birth. Please try again")
-
-
 def create_user_pin():
     """ Creates new user pin code """
-    clear_screen()
-    space_top()
-    sleep(0.5)
+    start_new_screen()
     center_text("Please enter a 4 digit pin code")
     while True:
         try:
             sleep(0.5)
-            user_pin = int(input("Enter pin code here: "))
+            user_pin = int(input(input_message()))
             test_pin_lenght = len(str(user_pin))
             if test_pin_lenght == 4:
                 return user_pin
@@ -133,6 +125,29 @@ def create_user_pin():
             center_text("Use 4 digits to create a pin code")
 
 
+def create_birth_year():
+    """ Creates new user age """
+    start_new_screen()
+    center_text("Please enter a 4 digit year of birth")
+    while True:
+        try:
+            sleep(0.5)
+            birth_year = int(input(input_message()))
+            test_pin_lenght = len(str(birth_year))
+            if test_pin_lenght == 4:
+                return birth_year
+                break
+            else:
+                raise ValueError
+        except ValueError:
+            clear_screen()
+            space_top()
+            sleep(1)
+            center_text("That's not a valid option!")
+            sleep(1)
+            center_text("Use 4 digits to create year of birth")
+
+
 def update_users_worksheet(user_name, user_pin, birth_year, date_time):
     """
     Creates a list from the user inputs and updates the
@@ -143,15 +158,12 @@ def update_users_worksheet(user_name, user_pin, birth_year, date_time):
     users_wks.append_row(create_list)
 
 
-def check_if_exists(*args):
+def check_if_exists(new_user):
     """
     Checks if the name already exists and tests the pin code, and
     if it doesn't exists, creates a new user.
     """
     while True:
-        # Gets the argument new_user which holds True or False
-        for arg in args:
-            new_user = arg
         # Defines the username from the function
         username = create_username()
         # Checks the users wks for the username
@@ -176,7 +188,7 @@ def check_if_exists(*args):
                 # Or if new_user is False,
                 # So it's and existing user trying to login
                 else:
-                    print("This account don't exist")
+                    center_text("This account don't exist")
                     # ----------------------------------- Make function later
                     while True:
                         question_user = input("Try again? Enter Y or N: ")
@@ -203,9 +215,53 @@ def check_if_exists(*args):
         birth_year = create_birth_year()
         update_users_worksheet(username, user_pin, birth_year, date_today())
         reset_treats(username)
-        print(f"\nYour account is setup {make_capitalize(username)}")
-        print("Please proceed to login\n")
-        check_if_exists(False)
+        start_new_screen()
+        center_text("Your account is setup")
+        center_text("Please proceed to login\n")
+        center_text("Press any key to continue...")
+        while True:
+            k = readkey()
+            if k == key.ENTER:
+                check_if_exists(False)
+                break
+            if k != key.ENTER:
+                check_if_exists(False)
+                break
+
+
+def welcome_to_daily_math(username):
+    """
+    Welcome you to daily math and gives random motivational qoute.
+    """
+    center_text(f"\nWelcome to Daily Math {make_capitalize(username)}")
+    center_text("May your calculations be true!")
+    print("")
+    center_text(f"Todays date is: {date_today()}\n")
+    random_qoutes()
+
+
+def latest_login(username):
+    """
+    Checks if the latest date you logged in match todays, and if
+    not it changes it to today.
+    """
+    # Finds the users row
+    row_select = find_user(username)
+    # checks the value of date in google sheets
+    users_latest_login = users_wks.cell(row_select, 4).value
+    test = "5"
+    message = "You need " + test + "treats to complete this day!"
+    if date_today() == users_latest_login:
+        # Print out a message how many points are left for today.
+        center_text(message)
+        menu(username)
+    else:
+        # Print and (soon) sets the number of points are left.
+        center_text(f"\n{message}: 15\n")
+        # Updates the date cell with todays date
+        users_wks.update_cell(row_select, 4, date_today())
+        reset_treats(username)
+        menu(username)
 
 
 def success_login(username):
@@ -224,48 +280,13 @@ def date_today():
 
 
 def find_user(username):
-    """ 
+    """
     Finds the user from the google sheet.
     """
     # Finds the user
     user_cell = users_wks.find(username, in_column=1)
     # Selects the row
     return user_cell.row
-
-
-def latest_login(username):
-    """
-    Checks if the latest date you logged in match todays, and if
-    not it changes it to today.
-    """
-    # Finds the users row
-    row_select = find_user(username)
-    # checks the value of date in google sheets
-    users_latest_login = users_wks.cell(row_select, 4).value
-    message = "You got 5 points left to complete the day"
-    if date_today() == users_latest_login:
-        # Print out a message how many points are left for today.
-        print(f"\n{message}: 5\n")
-        menu(username)
-    else:
-        # Print and (soon) sets the number of points are left.
-        print(f"\n{message}: 15\n")
-        # Updates the date cell with todays date
-        print("This is working.. kinda")
-        users_wks.update_cell(row_select, 4, date_today())
-        reset_treats(username)
-        menu(username)
-
-
-def welcome_to_daily_math(username):
-    """
-    Welcome you to daily math and gives random motivational qoute.
-    """
-    print(f"\nWelcome to Daily Math {make_capitalize(username)}")
-    print("May your calculations be true!")
-    print("")
-    print(f"Todays date is: {date_today()}\n")
-    random_qoutes()
 
 
 def random_qoutes():
@@ -276,7 +297,7 @@ def random_qoutes():
     random_number = randint(2, length)
     qoutes = quotes_wks.cell(random_number, 1).value
     author = quotes_wks.cell(random_number, 2).value
-    print(f"{qoutes}\n    - {author}")
+    center_text(f"{qoutes}\n    - {author}")
  
 
 def calculate_age(username):
@@ -295,10 +316,10 @@ def instructions(username):
     """
     print("")
     message = "you now have three choices of difficulty"
-    print(f"{make_capitalize(username)} {message}")
-    print("    1. Age 3-5")
-    print("    2. Age 6-12")
-    print("    3. Age 12+")
+    center_text(f"{make_capitalize(username)} {message}")
+    center_text("    1. Age 3-5")
+    center_text("    2. Age 6-12")
+    center_text("    3. Age 12+")
 
 
 def random_questions(num):
@@ -331,11 +352,11 @@ def answer_question(username, num):
         while True:
             user_input = input("Enter your answer here: ")
             if user_input.find(".") > 0:
-                print("Your answer contains a dot (.), please use commas (,)")
+                center_text("Your answer contains a dot (.), please use commas (,)")
             else:
                 break
         if user_input == question_list[1]:
-            print(f"That is correct {make_capitalize(username)}, good work!")
+            center_text(f"That is correct {make_capitalize(username)}, good work!")
             earn_treats(username)
             another_question(username, num)
             break
@@ -344,26 +365,26 @@ def answer_question(username, num):
             if tries == 3:
                 while True:
                     print("")
-                    print("Press 1 for solution.")
-                    print("Press 2 for to keep trying.")
+                    center_text("Press 1 for solution.")
+                    center_text("Press 2 for to keep trying.")
                     choice_input = int(input("Enter number here: "))
                     if choice_input == 1:
                         print("")
-                        print(f"The answer is {question_list[1]}")
+                        center_text(f"The answer is {question_list[1]}")
                         another_question(username, num)
                     elif choice_input == 2:
                         answer_question(username, num)
                     else:
                         message = "Pick a number between 1 and 2!"
                         not_that_hard(username)
-                        print(message)
+                        center_text(message)
             print(tries)
             print(f"\nWrong answer, keep trying {make_capitalize(username)}!")
 
 
 def not_that_hard(username):
     """ Prints out not that hard and username """
-    print(f"\nIt's not that hard {make_capitalize(username)}...")
+    center_text(f"\nIt's not that hard {make_capitalize(username)}...")
 
 
 def another_question(username, num):
@@ -382,7 +403,7 @@ def another_question(username, num):
             menu(username)
             break
         else:
-            print(f"\nPlease {username}, enter the key Y or N")
+            center_text(f"\nPlease {username}, enter the key Y or N")
 
 
 def make_capitalize(username):
@@ -420,7 +441,7 @@ def choose_difficulty(username):
                     choose_difficulty(username)
                     break
                 else:
-                    print(f"\nPlease {username}, enter the key Y or N")
+                    center_text(f"\nPlease {username}, enter the key Y or N")
             # ----------------------------------- Make function later
         else:
             answer_question(username, num)
@@ -429,8 +450,8 @@ def choose_difficulty(username):
         if your_age > 13:
             # ----------------------------------- Make function later
             print("")
-            print(f"Your age is {your_age}, this is for age 6-12.")
-            print("But if you really wanna do it, go ahead, I believe in you!")
+            center_text(f"Your age is {your_age}, this is for age 6-12.")
+            center_text("But if you really wanna do it, go ahead, I believe in you!")
             while True:
                 print("")
                 user_input = input("Are you sure? Enter Y or N: ")
@@ -442,7 +463,7 @@ def choose_difficulty(username):
                     choose_difficulty(username)
                     break
                 else:
-                    print(f"\nPlease {username}, enter the key Y or N")
+                    center_text(f"\nPlease {username}, enter the key Y or N")
             # ----------------------------------- Make function later
         else:
             answer_question(username, num)
@@ -451,8 +472,8 @@ def choose_difficulty(username):
         answer_question(username, num)
     else:
         message = "Pick a number between 1 and 3!"
-        print(f"\nIt's not that hard {make_capitalize(username)}...")
-        print(f"{message}\n")
+        center_text(f"\nIt's not that hard {make_capitalize(username)}...")
+        center_text(f"{message}\n")
         choose_difficulty(username)
 
 
@@ -492,10 +513,10 @@ def menu(username):
     """
     This is where you return to when your done with certain things
     """
-    print("Menu, select what you want to do.")
-    print("1. Question")
-    print("2. Motivational quote")
-    print("3. Quit")
+    center_text("Menu, select what you want to do.")
+    center_text("1. Question")
+    center_text("2. Motivational quote")
+    center_text("3. Quit")
     while True:
         user_input = input("Enter number here: ")
         integer = user_input.isnumeric()
@@ -510,9 +531,9 @@ def menu(username):
             elif user_input == "3":
                 quit()
             else:
-                print("press a number between 1-3")
+                center_text("press a number between 1-3")
         else:
-            print("Enter only digits!")
+            center_text("Enter only digits!")
 
 
 login_screen()
