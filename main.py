@@ -49,10 +49,10 @@ def welcome_message():
 
 def ask_new_user():
     """ Ask if you are a new user """
-    sleep(1)
-    center_text("Are you a new user? Y or N")
     new_user = True
     while True:
+        sleep(1)
+        center_text("Are you a new user? Y or N")
         k = readkey()
         if k == "y":
             clear_screen()
@@ -64,6 +64,8 @@ def ask_new_user():
             check_if_exists(new_user)
             break
         elif k != "y":
+            clear_screen()
+            space_top()
             center_text("Press Y for yes and N for no")
 
 
@@ -75,7 +77,7 @@ def create_username():
     sleep(1)
     while True:
         sleep(0.5)
-        username = input("                  Enter your name: ")
+        username = input("                           Enter here: ")
         if username.isalpha():
             if len(username) > 15:
                 clear_screen()
@@ -115,8 +117,13 @@ def create_user_pin():
     while True:
         try:
             sleep(0.5)
-            user_pin = int(input("                     Enter your pin code: "))
-            break
+            user_pin = int(input("Enter pin code here: "))
+            test_pin_lenght = len(str(user_pin))
+            if test_pin_lenght == 4:
+                return user_pin
+                break
+            else:
+                raise ValueError
         except ValueError:
             clear_screen()
             space_top()
@@ -124,24 +131,6 @@ def create_user_pin():
             center_text("That's not a valid option!")
             sleep(1)
             center_text("Use 4 digits to create a pin code")
-            
-
-
-    # while True:
-    #     sleep(1)
-    #     user_pin = input("                       Enter your pin code: ")
-    #     length = len(user_pin)
-    #     if user_pin is not int:
-    #         clear_screen()
-    #         space_top()
-    #         sleep(1)
-    #         center_text("Incorrect pin code.")
-    #         sleep(1)
-    #         center_text("Use only 4 digits. Please try again")
-    #     if length == 4:
-    #         print(type(user_pin))
-    #         return user_pin
-    #         break
 
 
 def update_users_worksheet(user_name, user_pin, birth_year, date_time):
@@ -203,7 +192,7 @@ def check_if_exists(*args):
                     # ----------------------------------- Make function later
             else:
                 break
-    user_pin = int(create_user_pin())
+    user_pin = create_user_pin()
     if user_cell is not None:
         # Access the pin code from google sheet with usernames
         pin_code = int(users_wks.cell(user_cell.row, 2).value)
@@ -526,5 +515,5 @@ def menu(username):
             print("Enter only digits!")
 
 
-# login_screen()
-create_user_pin()
+login_screen()
+# create_user_pin()
