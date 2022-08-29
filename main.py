@@ -49,21 +49,25 @@ def welcome_message():
 
 def ask_new_user():
     """ Ask if you are a new user """
-    center_text("Are you a new user? Yes or No")
+    sleep(1)
+    center_text("Are you a new user? Y or N")
     new_user = True
     while True:
         k = readkey()
         if k == "y":
-            clear_screen()
+            # clear_screen()
             check_if_exists(new_user)
             break
         elif k == "n":
-            clear_screen()
+            # clear_screen()
             new_user = False
             check_if_exists(new_user)
             break
         elif k != "y":
-            print(center_text("Press Y for yes and N for no?"))
+            center_text("Press Y for yes and N for no?")
+
+
+# ------------ Nothing below this is any concern now! ------------------
 
 
 def create_username():
