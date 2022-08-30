@@ -189,19 +189,35 @@ def check_if_exists(new_user):
                 # So it's and existing user trying to login
                 else:
                     center_text("This account don't exist")
-                    # ----------------------------------- Make function later
+                    # # ----------------------------------- Make function later
+                    # while True:
+                    #     question_user = input("Try again? Enter Y or N: ")
+                    #     print("")
+                    #     if question_user.lower() == "y":
+                    #         check_if_exists(False)
+                    #         break
+                    #     elif question_user.lower() == "n":
+                    #         menu(username)
+                    #     else:
+                    #         print("")
+                    #         print("Please enter the key Y or N.")
+                    # # ----------------------------------- Make function later
                     while True:
-                        question_user = input("Try again? Enter Y or N: ")
-                        print("")
-                        if question_user.lower() == "y":
+                        sleep(0.5)
+                        center_text("Try again? Y or N")
+                        k = readkey()
+                        if k == "y":
+                            clear_screen()
                             check_if_exists(False)
                             break
-                        elif question_user.lower() == "n":
+                        elif k == "n":
+                            clear_screen()
                             menu(username)
-                        else:
-                            print("")
-                            print("Please enter the key Y or N.")
-                    # ----------------------------------- Make function later
+                            break
+                        elif k != "y":
+                            clear_screen()
+                            space_top()
+                            center_text("Press Y for yes and N for no")
             else:
                 break
     user_pin = create_user_pin()
@@ -361,13 +377,16 @@ def answer_question(username, num):
         print("")
         print(question_list[0])
         while True:
-            user_input = input("Enter your answer here: ")
+            user_input = input(input_message())
             if user_input.find(".") > 0:
-                center_text("Your answer contains a dot (.), please use commas (,)")
+                message = "Your answer contains a dot, please use commas."
+                center_text(message)
             else:
                 break
         if user_input == question_list[1]:
-            center_text(f"That is correct {make_capitalize(username)}, good work!")
+            user = {make_capitalize(username)}
+            message = f"That is correct {user}, good work!"
+            center_text(message)
             earn_treats(username)
             another_question(username, num)
             break
@@ -424,6 +443,38 @@ def make_capitalize(username):
     return username.capitalize()
 
 
+def check_your_age(username, your_age, age, user, num):
+    """
+    Check if you want to play, though your age is
+    above the recommended age.
+    """
+    def if_your_age():
+        """ Creates smaller code, for more readability """
+        new_screen()
+        message = "Your age is not recommended for this difficulty, "
+        center_text(message + user + ".")
+        center_text("Do you want to continue?")
+        center_text("Press Y for yes and N for no")
+        while True:
+            k = readkey()
+            if k == "y":
+                clear_screen()
+                answer_question(username, num)
+                break
+            if k == "n":
+                choose_difficulty(username)
+                break
+            if k != "y":
+                center_text("Press Y for yes and N for no")
+                clear_screen()
+    if age == 13:
+        clear_screen()
+        answer_question(username, num)
+    else:
+        if your_age > age:
+            if_your_age()
+
+
 def choose_difficulty(username):
     """
     Here you get a choice to choose your difficulty level
@@ -431,61 +482,89 @@ def choose_difficulty(username):
         - Age 6-12
         - Age 12+
     """
+    new_screen()
     your_age = calculate_age(username)
     instructions(username)
-    choice_input = int(input("Pick a number between 1 and 3: "))
-    if choice_input == 1:
-        num = 1
-        if your_age > 5:
-            # ----------------------------------- Make function later
-            print("")
-            print(f"Your age is {your_age}, this is for age 3-5.")
-            print("But if you really wanna do it, go ahead, I believe in you!")
-            while True:
-                print("")
-                user_input = input("Are you sure? Enter Y or N: ")
-                if user_input.lower() == "y":
-                    answer_question(username, num)
-                    break
-                elif user_input.lower() == "n":
-                    print("")
-                    choose_difficulty(username)
-                    break
-                else:
-                    center_text(f"\nPlease {username}, enter the key Y or N")
-            # ----------------------------------- Make function later
-        else:
-            answer_question(username, num)
-    elif choice_input == 2:
-        num = 2
-        if your_age > 13:
-            # ----------------------------------- Make function later
-            print("")
-            center_text(f"Your age is {your_age}, this is for age 6-12.")
-            center_text("But if you really wanna do it, go ahead, I believe in you!")
-            while True:
-                print("")
-                user_input = input("Are you sure? Enter Y or N: ")
-                if user_input.lower() == "y":
-                    answer_question(username, num)
-                    break
-                elif user_input.lower() == "n":
-                    print("")
-                    choose_difficulty(username)
-                    break
-                else:
-                    center_text(f"\nPlease {username}, enter the key Y or N")
-            # ----------------------------------- Make function later
-        else:
-            answer_question(username, num)
-    elif choice_input == 3:
-        num = 3
-        answer_question(username, num)
-    else:
-        message = "Pick a number between 1 and 3!"
-        center_text(f"\nIt's not that hard {make_capitalize(username)}...")
-        center_text(f"{message}\n")
-        choose_difficulty(username)
+    user = make_capitalize(username)
+    center_text("Pick a number between 1 and 3: ")
+    while True:
+        sleep(0.5)
+        k = readkey()
+        if k == "1":
+            age = 5
+            num = 1
+            check_your_age(username, your_age, age, user, num)
+            break
+        elif k == "2":
+            age = 12
+            num = 2
+            check_your_age(username, your_age, age, user, num)
+            break
+        elif k == "3":
+            age = 13
+            num = 3
+            check_your_age(username, your_age, age, user, num)
+            break
+        elif k != "y":
+            clear_screen()
+            space_top()
+            message = "It's not that hard "
+            center_text(message + user + "...")
+            center_text("Pick a number between 1 and 3!")
+            instructions(username)
+
+    # if choice_input == 1:
+    #     num = 1
+    #     if your_age > 5:
+    #         # ----------------------------------- Make function later
+    #         print("")
+    #         print(f"Your age is {your_age}, this is for age 3-5.")
+    #         print("But if you really wanna do it, go ahead, I believe in you!")
+    #         while True:
+    #             print("")
+    #             user_input = input("Are you sure? Enter Y or N: ")
+    #             if user_input.lower() == "y":
+    #                 answer_question(username, num)
+    #                 break
+    #             elif user_input.lower() == "n":
+    #                 print("")
+    #                 choose_difficulty(username)
+    #                 break
+    #             else:
+    #                 center_text(f"\nPlease {username}, enter the key Y or N")
+    #         # ----------------------------------- Make function later
+    #     else:
+    #         answer_question(username, num)
+    # elif choice_input == 2:
+    #     num = 2
+    #     if your_age > 13:
+    #         # ----------------------------------- Make function later
+    #         print("")
+    #         center_text(f"Your age is {your_age}, this is for age 6-12.")
+    #         center_text("But if you really wanna do it, go ahead, I believe in you!")
+    #         while True:
+    #             print("")
+    #             user_input = input("Are you sure? Enter Y or N: ")
+    #             if user_input.lower() == "y":
+    #                 answer_question(username, num)
+    #                 break
+    #             elif user_input.lower() == "n":
+    #                 print("")
+    #                 choose_difficulty(username)
+    #                 break
+    #             else:
+    #                 center_text(f"\nPlease {username}, enter the key Y or N")
+    #         # ----------------------------------- Make function later
+    #     else:
+    #         answer_question(username, num)
+    # elif choice_input == 3:
+    #     num = 3
+    #     answer_question(username, num)
+    # else:
+    #     message = "Pick a number between 1 and 3!"
+    #     center_text(f"\nIt's not that hard {make_capitalize(username)}...")
+    #     center_text(f"{message}\n")
+    #     choose_difficulty(username)
 
 
 def earn_treats(username):
@@ -556,5 +635,5 @@ def menu(username):
             print("Did not press 1, 2 or 3.. Try again")
 
 
-login_screen()
-# menu("test")
+# login_screen()
+menu("test")
