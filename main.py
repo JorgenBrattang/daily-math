@@ -371,7 +371,9 @@ def answer_question(username, num):
     """
     Here you will get to answer the question given to you.
     """
+    new_screen()
     question_list = random_questions(num)
+    user = make_capitalize(username)
     tries = 0
     while True:
         print("")
@@ -394,22 +396,29 @@ def answer_question(username, num):
             tries += 1
             if tries == 3:
                 while True:
-                    print("")
+                    new_screen()
                     center_text("Press 1 for solution.")
                     center_text("Press 2 for to keep trying.")
-                    choice_input = int(input("Enter number here: "))
-                    if choice_input == 1:
-                        print("")
-                        center_text(f"The answer is {question_list[1]}")
-                        another_question(username, num)
-                    elif choice_input == 2:
-                        answer_question(username, num)
-                    else:
-                        message = "Pick a number between 1 and 2!"
-                        not_that_hard(username)
-                        center_text(message)
-            print(tries)
-            print(f"\nWrong answer, keep trying {make_capitalize(username)}!")
+                    while True:
+                        k = readkey()
+                        if k == "1":
+                            new_screen()
+                            print(question_list[0])
+                            center_text(f"The answer is {question_list[1]}")
+                            another_question(username, num)
+                        elif k == "2":
+                            answer_question(username, num)
+                        else:
+                            center_text("Did not press 1 or 2... Try again")
+            new_screen()
+            center_text("Wrong answer, keep trying " + user + "!")
+            sleep(0.5)
+            center_text(str(tries) + " out of 3")
+            sleep(0.5)
+            center_text("After 3 tries, a choice will be given.")
+            sleep(0.5)
+            print("")
+            press_any_key()
 
 
 def not_that_hard(username):
@@ -513,59 +522,6 @@ def choose_difficulty(username):
             center_text("Pick a number between 1 and 3!")
             instructions(username)
 
-    # if choice_input == 1:
-    #     num = 1
-    #     if your_age > 5:
-    #         # ----------------------------------- Make function later
-    #         print("")
-    #         print(f"Your age is {your_age}, this is for age 3-5.")
-    #         print("But if you really wanna do it, go ahead, I believe in you!")
-    #         while True:
-    #             print("")
-    #             user_input = input("Are you sure? Enter Y or N: ")
-    #             if user_input.lower() == "y":
-    #                 answer_question(username, num)
-    #                 break
-    #             elif user_input.lower() == "n":
-    #                 print("")
-    #                 choose_difficulty(username)
-    #                 break
-    #             else:
-    #                 center_text(f"\nPlease {username}, enter the key Y or N")
-    #         # ----------------------------------- Make function later
-    #     else:
-    #         answer_question(username, num)
-    # elif choice_input == 2:
-    #     num = 2
-    #     if your_age > 13:
-    #         # ----------------------------------- Make function later
-    #         print("")
-    #         center_text(f"Your age is {your_age}, this is for age 6-12.")
-    #         center_text("But if you really wanna do it, go ahead, I believe in you!")
-    #         while True:
-    #             print("")
-    #             user_input = input("Are you sure? Enter Y or N: ")
-    #             if user_input.lower() == "y":
-    #                 answer_question(username, num)
-    #                 break
-    #             elif user_input.lower() == "n":
-    #                 print("")
-    #                 choose_difficulty(username)
-    #                 break
-    #             else:
-    #                 center_text(f"\nPlease {username}, enter the key Y or N")
-    #         # ----------------------------------- Make function later
-    #     else:
-    #         answer_question(username, num)
-    # elif choice_input == 3:
-    #     num = 3
-    #     answer_question(username, num)
-    # else:
-    #     message = "Pick a number between 1 and 3!"
-    #     center_text(f"\nIt's not that hard {make_capitalize(username)}...")
-    #     center_text(f"{message}\n")
-    #     choose_difficulty(username)
-
 
 def earn_treats(username):
     """
@@ -603,6 +559,7 @@ def menu(username):
     """
     This is where you return to when your done with certain things
     """
+    new_screen()
     center_text("Menu, press the number to continue")
     center_text("1. Question")
     center_text("2. Motivational quote")
@@ -636,4 +593,4 @@ def menu(username):
 
 
 # login_screen()
-menu("test")
+answer_question("test", 1)
