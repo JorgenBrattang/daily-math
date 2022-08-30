@@ -63,43 +63,40 @@ def ask_new_user():
     new_user = True
     while True:
         sleep(0.5)
+        print("")
         center_text("Are you a new user? Y or N")
         k = readkey()
         if k == "y":
-            clear_screen()
             check_if_exists(new_user)
-            break
         elif k == "n":
-            clear_screen()
             new_user = False
             check_if_exists(new_user)
-            break
         elif k != "y":
-            clear_screen()
-            space_top()
+            new_screen()
             center_text("Press Y for yes and N for no")
 
 
 def create_username():
     """ Creates new user name """
-    new_screen()
-    center_text("Enter a name, use only letters.")
     while True:
+        new_screen()
+        center_text("Hello, please enter your name.")
         sleep(0.5)
         username = input(input_message())
         if username.isalpha():
             if len(username) > 15:
-                clear_screen()
+                new_screen()
                 center_text("To many characters, please limit yourself to 15.")
+                print("")
+                press_any_key()
             else:
                 return username.lower()
-                break
-        sleep(1)
-        clear_screen()
-        space_top()
+        new_screen()
         center_text("Please try again")
-        sleep(1)
+        sleep(0.5)
         center_text("Also only alphabetic characters allowed.")
+        print("")
+        press_any_key()
 
 
 def create_user_pin():
@@ -113,15 +110,12 @@ def create_user_pin():
             test_pin_lenght = len(str(user_pin))
             if test_pin_lenght == 4:
                 return user_pin
-                break
             else:
                 raise ValueError
         except ValueError:
-            clear_screen()
-            space_top()
-            sleep(1)
+            new_screen()
             center_text("That's not a valid option!")
-            sleep(1)
+            sleep(0.5)
             center_text("Use 4 digits to create a pin code")
 
 
@@ -136,15 +130,13 @@ def create_birth_year():
             test_pin_lenght = len(str(birth_year))
             if test_pin_lenght == 4:
                 return birth_year
-                break
             else:
                 raise ValueError
         except ValueError:
             clear_screen()
             space_top()
-            sleep(1)
             center_text("That's not a valid option!")
-            sleep(1)
+            sleep(0.5)
             center_text("Use 4 digits to create year of birth")
 
 
@@ -173,61 +165,52 @@ def check_if_exists(new_user):
             if new_user is True:
                 print("")
                 center_text("This exists already, try another.")
-                sleep(3)
+                print("")
+                press_any_key()
                 clear_screen()
-            # new_user is False
             else:
                 break
         # If it does exist
         else:
-            # If the user cell dont exist
+            # Asks if the user name exists and new_user is True or False
             if user_cell is None:
-                # And new_user is True
                 if new_user is True:
                     break
-                # Or if new_user is False,
-                # So it's and existing user trying to login
                 else:
+                    print("")
                     center_text("This account don't exist")
-                    # # ----------------------------------- Make function later
-                    # while True:
-                    #     question_user = input("Try again? Enter Y or N: ")
-                    #     print("")
-                    #     if question_user.lower() == "y":
-                    #         check_if_exists(False)
-                    #         break
-                    #     elif question_user.lower() == "n":
-                    #         menu(username)
-                    #     else:
-                    #         print("")
-                    #         print("Please enter the key Y or N.")
-                    # # ----------------------------------- Make function later
                     while True:
                         sleep(0.5)
                         center_text("Try again? Y or N")
                         k = readkey()
                         if k == "y":
-                            clear_screen()
                             check_if_exists(False)
                             break
                         elif k == "n":
-                            clear_screen()
-                            menu(username)
+                            login_screen()
                             break
                         elif k != "y":
-                            clear_screen()
                             space_top()
                             center_text("Press Y for yes and N for no")
             else:
                 break
     user_pin = create_user_pin()
+    # If username exist do this:
+    # ----------------------------------------------------
     if user_cell is not None:
         # Access the pin code from google sheet with usernames
         pin_code = int(users_wks.cell(user_cell.row, 2).value)
+        # Checks the pincode
         if pin_code == user_pin:
             success_login(username)
+        if pin_code != user_pin:
+            user = make_capitalize(username)
+            center_text("Wrong pin code " + user + "!")
+            print("")
+            press_any_key()
+    # ---------------------------------------------------- Come back to this
+    # If the username does not exist do this:
     else:
-        # If the user name does not exist do this:
         birth_year = create_birth_year()
         update_users_worksheet(username, user_pin, birth_year, date_today())
         reset_treats(username)
@@ -372,6 +355,7 @@ def answer_question(username, num):
     Here you will get to answer the question given to you.
     """
     new_screen()
+    center_text("To go back to menu, just press Enter when its empty.")
     question_list = random_questions(num)
     user = make_capitalize(username)
     tries = 0
@@ -380,6 +364,8 @@ def answer_question(username, num):
         print(question_list[0])
         while True:
             user_input = input(input_message())
+            if len(user_input) == 0:
+                menu(username)
             if user_input.find(".") > 0:
                 message = "Your answer contains a dot, please use commas."
                 center_text(message)
@@ -387,7 +373,7 @@ def answer_question(username, num):
                 break
         if user_input == question_list[1]:
             user = {make_capitalize(username)}
-            message = f"That is correct {user}, good work!"
+            message = "That is correct " + user + ", good work!"
             center_text(message)
             earn_treats(username)
             another_question(username, num)
@@ -399,6 +385,7 @@ def answer_question(username, num):
                     new_screen()
                     center_text("Press 1 for solution.")
                     center_text("Press 2 for to keep trying.")
+                    center_text("Press 3 to go back to menu")
                     while True:
                         k = readkey()
                         if k == "1":
@@ -408,6 +395,8 @@ def answer_question(username, num):
                             another_question(username, num)
                         elif k == "2":
                             answer_question(username, num)
+                        elif k == "3":
+                            menu(username)
                         else:
                             center_text("Did not press 1 or 2... Try again")
             new_screen()
@@ -431,18 +420,19 @@ def another_question(username, num):
     Asks if you want another question in the same difficulty
     """
     print("")
+    center_text("Do you want to continue?")
+    center_text("Press Y for yes and N for no")
     while True:
-        print("")
-        user_input = input("Do you want to continue? Enter Y or N: ")
-        if user_input.lower() == "y":
+        k = readkey()
+        if k == "y":
             answer_question(username, num)
             break
-        elif user_input.lower() == "n":
-            print("")
+        if k == "n":
             menu(username)
             break
-        else:
-            center_text(f"\nPlease {username}, enter the key Y or N")
+        if k != "y":
+            center_text("Press Y for yes and N for no")
+            clear_screen()
 
 
 def make_capitalize(username):
@@ -569,8 +559,7 @@ def menu(username):
         if k == "1":
             choose_difficulty(username)
         elif k == "2":
-            clear_screen()
-            space_top()
+            new_screen()
             random_qoutes()
             press_any_key()
             menu(username)
@@ -582,15 +571,13 @@ def menu(username):
                 if k == "y":
                     quit()
                 elif k == "n":
-                    clear_screen()
                     menu(username)
                 elif k != "y":
-                    clear_screen()
-                    space_top()
+                    new_screen()
                     center_text("Press Y for yes and N for no")
         else:
             print("Did not press 1, 2 or 3.. Try again")
 
 
-# login_screen()
-answer_question("test", 1)
+login_screen()
+# answer_question("test", 1)
