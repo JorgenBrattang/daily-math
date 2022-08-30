@@ -218,15 +218,8 @@ def check_if_exists(new_user):
         new_screen()
         center_text("Your account is setup")
         center_text("Please proceed to login\n")
-        center_text("Press any key to continue...")
-        while True:
-            k = readkey()
-            if k == key.ENTER:
-                check_if_exists(False)
-                break
-            if k != key.ENTER:
-                check_if_exists(False)
-                break
+        press_any_key()
+        check_if_exists(False)
 
 
 def press_any_key():
@@ -335,9 +328,9 @@ def instructions(username):
     print("")
     message = "you now have three choices of difficulty"
     center_text(f"{make_capitalize(username)} {message}")
-    center_text("    1. Age 3-5")
-    center_text("    2. Age 6-12")
-    center_text("    3. Age 12+")
+    center_text("1. Age 3-5")
+    center_text(" 2. Age 6-12")
+    center_text("3. Age 12+")
 
 
 def random_questions(num):
@@ -563,5 +556,5 @@ def menu(username):
             print("Did not press 1, 2 or 3.. Try again")
 
 
-# login_screen()
-menu("test")
+login_screen()
+# menu("test")
