@@ -449,7 +449,7 @@ def answer_question(username, num):
         display_chunk_list(chunk_list)
         while True:
             new_line()
-            user_input = input(input_message())
+            user_input = input(input_message()).strip()
             if len(user_input) == 0:
                 menu(username)
             if user_input.find(".") > 0:
