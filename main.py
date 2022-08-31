@@ -57,7 +57,7 @@ def new_line():
 
 def input_message():
     """ Enter here string """
-    return "                           Enter here: "
+    return "                           Enter here:\n "
 
 
 def new_screen():
