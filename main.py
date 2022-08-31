@@ -194,31 +194,54 @@ def check_if_exists(new_user):
                             center_text("Press Y for yes and N for no")
             else:
                 break
-    user_pin = create_user_pin()
-    # If username exist do this:
-    # ----------------------------------------------------
-    if user_cell is not None:
-        # Access the pin code from google sheet with usernames
-        pin_code = int(users_wks.cell(user_cell.row, 2).value)
-        # Checks the pincode
-        if pin_code == user_pin:
-            success_login(username)
-        if pin_code != user_pin:
-            user = make_capitalize(username)
-            center_text("Wrong pin code " + user + "!")
-            print("")
+    user = make_capitalize(username)
+    num_tries = 0
+    while True:
+        user_pin = create_user_pin()
+        # If username exist do this:
+        # ----------------------------------------------------
+        if user_cell is not None:
+            # Access the pin code from google sheet with usernames
+            pin_code = int(users_wks.cell(user_cell.row, 2).value)
+            # Checks the pincode
+            if pin_code == user_pin:
+                success_login(username)
+            if pin_code != user_pin:
+                num_tries += 1
+                if num_tries == 3:
+                    while True:
+                        print("")
+                        center_text("You tried 3 times, are you really "
+                                    + user + "?")
+                        sleep(0.5)
+                        center_text("Try again? Y or N")
+                        k = readkey()
+                        if k == "y":
+                            num_tries = 0
+                            break
+                        if k == "n":
+                            login_screen()
+                        if k != "y":
+                            new_screen()
+                            center_text("Press Y for yes and N for no")
+                else:
+                    print("")
+                    center_text(str(num_tries) + " of 3 tries!")
+                    center_text("Wrong pin code, try again!")
+                    print("")
+                    press_any_key()
+        else:
+            birth_year = create_birth_year()
+            update_users_worksheet(username, user_pin, birth_year, date_today())
+            reset_treats(username)
+            new_screen()
+            center_text("Your account is setup")
+            center_text("Please proceed to login\n")
             press_any_key()
+            check_if_exists(False)
+
     # ---------------------------------------------------- Come back to this
     # If the username does not exist do this:
-    else:
-        birth_year = create_birth_year()
-        update_users_worksheet(username, user_pin, birth_year, date_today())
-        reset_treats(username)
-        new_screen()
-        center_text("Your account is setup")
-        center_text("Please proceed to login\n")
-        press_any_key()
-        check_if_exists(False)
 
 
 def press_any_key():
