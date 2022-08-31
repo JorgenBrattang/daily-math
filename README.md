@@ -26,7 +26,8 @@ Google sheet tasks:
 - Corresponding equations on the questions for each level.
 - Different messages, example "Welcome message".
 
-
+## Unsolved bugs
+- Could not disable the keyboard while the sleep() was working it's magic. Tried different approaces but none that I could implement.
 
 ## Credit
 Quotes of the day:

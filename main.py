@@ -1,9 +1,11 @@
+""" Math Daily """
 from random import randint
 from datetime import date
-from rich.console import Console
-from readchar import readkey, key
 from time import sleep
 import os
+from rich.console import Console
+from readchar import readkey, key
+
 import scope
 console = Console()
 
@@ -18,7 +20,7 @@ questions_3_wks = scope.SHEET.worksheet("questions-3")
 
 # -------- Credit code ----------
 def clear_screen():
-    """ 
+    """
     Clears the screen when called.
     Credits: https://teamtreehouse.com/community/using-a-clearscreen-in-pycharm
     """
@@ -27,12 +29,12 @@ def clear_screen():
 
 def create_chunk_list(my_list, chunk_size):
     """ Creates smaller chunks of list """
+    # Splits the list into indivdual pieces
     split_list = my_list.split()
 
     for i in range(0, len(split_list), chunk_size):
         yield split_list[i:i + chunk_size]
 
-    # Splits the list into indivdual pieces
 # -------- ___________ ----------
 
 
@@ -44,7 +46,7 @@ def center_text(message):
 
 def space_top():
     """ Creates 5 break lines when called """
-    for x in range(5):
+    for unused in range(5):
         print("")
 
 
@@ -263,7 +265,8 @@ def check_if_exists(new_user):
         # If username don't exist do this
         else:
             birth_year = create_birth_year()
-            update_users_worksheet(username, user_pin, birth_year, date_today()) ### Fix this!
+            update_users_worksheet(username, user_pin,
+                                   birth_year, date_today())
             reset_treats(username)
             new_screen()
             center_text("Your account is setup")
@@ -591,12 +594,18 @@ def earn_treats(username):
     """
     # Finds the users row
     row_select = find_user(username)
+
     # checks the value of treats in google sheets
-    users_treats = users_wks.cell(row_select, 5).value
+    user_treats = users_wks.cell(row_select, 5).value
+    total_user_treats = users_wks.cell(row_select, 6).value
+
     # Sets the users_treats to be int and adds more readability
-    increase_treats = int(users_treats)
+    increase_treats = int(user_treats)
+    total_increase_treats = int(total_user_treats)
+
     # Access the users worksheets and increases the treats by 1
     users_wks.update_cell(row_select, 5, increase_treats+1)
+    users_wks.update_cell(row_select, 6, total_increase_treats+1)
 
 
 def reset_treats(username):
@@ -605,8 +614,14 @@ def reset_treats(username):
     """
     # Finds the users row
     row_select = find_user(username)
+
     # Access the users worksheets and sets the treats back to 0
     users_wks.update_cell(row_select, 5, 0)
+
+    # Checks if users got total users treats
+    total_user_treats = users_wks.cell(row_select, 6).value
+    if total_user_treats is None:
+        users_wks.update_cell(row_select, 6, int(0))
 
 
 def login_screen():
@@ -652,5 +667,7 @@ def menu(username):
             print("Did not press 1, 2 or 3.. Try again")
 
 
-# login_screen()
-menu("test")
+login_screen()
+# menu("test")
+
+# reset_treats("test")
