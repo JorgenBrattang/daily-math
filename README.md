@@ -17,7 +17,10 @@ Live app: https://daily-math.herokuapp.com/
     - Keeping that feature because it should be a remainder that you need to progress even further and move up to the more challenging questions.
 
 # Development
-To Develop this app, the developer had to think how the app would progress throughout it steps which required a bit of thinking and learning how the code flowed. Once that is was out of the way, the logic behind each function was simple but required a bit of practice and failure to reach the final product.
+To Develop this app, the developer had to think how the app would progress throughout it steps which required a bit of thinking and learning how the code flowed. The logic behind all the functions is quite easy if you break them down to smaller chunks, but a bit of thinking is required to make it functional.
+
+# Strategy
+The logic behind each function is simple but requires a bit of practice and failure to reach the final product. As mentioned before by breaking down the code into smaller chunks and each function to its core, it is quite easy to code this. But to make it work the developer needs to read documents and tutorials to grasp the concept and the fundamentals.
 
 ## Feature / Task list
 - Welcome message
@@ -47,8 +50,21 @@ Google sheet tasks:
 - Corresponding equations on the questions for each level.
 - Different messages, example "Welcome message".
 
+# Testing
+To see the testing part, please follow this link: Testing.md
+
 ## Unsolved bugs
 - Could not disable the keyboard while the sleep() was working it's magic. Tried different approaces but none that I could implement.
+
+# Technologies used
+## Language
+- Python
+
+## Frameworks libraries and programs Used
+- <a href="https://gitpod.io/" title="Link to gitpod" rel="nofollow">GitPod</a>
+    - GitPod was used for writing code, committing, and then pushing to GitHub.
+- <a href="https://github.com/" title="Link to github" rel="nofollow">Github</a>
+    - GitHub was used to store the project after pushing
 
 ## Credit
 Quotes of the day:
@@ -75,10 +91,20 @@ def create_chunk_list(my_list, chunk_size):
             yield my_list[i:i + chunk_size]
 ```
 
-
-
-
 - https://littlelearningcorner.com/2021/11/fun-math-questions-for-kids-k-2.html
+
 ## Great Tutorials
+
 - Register Keypresses
 https://pypi.org/project/readchar/
+
+## What I learned
+The developer learn basic Python coding and how to implement libarys to make life a little easier, and not invent the wheel again.
+
+## Continued development
+To further develop this game, it would be to add even more questions and improve the solution to make a step by step guide to show the user how it was solved.
+
+## Acknowledgements
+I would like to acknowledge my mentor <a href="https://github.com/seunkoko" title="Link to GitHub profile" rel="nofollow">Oluwaseun Owonikoko</a> which guided me to make the app more interesting and threw me idea's that I did not think about.
+
+ My family for helping me progress and support me, and not to forget the tutors and community of slack that helped me alot to understand the concepts of programming and hardship of debugging.
