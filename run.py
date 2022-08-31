@@ -478,7 +478,7 @@ def answer_question(username, num):
     user = make_capitalize(username)
     tries = 0
     while True:
-        chunk_list = list(create_chunk_list(question_list[0], 10))
+        chunk_list = list(create_chunk_list(question_list[0], 12))
         display_chunk_list(chunk_list)
         while True:
             new_line()
