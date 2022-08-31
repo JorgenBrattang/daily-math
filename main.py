@@ -97,9 +97,13 @@ def create_username():
     """ Creates new user name """
     while True:
         new_screen()
+        center_text("To go back, just press Enter when its empty.")
+        new_line()
         center_text("Hello, please enter your name.")
         sleep(0.5)
         username = input(input_message())
+        if len(username) == 0:
+            login_screen()
         if username.isalpha():
             if len(username) > 15:
                 new_screen()
@@ -312,17 +316,10 @@ def latest_login(username):
     row_select = find_user(username)
     # checks the value of date in google sheets
     users_latest_login = users_wks.cell(row_select, 4).value
-    test = "5"
-    message = "You need " + test + " treats to complete this day!"
-    new_line()
     if date_today() == users_latest_login:
-        # Print out a message how many points are left for today. <<-----------------------
-        center_text(message)
+        center_text("This is your total amount")
         menu(username)
     else:
-        # Print and (soon) sets the number of points are left.
-        center_text(f"\n{message}: 15\n")
-
         # Updates the date cell with todays date
         users_wks.update_cell(row_select, 4, date_today())
         reset_treats(username)
@@ -668,6 +665,3 @@ def menu(username):
 
 
 login_screen()
-# menu("test")
-
-# reset_treats("test")
