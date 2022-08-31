@@ -101,7 +101,7 @@ def create_username():
         new_line()
         center_text("Hello, please enter your name.")
         sleep(0.5)
-        username = input(input_message())
+        username = input(input_message()).strip()
         if len(username) == 0:
             login_screen()
         if username.isalpha():
@@ -459,6 +459,7 @@ def answer_question(username, num):
                 break
         if user_input == question_list[1]:
             new_screen()
+            earn_treats(username)
             message = "That is correct " + str(user) + ", good work!"
             center_text(message)
             center_text("Here is a treat for you!")
@@ -474,14 +475,14 @@ def answer_question(username, num):
             if int(today_user_treats) > 5:
                 new_line()
                 center_text("Great job " + user)
-                center_text("You are done for today, but feel free to continue!")
+                done = "You are done for today, but feel free to continue!"
+                center_text(done)
             new_line()
             center_text("Todays earned treats: "
                         + str(today_user_treats) + " out of 5")
             center_text("This is your total amount of treats earned: "
                         + str(total_user_treats))
             # ----------------
-            earn_treats(username)
             another_question(username, num)
             break
         else:
@@ -696,6 +697,4 @@ def menu(username):
             print("Did not press 1, 2 or 3.. Try again")
 
 
-# login_screen()
-latest_login("test")
-# menu("test")
+login_screen()
