@@ -37,24 +37,22 @@ def create_chunk_list(my_list, chunk_size):
 
 
 def center_text(message):
-    """ 
-    Center the text 
+    """
+    Center the text
     example:
     center_text("Hello, world!")
     """
-    length = 79 - (len(message))
-    print(message.center(len(message) + length))
+    print(message.center(80))
 
 
 def center_text_color(message, color):
-    """ 
+    """
     Center the text with color
     example:
     center_text_color("Hello, world!", "magenta")
     """
-    length = 87 - (len(message))
     text = colored(message, color)
-    cprint(text.center(len(message) + length))
+    cprint(text.center(87))
 
 
 def space_top():
@@ -85,7 +83,8 @@ def welcome_message():
     Welcomes you to the game
     """
     new_screen()
-    center_text("Welcome player, please login and enjoy your daily math.")
+    center_text_color("Welcome player", "green")
+    center_text("please login and enjoy your daily math.")
 
 
 def ask_new_user():
@@ -711,4 +710,4 @@ def menu(username):
             print("Did not press 1, 2 or 3.. Try again")
 
 
-# login_screen()
+login_screen()
