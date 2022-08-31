@@ -66,16 +66,42 @@ To see the testing part, please follow this link: Testing.md
 - <a href="https://github.com/" title="Link to github" rel="nofollow">Github</a>
     - GitHub was used to store the project after pushing
 
-## Credit
-Quotes of the day:
+```python
+from random import randint # For random numbers
+
+from datetime import date # To get the date
+
+from time import sleep # To sleep in between, for UX
+
+import os # To clear the screen in between text
+
+from readchar import readkey, key # To get read keyboard presses, instead of using input
+```
+
+# Credit
+## Quotes of the day:
 https://www.brainyquote.com/topics/motivational-quotes
 
-Math questions
+```
+"Ever tried. Ever failed. No matter. Try Again. Fail again. Fail better." 
+- Samuel Beckett
+```
+
+## Math questions
+
 - https://www.kidzone.ws/math/wordproblems.htm
+    - Example:
+```
+Ben has 4 peaches. Sarah has 3 peaches. How many peaches do they have in all?
+```
 
 - https://www.cuemath.com/learn/fun-maths-questions/#30%20Fun%20Maths%20Questions%20with%20answers
+    - Example:
+```
+What is the number of the missing sequence: 16 09 68 88 ?? 98
+```
 
-### Credited Code
+# Credited Code
 
 - https://teamtreehouse.com/community/using-a-clearscreen-in-pycharm
 ```python
@@ -97,6 +123,8 @@ def create_chunk_list(my_list, chunk_size):
 
 - Register Keypresses
 https://pypi.org/project/readchar/
+
+# Developer's part
 
 ## What I learned
 The developer learn basic Python coding and how to implement libarys to make life a little easier, and not invent the wheel again.

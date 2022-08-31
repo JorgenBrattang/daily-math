@@ -3,11 +3,8 @@ from random import randint
 from datetime import date
 from time import sleep
 import os
-# from rich.console import Console
 from readchar import readkey, key
-
 import scope
-# console = Console()
 
 
 # wks = worksheet
