@@ -94,8 +94,7 @@ def welcome_message():
     """
     new_screen()
     center_text_color_attr("Welcome player", "green", "bold")
-    center_text_color_attr("Please login and enjoy your daily math.",
-                           "white", "bold")
+    center_text("Please login and enjoy your daily math.")
 
 
 def ask_new_user():

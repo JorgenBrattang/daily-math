@@ -124,6 +124,28 @@ def create_chunk_list(my_list, chunk_size):
 - Register Keypresses
 https://pypi.org/project/readchar/
 
+# Deployment
+To make this project I used the Code Institute's mock terminal for Heroku and their way of linking to Google Sheet API.
+
+## Create Repository
+For this I used Github.
+1. Go to your profile, and press on "Repositories".
+2. Press "New" (Big green button).
+3. There I chose to use a template from Code Institute to have everything I needed for this project.
+4. Named my project "daily-math".
+5. Then clicked on "Create repository".
+6. Onces created, I opened the repository and clicked on "Gitpod" to create a new workplace.
+
+## Github Pages
+1. Went to my repository "daily-math".
+2. Settings tab.
+3. Pages.
+4. Chose my branch to be main.
+5. Hit save and a couple of minutes later it was deployed.
+
+## Forking
+1. Login to Github and go to my <a href="https://github.com/JorgenBrattang/daily-math">repository</a>
+
 # Developer's part
 
 ## What I learned
