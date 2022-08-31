@@ -23,6 +23,12 @@ def clear_screen():
     Credits: https://teamtreehouse.com/community/using-a-clearscreen-in-pycharm
     """
     os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def create_chunk_list(my_list, chunk_size):
+    """ Creates smaller chunks of list """
+    for i in range(0, len(my_list), chunk_size):
+        yield my_list[i:i + chunk_size]
 # -------- ___________ ----------
 
 
@@ -335,29 +341,32 @@ def find_user(username):
     return user_cell.row
 
 
+def display_chunk_list(chunk_list):
+    """
+    Goes through the list and center_text() it to look nice.
+    """
+    for unused, value in enumerate(chunk_list):
+        center_text(" ".join(value))
+
+
 def random_qoutes():
     """
     Gives you an random qoute from google sheets
     """
+    # Gets the lenght of qoutes and gives a random number
     length = quotes_wks.row_count
     random_number = randint(2, length)
+
     # Gets the Qoute from Google sheet
     qoutes = quotes_wks.cell(random_number, 1).value
 
     # Splits the list into indivdual pieces
     split_list = qoutes.split()
 
-    # -------- Credit code ----------
-    def create_chunk_list(my_list, chunk_size):
-        """ Creates smaller chunks of list """
-        for i in range(0, len(my_list), chunk_size):
-            yield my_list[i:i + chunk_size]
-    # -------- ___________ ----------
-
+    # Creates a new list and prints it out
     chunk_list = list(create_chunk_list(split_list, 8))
-    # Goes through the list and center_text() to display them nice
-    for unused, value in enumerate(chunk_list):
-        center_text(" ".join(value))
+    display_chunk_list(chunk_list)
+
     # Gets the Author from Google sheet
     author = quotes_wks.cell(random_number, 2).value
     center_text("- " + author)

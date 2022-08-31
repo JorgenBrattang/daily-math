@@ -45,6 +45,16 @@ def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 ```
 
+- https://www.youtube.com/watch?v=SuEk_TBkReQ&t=2s
+```python
+def create_chunk_list(my_list, chunk_size):
+        """ Creates smaller chunks of list """
+        for i in range(0, len(my_list), chunk_size):
+            yield my_list[i:i + chunk_size]
+```
+
+
+
 
 - https://littlelearningcorner.com/2021/11/fun-math-questions-for-kids-k-2.html
 ## Great Tutorials
