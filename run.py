@@ -443,7 +443,7 @@ def instructions(username):
     new_line()
     user = make_capitalize(username)
     message = "you now have three choices of difficulty"
-    center_text(f"{user} {message}")
+    center_text_color_attr(f"{user}, {message}", "green", "underline")
     center_text("1. Age 3-5")
     center_text(" 2. Age 6-12")
     center_text("3. Age 12+")
@@ -472,7 +472,8 @@ def answer_question(username, num):
     Here you will get to answer the question given to you.
     """
     new_screen()
-    center_text("To go back to menu, just press Enter when its empty.")
+    center_text_color_attr("To go back, just press Enter when its empty.",
+                               "grey", "underline")
     question_list = random_questions(num)
     user = make_capitalize(username)
     tries = 0
@@ -486,7 +487,9 @@ def answer_question(username, num):
                 menu(username)
             if user_input.find(".") > 0:
                 message = "Your answer contains a dot, please use commas."
-                center_text(message)
+                new_line()
+                center_text_color_attr(message,
+                                       "yellow", "underline")
             else:
                 break
         if user_input == question_list[1]:
@@ -585,7 +588,8 @@ def check_your_age(username, your_age, age, user, num):
         """ Creates smaller code, for more readability """
         new_screen()
         message = "Your age is not recommended for this difficulty, "
-        center_text(message + user + ".")
+        center_text_color_attr(message + user + ".",
+                               "red", "underline")
         center_text("Do you want to continue?")
         center_text("Press Y for yes and N for no")
         while True:
@@ -619,7 +623,7 @@ def choose_difficulty(username):
     your_age = calculate_age(username)
     instructions(username)
     user = make_capitalize(username)
-    center_text("Pick a number between 1 and 3: ")
+    center_text_color("Pick a number between 1 and 3", "cyan")
     while True:
         sleep(0.5)
         k = readkey()
@@ -642,7 +646,8 @@ def choose_difficulty(username):
             clear_screen()
             space_top()
             message = "It's not that hard "
-            center_text(message + user + "...")
+            center_text_color_attr(message + user + "...",
+                                   "yellow", "underline")
             center_text("Pick a number between 1 and 3!")
             instructions(username)
 
@@ -696,7 +701,8 @@ def menu(username):
     This is where you return to when your done with certain things
     """
     new_screen()
-    center_text("Menu, press the number to continue")
+    center_text_color_attr("Menu, press the number to continue",
+                           "green", "underline")
     center_text("1. Question")
     center_text("2. Motivational quote")
     center_text("3. Check my treats")
@@ -727,7 +733,9 @@ def menu(username):
                     new_screen()
                     center_text("Press Y for yes and N for no")
         else:
-            print("Did not press 1, 2 or 3.. Try again")
+            new_line()
+            center_text_color_attr("Did not press 1, 2 or 3.. Try again",
+                                   "yellow", "underline")
 
 
 login_screen()
