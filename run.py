@@ -101,7 +101,7 @@ def create_username():
         username = input(input_message()).strip()
         if len(username) == 0:
             login_screen()
-        if username.isalpha():
+        if username.isalnum():
             if len(username) > 15:
                 new_screen()
                 center_text("To many characters, please limit yourself to 15.")
@@ -112,7 +112,7 @@ def create_username():
         new_screen()
         center_text("Please try again")
         sleep(0.5)
-        center_text("Also only alphabetic characters allowed.")
+        center_text("Also only alphabetic and numeric characters allowed.")
         new_line()
         press_any_key()
 
