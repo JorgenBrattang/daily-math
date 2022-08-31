@@ -45,14 +45,24 @@ def center_text(message):
     print(message.center(80))
 
 
-def center_text_color(message, color):
+def center_text_color(message, color, num):
     """
     Center the text with color
     example:
     center_text_color("Hello, world!", "magenta")
     """
     text = colored(message, color)
-    cprint(text.center(87))
+    cprint(text.center(num))
+
+
+def center_text_color_attr(message, color, attr, num):
+    """
+    Center the text with color and bold
+    example:
+    center_text_color("Hello, world!", "magenta")
+    """
+    text = colored(message, color, attrs=[attr])
+    cprint(text.center(num))
 
 
 def space_top():
@@ -710,4 +720,4 @@ def menu(username):
             print("Did not press 1, 2 or 3.. Try again")
 
 
-login_screen()
+# login_screen()
