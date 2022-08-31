@@ -4,6 +4,7 @@ from datetime import date
 from time import sleep
 import os
 from readchar import readkey, key
+from termcolor import colored, cprint
 import scope
 
 
@@ -36,9 +37,24 @@ def create_chunk_list(my_list, chunk_size):
 
 
 def center_text(message):
-    """ Center the text """
+    """ 
+    Center the text 
+    example:
+    center_text("Hello, world!")
+    """
     length = 79 - (len(message))
     print(message.center(len(message) + length))
+
+
+def center_text_color(message, color):
+    """ 
+    Center the text with color
+    example:
+    center_text_color("Hello, world!", "magenta")
+    """
+    length = 87 - (len(message))
+    text = colored(message, color)
+    cprint(text.center(len(message) + length))
 
 
 def space_top():
@@ -695,4 +711,4 @@ def menu(username):
             print("Did not press 1, 2 or 3.. Try again")
 
 
-login_screen()
+# login_screen()
