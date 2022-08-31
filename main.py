@@ -297,7 +297,8 @@ def welcome_to_daily_math(username):
     Welcome you to daily math and gives random motivational qoute.
     """
     new_screen()
-    center_text("Welcome to Daily Math " + make_capitalize(username))
+    user = make_capitalize(username)
+    center_text("Welcome to Daily Math " + user)
     center_text("May your calculations be true!")
     center_text("Todays date is: " + date_today())
     new_line()
@@ -316,8 +317,20 @@ def latest_login(username):
     row_select = find_user(username)
     # checks the value of date in google sheets
     users_latest_login = users_wks.cell(row_select, 4).value
+    today_user_treats = users_wks.cell(row_select, 5).value
+    total_user_treats = users_wks.cell(row_select, 6).value
     if date_today() == users_latest_login:
-        center_text("This is your total amount")
+        new_screen()
+        if int(today_user_treats) == 5:
+            center_text("Great job " + username)
+            center_text("You are done for today, but feel free to continue!")
+        new_line()
+        center_text("Todays earned treats: "
+                    + str(today_user_treats) + " out of 5")
+        center_text("This is your total amount of treats earned: "
+                    + str(total_user_treats))
+        new_line()
+        press_any_key()
         menu(username)
     else:
         # Updates the date cell with todays date
@@ -395,8 +408,9 @@ def instructions(username):
     Prints the instructions for the difficulty levels
     """
     new_line()
+    user = make_capitalize(username)
     message = "you now have three choices of difficulty"
-    center_text(f"{make_capitalize(username)} {message}")
+    center_text(f"{user} {message}")
     center_text("1. Age 3-5")
     center_text(" 2. Age 6-12")
     center_text("3. Age 12+")
@@ -443,7 +457,6 @@ def answer_question(username, num):
             else:
                 break
         if user_input == question_list[1]:
-            user = make_capitalize(username)
             new_screen()
             message = "That is correct " + str(user) + ", good work!"
             center_text(message)
@@ -480,11 +493,6 @@ def answer_question(username, num):
             sleep(0.5)
             new_line()
             press_any_key()
-
-
-def not_that_hard(username):
-    """ Prints out not that hard and username """
-    center_text(f"\nIt's not that hard {make_capitalize(username)}...")
 
 
 def another_question(username, num):
@@ -637,7 +645,8 @@ def menu(username):
     center_text("Menu, press the number to continue")
     center_text("1. Question")
     center_text("2. Motivational quote")
-    center_text("3. Quit")
+    center_text("3. Check my treats")
+    center_text("4. Quit")
     while True:
         k = readkey()
         if k == "1":
@@ -649,6 +658,8 @@ def menu(username):
             press_any_key()
             menu(username)
         elif k == "3":
+            latest_login(username)
+        elif k == "4":
             new_line()
             center_text("Are you sure? Y or N")
             while True:
@@ -664,4 +675,6 @@ def menu(username):
             print("Did not press 1, 2 or 3.. Try again")
 
 
-login_screen()
+# login_screen()
+# latest_login("test")
+menu("test")
