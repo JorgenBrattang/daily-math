@@ -93,7 +93,7 @@ def welcome_message():
     Welcomes you to the game
     """
     new_screen()
-    center_text_color_attr("Welcome player", "green", "underline")
+    center_text_color_attr("Welcome player", "green", "bold")
     center_text("please login and enjoy your daily math.")
 
 
@@ -121,7 +121,7 @@ def create_username():
     while True:
         new_screen()
         center_text_color_attr("To go back, just press Enter when its empty.",
-                               "grey", "underline")
+                               "yellow", "underline")
         new_line()
         center_text_color("Please enter your name.", "green")
         sleep(0.5)
@@ -473,7 +473,7 @@ def answer_question(username, num):
     """
     new_screen()
     center_text_color_attr("To go back, just press Enter when its empty.",
-                               "grey", "underline")
+                           "yellow", "underline")
     question_list = random_questions(num)
     user = make_capitalize(username)
     tries = 0
