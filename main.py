@@ -319,10 +319,11 @@ def latest_login(username):
     users_latest_login = users_wks.cell(row_select, 4).value
     today_user_treats = users_wks.cell(row_select, 5).value
     total_user_treats = users_wks.cell(row_select, 6).value
+    user = make_capitalize(username)
     if date_today() == users_latest_login:
         new_screen()
-        if int(today_user_treats) == 5:
-            center_text("Great job " + username)
+        if int(today_user_treats) > 5:
+            center_text("Great job " + user)
             center_text("You are done for today, but feel free to continue!")
         new_line()
         center_text("Todays earned treats: "
@@ -460,6 +461,26 @@ def answer_question(username, num):
             new_screen()
             message = "That is correct " + str(user) + ", good work!"
             center_text(message)
+            center_text("Here is a treat for you!")
+            new_line()
+            center_text("🍪")
+            # ----------------
+            # Finds the users row
+            row_select = find_user(username)
+            # checks the value of date in google sheets
+            today_user_treats = users_wks.cell(row_select, 5).value
+            total_user_treats = users_wks.cell(row_select, 6).value
+            user = make_capitalize(username)
+            if int(today_user_treats) > 5:
+                new_line()
+                center_text("Great job " + user)
+                center_text("You are done for today, but feel free to continue!")
+            new_line()
+            center_text("Todays earned treats: "
+                        + str(today_user_treats) + " out of 5")
+            center_text("This is your total amount of treats earned: "
+                        + str(total_user_treats))
+            # ----------------
             earn_treats(username)
             another_question(username, num)
             break
@@ -676,5 +697,5 @@ def menu(username):
 
 
 # login_screen()
-# latest_login("test")
-menu("test")
+latest_login("test")
+# menu("test")
