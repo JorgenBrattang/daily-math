@@ -3,11 +3,11 @@ from random import randint
 from datetime import date
 from time import sleep
 import os
-from rich.console import Console
+# from rich.console import Console
 from readchar import readkey, key
 
 import scope
-console = Console()
+# console = Console()
 
 
 # wks = worksheet
@@ -41,7 +41,7 @@ def create_chunk_list(my_list, chunk_size):
 def center_text(message):
     """ Center the text """
     length = 79 - (len(message))
-    console.print(message.center(len(message) + length))
+    print(message.center(len(message) + length))
 
 
 def space_top():
