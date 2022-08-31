@@ -85,7 +85,7 @@ def new_screen():
     """ Starts new screen """
     clear_screen()
     space_top()
-    sleep(0.5)
+    # sleep(0.5)
 
 
 def welcome_message():
@@ -101,7 +101,7 @@ def ask_new_user():
     """ Ask if you are a new user """
     new_user = True
     while True:
-        sleep(0.5)
+        # sleep(0.5)
         new_line()
         center_text("Are you a new user?")
         center_text_color_attr("Y or N", "green", "bold")
@@ -124,7 +124,7 @@ def create_username():
                                "yellow", "underline")
         new_line()
         center_text_color("Please enter your name.", "green")
-        sleep(0.5)
+        # sleep(0.5)
         username = input(input_message()).strip()
         if len(username) == 0:
             login_screen()
@@ -138,7 +138,7 @@ def create_username():
                 return username.lower()
         new_screen()
         center_text("Please try again")
-        sleep(0.5)
+        # sleep(0.5)
         center_text("Also only alphabetic and numeric characters allowed.")
         new_line()
         press_any_key()
@@ -150,7 +150,7 @@ def create_user_pin():
     center_text_color("Please enter a 4 digit pin code", "green")
     while True:
         try:
-            sleep(0.5)
+            # sleep(0.5)
             user_pin = int(input(input_message()))
             test_pin_lenght = len(str(user_pin))
             if test_pin_lenght == 4:
@@ -161,7 +161,7 @@ def create_user_pin():
             new_screen()
             center_text_color_attr("That's not a valid option!",
                                    "red", "bold")
-            sleep(0.5)
+            # sleep(0.5)
             center_text_color_attr("Use 4 digits to create a pin code",
                                    "yellow", "underline")
 
@@ -172,7 +172,7 @@ def create_birth_year():
     center_text_color("Please enter a 4 digit year of birth", "green")
     while True:
         try:
-            sleep(0.5)
+            # sleep(0.5)
             birth_year = int(input(input_message()))
             test_pin_lenght = len(str(birth_year))
             if test_pin_lenght == 4:
@@ -184,7 +184,7 @@ def create_birth_year():
             space_top()
             center_text_color_attr("That's not a valid option!",
                                    "red", "bold")
-            sleep(0.5)
+            # sleep(0.5)
             center_text_color_attr("Use 4 digits to create year of birth",
                                    "yellow", "underline")
 
@@ -241,7 +241,7 @@ def check_if_exists(new_user):
                         new_line()
                         center_text("This account don't exist")
                         while True:
-                            sleep(0.5)
+                            # sleep(0.5)
                             center_text("Try again? Y or N")
                             k = readkey()
                             if k == "y":
@@ -279,7 +279,7 @@ def check_if_exists(new_user):
                         new_line()
                         center_text("You tried 3 times, are you really "
                                     + user + "?")
-                        sleep(0.5)
+                        # sleep(0.5)
                         center_text("Try again? Y or N")
                         k = readkey()
                         if k == "y":
@@ -543,11 +543,11 @@ def answer_question(username, num):
                             center_text("Did not press 1 or 2... Try again")
             new_screen()
             center_text("Wrong answer, keep trying " + user + "!")
-            sleep(0.5)
+            # sleep(0.5)
             center_text(str(tries) + " out of 3")
-            sleep(0.5)
+            # sleep(0.5)
             center_text("After 3 tries, a choice will be given.")
-            sleep(0.5)
+            # sleep(0.5)
             new_line()
             press_any_key()
 
@@ -603,7 +603,7 @@ def check_your_age(username, your_age, age, user, num):
                 break
             if k != "y":
                 center_text("Press Y for yes and N for no")
-                clear_screen()
+                if_your_age()
     if age == 13:
         clear_screen()
         answer_question(username, num)
@@ -625,7 +625,7 @@ def choose_difficulty(username):
     user = make_capitalize(username)
     center_text_color("Pick a number between 1 and 3", "cyan")
     while True:
-        sleep(0.5)
+        # sleep(0.5)
         k = readkey()
         if k == "1":
             age = 5
