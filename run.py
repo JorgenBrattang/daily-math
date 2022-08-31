@@ -57,7 +57,7 @@ def new_line():
 
 def input_message():
     """ Enter here string """
-    return "                           Enter here:\n "
+    return "                           Enter here: "
 
 
 def new_screen():
@@ -687,6 +687,7 @@ def menu(username):
             while True:
                 k = readkey()
                 if k == "y":
+                    clear_screen()
                     quit()
                 elif k == "n":
                     menu(username)
