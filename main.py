@@ -27,8 +27,12 @@ def clear_screen():
 
 def create_chunk_list(my_list, chunk_size):
     """ Creates smaller chunks of list """
-    for i in range(0, len(my_list), chunk_size):
-        yield my_list[i:i + chunk_size]
+    split_list = my_list.split()
+
+    for i in range(0, len(split_list), chunk_size):
+        yield split_list[i:i + chunk_size]
+
+    # Splits the list into indivdual pieces
 # -------- ___________ ----------
 
 
@@ -43,9 +47,11 @@ def space_top():
     for x in range(5):
         print("")
 
+
 def new_line():
     """ Creates 1 new line when called """
     print("")
+
 
 def input_message():
     """ Enter here string """
@@ -365,11 +371,8 @@ def random_qoutes():
     # Gets the Qoute from Google sheet
     qoutes = quotes_wks.cell(random_number, 1).value
 
-    # Splits the list into indivdual pieces
-    split_list = qoutes.split()
-
     # Creates a new list and prints it out
-    chunk_list = list(create_chunk_list(split_list, 8))
+    chunk_list = list(create_chunk_list(qoutes, 8))
     display_chunk_list(chunk_list)
 
     # Gets the Author from Google sheet
@@ -427,8 +430,7 @@ def answer_question(username, num):
     user = make_capitalize(username)
     tries = 0
     while True:
-        split_list = question_list[0].split()
-        chunk_list = list(create_chunk_list(split_list, 10))
+        chunk_list = list(create_chunk_list(question_list[0], 10))
         display_chunk_list(chunk_list)
         while True:
             new_line()
