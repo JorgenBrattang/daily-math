@@ -43,6 +43,9 @@ def space_top():
     for x in range(5):
         print("")
 
+def new_line():
+    """ Creates 1 new line when called """
+    print("")
 
 def input_message():
     """ Enter here string """
@@ -69,7 +72,7 @@ def ask_new_user():
     new_user = True
     while True:
         sleep(0.5)
-        print("")
+        new_line()
         center_text("Are you a new user? Y or N")
         k = readkey()
         if k == "y":
@@ -93,7 +96,7 @@ def create_username():
             if len(username) > 15:
                 new_screen()
                 center_text("To many characters, please limit yourself to 15.")
-                print("")
+                new_line()
                 press_any_key()
             else:
                 return username.lower()
@@ -101,7 +104,7 @@ def create_username():
         center_text("Please try again")
         sleep(0.5)
         center_text("Also only alphabetic characters allowed.")
-        print("")
+        new_line()
         press_any_key()
 
 
@@ -180,9 +183,9 @@ def check_if_exists(new_user):
             # If it doesn't exist
             if user_cell is not None:
                 if new_user is True:
-                    print("")
+                    new_line()
                     center_text("This exists already, try another.")
-                    print("")
+                    new_line()
                     press_any_key()
                     clear_screen()
                 else:
@@ -194,7 +197,7 @@ def check_if_exists(new_user):
                     if new_user is True:
                         return [username, user_cell]
                     else:
-                        print("")
+                        new_line()
                         center_text("This account don't exist")
                         while True:
                             sleep(0.5)
@@ -231,7 +234,7 @@ def check_if_exists(new_user):
                 num_tries += 1
                 if num_tries == 3:
                     while True:
-                        print("")
+                        new_line()
                         center_text("You tried 3 times, are you really "
                                     + user + "?")
                         sleep(0.5)
@@ -246,10 +249,10 @@ def check_if_exists(new_user):
                             new_screen()
                             center_text("Press Y for yes and N for no")
                 else:
-                    print("")
+                    new_line()
                     center_text(str(num_tries) + " of 3 tries!")
                     center_text("Wrong pin code, try again!")
-                    print("")
+                    new_line()
                     press_any_key()
         # If username don't exist do this
         else:
@@ -284,10 +287,10 @@ def welcome_to_daily_math(username):
     center_text("Welcome to Daily Math " + make_capitalize(username))
     center_text("May your calculations be true!")
     center_text("Todays date is: " + date_today())
-    print("")
+    new_line()
     press_any_key()
     random_qoutes()
-    print("")
+    new_line()
     press_any_key()
 
 
@@ -302,14 +305,15 @@ def latest_login(username):
     users_latest_login = users_wks.cell(row_select, 4).value
     test = "5"
     message = "You need " + test + " treats to complete this day!"
-    print("")
+    new_line()
     if date_today() == users_latest_login:
-        # Print out a message how many points are left for today.
+        # Print out a message how many points are left for today. <<-----------------------
         center_text(message)
         menu(username)
     else:
         # Print and (soon) sets the number of points are left.
         center_text(f"\n{message}: 15\n")
+
         # Updates the date cell with todays date
         users_wks.update_cell(row_select, 4, date_today())
         reset_treats(username)
@@ -337,6 +341,7 @@ def find_user(username):
     """
     # Finds the user
     user_cell = users_wks.find(username, in_column=1)
+
     # Selects the row
     return user_cell.row
 
@@ -386,7 +391,7 @@ def instructions(username):
     """
     Prints the instructions for the difficulty levels
     """
-    print("")
+    new_line()
     message = "you now have three choices of difficulty"
     center_text(f"{make_capitalize(username)} {message}")
     center_text("1. Age 3-5")
@@ -404,7 +409,7 @@ def random_questions(num):
         worksheet = questions_2_wks
     elif num == 3:
         worksheet = questions_3_wks
-    print("")
+    new_line()
     length = worksheet.row_count
     random_number = randint(2, length)
     question = worksheet.cell(random_number, 1).value
@@ -422,9 +427,11 @@ def answer_question(username, num):
     user = make_capitalize(username)
     tries = 0
     while True:
-        print("")
-        print(question_list[0])
+        split_list = question_list[0].split()
+        chunk_list = list(create_chunk_list(split_list, 10))
+        display_chunk_list(chunk_list)
         while True:
+            new_line()
             user_input = input(input_message())
             if len(user_input) == 0:
                 menu(username)
@@ -434,8 +441,9 @@ def answer_question(username, num):
             else:
                 break
         if user_input == question_list[1]:
-            user = {make_capitalize(username)}
-            message = "That is correct " + user + ", good work!"
+            user = make_capitalize(username)
+            new_screen()
+            message = "That is correct " + str(user) + ", good work!"
             center_text(message)
             earn_treats(username)
             another_question(username, num)
@@ -468,7 +476,7 @@ def answer_question(username, num):
             sleep(0.5)
             center_text("After 3 tries, a choice will be given.")
             sleep(0.5)
-            print("")
+            new_line()
             press_any_key()
 
 
@@ -481,7 +489,7 @@ def another_question(username, num):
     """
     Asks if you want another question in the same difficulty
     """
-    print("")
+    new_line()
     center_text("Do you want to continue?")
     center_text("Press Y for yes and N for no")
     while True:
@@ -623,10 +631,11 @@ def menu(username):
         elif k == "2":
             new_screen()
             random_qoutes()
+            new_line()
             press_any_key()
             menu(username)
         elif k == "3":
-            print("")
+            new_line()
             center_text("Are you sure? Y or N")
             while True:
                 k = readkey()
@@ -642,4 +651,4 @@ def menu(username):
 
 
 # login_screen()
-random_qoutes()
+menu("test")
