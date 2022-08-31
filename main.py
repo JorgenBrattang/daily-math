@@ -23,7 +23,7 @@ def clear_screen():
     Credits: https://teamtreehouse.com/community/using-a-clearscreen-in-pycharm
     """
     os.system('cls' if os.name == 'nt' else 'clear')
-# -------- ........... ----------
+# -------- ___________ ----------
 
 
 def center_text(message):
@@ -155,51 +155,66 @@ def check_if_exists(new_user):
     Checks if the name already exists and tests the pin code, and
     if it doesn't exists, creates a new user.
     """
-    while True:
-        # Defines the username from the function
-        username = create_username()
-        # Checks the users wks for the username
-        user_cell = users_wks.find(username, in_column=1)
-        # If it doesn't exist
-        if user_cell is not None:
-            if new_user is True:
-                print("")
-                center_text("This exists already, try another.")
-                print("")
-                press_any_key()
-                clear_screen()
-            else:
-                break
-        # If it does exist
-        else:
-            # Asks if the user name exists and new_user is True or False
-            if user_cell is None:
+
+    def user_cell(new_user):
+        """
+        If user_cell is none, checks if new_user is true else it
+        will tell you the account doesn't exist and gives you a choice
+        to try again.
+
+        If user_cell is not none, checks if new_user is true and return
+        else it will tell you that account doesn't exist and promts
+        you to try again.
+        """
+        while True:
+            # Defines the username from the function
+            username = create_username()
+            # Checks the users wks for the username
+            user_cell = users_wks.find(username, in_column=1)
+            # If it doesn't exist
+            if user_cell is not None:
                 if new_user is True:
-                    break
-                else:
                     print("")
-                    center_text("This account don't exist")
-                    while True:
-                        sleep(0.5)
-                        center_text("Try again? Y or N")
-                        k = readkey()
-                        if k == "y":
-                            check_if_exists(False)
-                            break
-                        elif k == "n":
-                            login_screen()
-                            break
-                        elif k != "y":
-                            space_top()
-                            center_text("Press Y for yes and N for no")
+                    center_text("This exists already, try another.")
+                    print("")
+                    press_any_key()
+                    clear_screen()
+                else:
+                    return [username, user_cell]
+            # If it does exist
             else:
-                break
+                # Asks if the user name exists and new_user is True or False
+                if user_cell is None:
+                    if new_user is True:
+                        return [username, user_cell]
+                    else:
+                        print("")
+                        center_text("This account don't exist")
+                        while True:
+                            sleep(0.5)
+                            center_text("Try again? Y or N")
+                            k = readkey()
+                            if k == "y":
+                                check_if_exists(False)
+                                break
+                            elif k == "n":
+                                login_screen()
+                                break
+                            elif k != "y":
+                                space_top()
+                                center_text("Press Y for yes and N for no")
+                else:
+                    return [username, user_cell]
+
+    value = user_cell(new_user)
+    username = value[0]
+    user_cell = value[1]
+
     user = make_capitalize(username)
     num_tries = 0
     while True:
         user_pin = create_user_pin()
         # If username exist do this:
-        # ----------------------------------------------------
         if user_cell is not None:
             # Access the pin code from google sheet with usernames
             pin_code = int(users_wks.cell(user_cell.row, 2).value)
@@ -230,18 +245,16 @@ def check_if_exists(new_user):
                     center_text("Wrong pin code, try again!")
                     print("")
                     press_any_key()
+        # If username don't exist do this
         else:
             birth_year = create_birth_year()
-            update_users_worksheet(username, user_pin, birth_year, date_today())
+            update_users_worksheet(username, user_pin, birth_year, date_today()) ### Fix this!
             reset_treats(username)
             new_screen()
             center_text("Your account is setup")
             center_text("Please proceed to login\n")
             press_any_key()
             check_if_exists(False)
-
-    # ---------------------------------------------------- Come back to this
-    # If the username does not exist do this:
 
 
 def press_any_key():
@@ -328,10 +341,27 @@ def random_qoutes():
     """
     length = quotes_wks.row_count
     random_number = randint(2, length)
+    # Gets the Qoute from Google sheet
     qoutes = quotes_wks.cell(random_number, 1).value
+
+    # Splits the list into indivdual pieces
+    split_list = qoutes.split()
+
+    # -------- Credit code ----------
+    def create_chunk_list(my_list, chunk_size):
+        """ Creates smaller chunks of list """
+        for i in range(0, len(my_list), chunk_size):
+            yield my_list[i:i + chunk_size]
+    # -------- ___________ ----------
+
+    chunk_list = list(create_chunk_list(split_list, 8))
+    # Goes through the list and center_text() to display them nice
+    for unused, value in enumerate(chunk_list):
+        center_text(" ".join(value))
+    # Gets the Author from Google sheet
     author = quotes_wks.cell(random_number, 2).value
-    center_text(f"{qoutes}\n    - {author}")
- 
+    center_text("- " + author)
+
 
 def calculate_age(username):
     """
@@ -602,5 +632,5 @@ def menu(username):
             print("Did not press 1, 2 or 3.. Try again")
 
 
-login_screen()
-# answer_question("test", 1)
+# login_screen()
+random_qoutes()
