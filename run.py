@@ -94,7 +94,8 @@ def welcome_message():
     """
     new_screen()
     center_text_color_attr("Welcome player", "green", "bold")
-    center_text("please login and enjoy your daily math.")
+    center_text_color_attr("Please login and enjoy your daily math.",
+                           "white", "bold")
 
 
 def ask_new_user():
@@ -103,8 +104,8 @@ def ask_new_user():
     while True:
         # sleep(0.5)
         new_line()
-        center_text("Are you a new user?")
-        center_text_color_attr("Y or N", "green", "bold")
+        center_text_color_attr("Are you a new user?", "green", "bold")
+        center_text("Y or N")
         k = readkey()
         if k == "y":
             check_if_exists(new_user)
@@ -113,7 +114,8 @@ def ask_new_user():
             check_if_exists(new_user)
         elif k != "y":
             new_screen()
-            center_text("Press Y for yes and N for no")
+            center_text_color_attr("Press Y for yes and N for no",
+                                   "yellow", "bold")
 
 
 def create_username():
@@ -121,9 +123,9 @@ def create_username():
     while True:
         new_screen()
         center_text_color_attr("To go back, just press Enter when its empty.",
-                               "yellow", "underline")
+                               "yellow", "bold")
         new_line()
-        center_text_color("Please enter your name.", "green")
+        center_text_color_attr("Please enter your name.", "green", "bold")
         # sleep(0.5)
         username = input(input_message()).strip()
         if len(username) == 0:
@@ -131,7 +133,8 @@ def create_username():
         if username.isalnum():
             if len(username) > 15:
                 new_screen()
-                center_text("To many characters, please limit yourself to 15.")
+                center_text_color_attr("To many characters!", "yellow", "bold")
+                center_text("Please limit yourself to 15.")
                 new_line()
                 press_any_key()
             else:
@@ -139,7 +142,8 @@ def create_username():
         new_screen()
         center_text("Please try again")
         # sleep(0.5)
-        center_text("Also only alphabetic and numeric characters allowed.")
+        center_text_color_attr("Only alphabetic and numeric characters allowed.",
+                               "yellow", "bold")
         new_line()
         press_any_key()
 
@@ -147,7 +151,7 @@ def create_username():
 def create_user_pin():
     """ Creates new user pin code """
     new_screen()
-    center_text_color("Please enter a 4 digit pin code", "green")
+    center_text_color_attr("Please enter a 4 digit pin code", "green", "bold")
     while True:
         try:
             # sleep(0.5)
@@ -163,13 +167,14 @@ def create_user_pin():
                                    "red", "bold")
             # sleep(0.5)
             center_text_color_attr("Use 4 digits to create a pin code",
-                                   "yellow", "underline")
+                                   "yellow", "bold")
 
 
 def create_birth_year():
     """ Creates new user age """
     new_screen()
-    center_text_color("Please enter a 4 digit year of birth", "green")
+    center_text_color_attr("Please enter a 4 digit year of birth",
+                           "green", "bold")
     while True:
         try:
             # sleep(0.5)
@@ -186,7 +191,7 @@ def create_birth_year():
                                    "red", "bold")
             # sleep(0.5)
             center_text_color_attr("Use 4 digits to create year of birth",
-                                   "yellow", "underline")
+                                   "yellow", "bold")
 
 
 def update_users_worksheet(user_name, user_pin, birth_year, date_time):
@@ -224,8 +229,8 @@ def check_if_exists(new_user):
             if user_cell is not None:
                 if new_user is True:
                     new_line()
-                    center_text_color("This exists already, try another.",
-                                      "red")
+                    center_text_color_attr("This exists already, try another.",
+                                           "red", "bold")
                     new_line()
                     press_any_key()
                     clear_screen()
@@ -239,7 +244,8 @@ def check_if_exists(new_user):
                         return [username, user_cell]
                     else:
                         new_line()
-                        center_text("This account don't exist")
+                        center_text_color_attr("This account don't exist",
+                                               "red", "bold")
                         while True:
                             # sleep(0.5)
                             center_text("Try again? Y or N")
@@ -253,7 +259,8 @@ def check_if_exists(new_user):
                             elif k != "y":
                                 space_top()
                                 message = ("Press Y for yes and N for no")
-                                center_text_color(message, "yellow")
+                                center_text_color_attr(message, "yellow",
+                                                       "bold")
                 else:
                     return [username, user_cell]
 
@@ -277,8 +284,8 @@ def check_if_exists(new_user):
                 if num_tries == 3:
                     while True:
                         new_line()
-                        center_text("You tried 3 times, are you really "
-                                    + user + "?")
+                        center_text_color_attr("You tried 3 times, are you really "
+                                               + user + "?", "yellow", "bold")
                         # sleep(0.5)
                         center_text("Try again? Y or N")
                         k = readkey()
@@ -293,7 +300,8 @@ def check_if_exists(new_user):
                 else:
                     new_line()
                     center_text(str(num_tries) + " of 3 tries!")
-                    center_text("Wrong pin code, try again!")
+                    center_text_color_attr("Wrong pin code, try again!",
+                                           "red", "bold")
                     new_line()
                     press_any_key()
         # If username don't exist do this
@@ -303,8 +311,8 @@ def check_if_exists(new_user):
                                    birth_year, date_today())
             reset_treats(username)
             new_screen()
-            center_text_color("Your account is setup", "green")
-            center_text_color("Please proceed to login", "green")
+            center_text_color_attr("Your account is setup", "green", "bold")
+            center_text_color_attr("Please proceed to login", "green", "bold")
             new_line()
             press_any_key()
             check_if_exists(False)
@@ -312,7 +320,8 @@ def check_if_exists(new_user):
 
 def press_any_key():
     """ Press any key to continue """
-    center_text_color("Press any key to continue...", "magenta")
+    center_text_color_attr("Press any key to continue...",
+                           "magenta", "bold")
     while True:
         k = readkey()
         if k == key.ENTER:
@@ -330,7 +339,7 @@ def welcome_to_daily_math(username):
     new_screen()
     user = make_capitalize(username)
     center_text_color_attr("Welcome to Daily Math " + user,
-                           "green", "underline")
+                           "green", "bold")
     center_text("May your calculations be true!")
     center_text("Todays date is: " + date_today())
     new_line()
@@ -355,13 +364,13 @@ def latest_login(username):
     if date_today() == users_latest_login:
         new_screen()
         if int(today_user_treats) > 5:
-            center_text_color_attr("Great job " + user, "green", "underline")
+            center_text_color_attr("Great job " + user, "green", "bold")
             center_text("You are done for today, but feel free to continue!")
         new_line()
         center_text("Todays earned treats: "
                     + str(today_user_treats) + " out of 5")
         center_text_color_attr("This is your total amount of treats earned: "
-                               + str(total_user_treats), "cyan", "underline")
+                               + str(total_user_treats), "cyan", "bold")
         new_line()
         press_any_key()
         menu(username)
@@ -423,7 +432,7 @@ def random_qoutes():
 
     # Gets the Author from Google sheet
     author = quotes_wks.cell(random_number, 2).value
-    center_text_color("- " + author, "cyan")
+    center_text_color_attr("- " + author, "cyan", "bold")
 
 
 def calculate_age(username):
@@ -443,7 +452,7 @@ def instructions(username):
     new_line()
     user = make_capitalize(username)
     message = "you now have three choices of difficulty"
-    center_text_color_attr(f"{user}, {message}", "green", "underline")
+    center_text_color_attr(f"{user}, {message}", "green", "bold")
     center_text("1. Age 3-5")
     center_text(" 2. Age 6-12")
     center_text("3. Age 12+")
@@ -473,7 +482,7 @@ def answer_question(username, num):
     """
     new_screen()
     center_text_color_attr("To go back, just press Enter when its empty.",
-                           "yellow", "underline")
+                           "yellow", "bold")
     question_list = random_questions(num)
     user = make_capitalize(username)
     tries = 0
@@ -489,14 +498,14 @@ def answer_question(username, num):
                 message = "Your answer contains a dot, please use commas."
                 new_line()
                 center_text_color_attr(message,
-                                       "yellow", "underline")
+                                       "yellow", "bold")
             else:
                 break
         if user_input == question_list[1]:
             new_screen()
             earn_treats(username)
             message = "That is correct " + str(user) + ", good work!"
-            center_text(message)
+            center_text_color_attr(message, "green", "bold")
             center_text("Here is a treat for you!")
             new_line()
             center_text("🍪")
@@ -509,12 +518,14 @@ def answer_question(username, num):
             user = make_capitalize(username)
             if int(today_user_treats) > 5:
                 new_line()
-                center_text("Great job " + user)
+                center_text_color_attr("Great job " + user,
+                                       "green", "bold")
                 done = "You are done for today, but feel free to continue!"
                 center_text(done)
             new_line()
-            center_text("Todays earned treats: "
-                        + str(today_user_treats) + " out of 5")
+            center_text_color_attr("Todays earned treats: "
+                                   + str(today_user_treats) + " out of 5",
+                                   "cyan", "bold")
             center_text("This is your total amount of treats earned: "
                         + str(total_user_treats))
             # ----------------
@@ -540,9 +551,11 @@ def answer_question(username, num):
                         elif k == "3":
                             menu(username)
                         else:
-                            center_text("Did not press 1 or 2... Try again")
+                            text = "Did not press 1, 2 or 3... Try again"
+                            center_text_color_attr(text, "yellow", "bold")
             new_screen()
-            center_text("Wrong answer, keep trying " + user + "!")
+            center_text_color_attr("Wrong answer, keep trying " + user + "!",
+                                   "red", "bold")
             # sleep(0.5)
             center_text(str(tries) + " out of 3")
             # sleep(0.5)
@@ -557,7 +570,8 @@ def another_question(username, num):
     Asks if you want another question in the same difficulty
     """
     new_line()
-    center_text("Do you want to continue?")
+    center_text_color_attr("Do you want to continue?",
+                           "green", "bold")
     center_text("Press Y for yes and N for no")
     while True:
         k = readkey()
@@ -568,7 +582,8 @@ def another_question(username, num):
             menu(username)
             break
         if k != "y":
-            center_text("Press Y for yes and N for no")
+            center_text_color_attr("Press Y for yes and N for no",
+                                   "yellow", "bold")
             clear_screen()
 
 
@@ -589,7 +604,7 @@ def check_your_age(username, your_age, age, user, num):
         new_screen()
         message = "Your age is not recommended for this difficulty, "
         center_text_color_attr(message + user + ".",
-                               "red", "underline")
+                               "red", "bold")
         center_text("Do you want to continue?")
         center_text("Press Y for yes and N for no")
         while True:
@@ -602,7 +617,6 @@ def check_your_age(username, your_age, age, user, num):
                 choose_difficulty(username)
                 break
             if k != "y":
-                center_text("Press Y for yes and N for no")
                 if_your_age()
     if age == 13:
         clear_screen()
@@ -623,7 +637,7 @@ def choose_difficulty(username):
     your_age = calculate_age(username)
     instructions(username)
     user = make_capitalize(username)
-    center_text_color("Pick a number between 1 and 3", "cyan")
+    center_text_color_attr("Pick a number between 1 and 3", "cyan", "bold")
     while True:
         # sleep(0.5)
         k = readkey()
@@ -647,7 +661,7 @@ def choose_difficulty(username):
             space_top()
             message = "It's not that hard "
             center_text_color_attr(message + user + "...",
-                                   "yellow", "underline")
+                                   "yellow", "bold")
             center_text("Pick a number between 1 and 3!")
             instructions(username)
 
@@ -702,7 +716,7 @@ def menu(username):
     """
     new_screen()
     center_text_color_attr("Menu, press the number to continue",
-                           "green", "underline")
+                           "green", "bold")
     center_text("1. Question")
     center_text("2. Motivational quote")
     center_text("3. Check my treats")
@@ -735,7 +749,7 @@ def menu(username):
         else:
             new_line()
             center_text_color_attr("Did not press 1, 2 or 3.. Try again",
-                                   "yellow", "underline")
+                                   "yellow", "bold")
 
 
 login_screen()
