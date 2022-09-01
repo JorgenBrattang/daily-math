@@ -443,6 +443,8 @@ def instructions(username):
     """
     new_line()
     user = make_capitalize(username)
+    loading()
+    new_screen()
     message = "you now have three choices of difficulty"
     center_text_color(f"{user}, {message}", "green", "bold")
     center_text("1. Age 3-5")
@@ -477,6 +479,7 @@ def answer_question(username, num):
     """
     Here you will get to answer the question given to you.
     """
+    loading()
     new_screen()
     center_text_color("To go back, just press Enter when its empty.",
                       "yellow", "bold")
@@ -502,6 +505,7 @@ def answer_question(username, num):
         if user_input == question_list[1]:
             new_screen()
             earn_treats(username)
+            new_screen()
             message = "That is correct " + str(user) + ", good work!"
             center_text_color(message, "green", "bold")
             center_text("Here is a treat for you!")
@@ -677,6 +681,7 @@ def earn_treats(username):
     """
     Give the user treats for each completed question.
     """
+    loading()
     # Finds the users row
     row_select = find_user(username)
     # checks the value of treats in google sheets
@@ -694,6 +699,7 @@ def reset_treats(username):
     """
     Resets the users treats for a new day.
     """
+    loading()
     # Finds the users row
     row_select = find_user(username)
     # Access the users worksheets and sets the treats back to 0
