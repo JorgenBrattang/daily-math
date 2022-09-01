@@ -156,10 +156,25 @@ The logic behind each function is simple but requires a bit of practice and fail
 
 ![stretch-page](assets/images/features/28_choice_error.png)
 
-- If we press (2), we get thrown back to the same question as befor but with three new tries. If we press (3), we go back to the main menu. So lets press (1)
+- If we press (2), we get thrown back to the same question as befor but with three new tries. If we press (3), we go back to the main menu. So lets press (1).
 
 ![stretch-page](assets/images/features/28_choice_error.png)
 
+- As you can tell I got another question here, due to the fact when I'm doing this I have redo my steps sometimes and since it's random it gave me another question. But the principle is the same, the question is told again and you are given the answer. If we answer (N) we will go back to main menu. So lets press (K) or any other button then (Y) to test it.
+
+![stretch-page](assets/images/features/29_choice_solution.png)
+
+- Now we get a suspected error, lets continue.
+
+![stretch-page](assets/images/features/30_solution_error.png)
+
+- Lets press (Y) on this to try again.
+
+![stretch-page](assets/images/features/31_solution_error_part2.png)
+
+- Now we are back at another random question. Lets answer right, which is (10).
+
+![stretch-page](assets/images/features/32_question_again.png)
 
 
 # Testing
