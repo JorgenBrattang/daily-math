@@ -148,9 +148,17 @@ The logic behind each function is simple but requires a bit of practice and fail
 
 ![stretch-page](assets/images/features/26_wrong_1.png)
 
-- Now we get our choice that was promised.
+- Now we get our choice that was promised. And lets try to press wrong again.
 
 ![stretch-page](assets/images/features/27_choice.png)
+
+- We get an error, and to continue to try.
+
+![stretch-page](assets/images/features/28_choice_error.png)
+
+- If we press (2), we get thrown back to the same question as befor but with three new tries. If we press (3), we go back to the main menu. So lets press (1)
+
+![stretch-page](assets/images/features/28_choice_error.png)
 
 
 

@@ -547,9 +547,11 @@ def answer_question(username, num):
                         k = readkey()
                         if k == "1":
                             new_screen()
-                            print(question_list[0])
+                            # Creates smaller chunks
+                            chunk_list = list(create_chunk_list
+                                              (question_list[0], 12))
+                            display_chunk_list(chunk_list)
                             center_text(f"The answer is {question_list[1]}")
-                            loading()
                             another_question(username, num)
                         elif k == "2":
                             loading()
@@ -575,11 +577,11 @@ def another_question(username, num):
     """
     Asks if you want another question in the same difficulty
     """
-    new_line()
-    center_text_color("Do you want to continue?",
-                      "green", "bold")
-    center_text("Press Y for yes and N for no")
     while True:
+        new_line()
+        center_text_color("Do you want to continue?",
+                          "green", "bold")
+        center_text("Press Y for yes and N for no")
         k = readkey()
         if k == "y":
             loading()
@@ -590,9 +592,12 @@ def another_question(username, num):
             menu(username)
             break
         if k != "y":
+            new_screen()
+            new_line()
             center_text_color("Press Y for yes and N for no",
                               "yellow", "bold")
-            clear_screen()
+            press_any_key()
+            new_screen()
 
 
 def make_capitalize(username):
@@ -732,7 +737,8 @@ def menu(username):
     """
     new_screen()
     while True:
-        center_text_color("Menu, press the number to continue", "green", "bold")
+        center_text_color("Menu, press the number to continue",
+                          "green", "bold")
         center_text("1. Question")
         center_text("2. Motivational quote")
         center_text("3. Check my treats")
