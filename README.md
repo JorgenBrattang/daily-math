@@ -4,10 +4,29 @@ Daily Math is a Python terminal game which runs on a mock terminal.
 
 The goal is to challange you to complete 5 math questions per day, either go the easy route or the hard one. You will earn treats either way, but at what cost...
 
+![stretch-page](assets/images/amIresponsive.png)
+
 Live app: https://daily-math.herokuapp.com/
 
-# User Experiance (UX)
-## User Stories
+# Table of content
+- [User Experience](#user-experience)
+    - [User stories](#user-stories)
+    - [User feedback](#user-feedback)
+- [Design](#design)
+    - [Login](#login)
+    - [Menu](#menu)
+    - [Difficulty](#difficulty)
+- [Development](#development)
+- [Strategy](#strategy)
+- [Feature and Testing](#feature-and-testing)
+- [Unsolved bugs](#unsolved-bugs)
+- [Technologies used](#technologies-used)
+    - [Language](#language)
+- [Frameworks libraries and programs used](#frameworks-libraries-and-programs-used)
+
+
+# User experience
+## User stories
 - The game should be easy to navigate
 - Should encurage me to complete the daily tasks
 - If the question in hand is to hard, give me the solution.
@@ -37,7 +56,7 @@ The logic behind each function is simple but requires a bit of practice and fail
 
 Everything that is entered, like username, age and so on. Will be stored on a seperate server Google sheet API. Which will be read and changed through out the code.
 
-## Feature / Testing
+## Feature and Testing
 I have combined these two to make space here, cause feature contains of 40 images. So by combining them will make it easier to follow along instead of contant repetition.
 
 Follow this <a href="https://github.com/JorgenBrattang/daily-math/blob/main/TESTING.md">Testing.md</a> to go there.
@@ -50,7 +69,7 @@ Follow this <a href="https://github.com/JorgenBrattang/daily-math/blob/main/TEST
 ## Language
 - Python
 
-## Frameworks libraries and programs Used
+## Frameworks libraries and programs used
 
 - <a href="https://git-scm.com/" title="Link to git" rel="nofollow">Git</a>
     - For version control
@@ -64,16 +83,18 @@ Follow this <a href="https://github.com/JorgenBrattang/daily-math/blob/main/TEST
     - To store information
 - <a href="https://dashboard.heroku.com/" title="Link to Heroku" rel="nofollow">Heroku</a>
     - To deploy project.
-- <a href="https://lucid.app/" title="Link to lucid" rel="nofollow">>Lucid</a> 
+- <a href="https://lucid.app/" title="Link to lucid" rel="nofollow">Lucid</a> 
     - To make flowcharts for the project
-- <a href="https://docs.python.org/3/library/random.html" title="Link to python random" rel="nofollow">>Random libary</a> 
+- <a href="https://docs.python.org/3/library/random.html" title="Link to python random" rel="nofollow">Random libary</a> 
     - To make random questions / quotes
-- <a href="https://docs.python.org/3/library/datetime.html" title="Link to python datetime" rel="nofollow">>Datetime libary</a> 
+- <a href="https://docs.python.org/3/library/datetime.html" title="Link to python datetime" rel="nofollow">Datetime libary</a> 
     - To display current date
-- <a href="https://docs.python.org/3/library/os.html" title="Link to python os" rel="nofollow">>Os libary</a> 
+- <a href="https://docs.python.org/3/library/os.html" title="Link to python os" rel="nofollow">Os libary</a> 
     - To clear the screen
-- <a href="https://pypi.org/project/readchar/" title="Link to python readchar" rel="nofollow">>Readchar libary</a> 
+- <a href="https://pypi.org/project/readchar/" title="Link to python readchar" rel="nofollow">Readchar libary</a> 
     - To get the user's keyboard presses
+- <a href="https://ui.dev/amiresponsive" title="Link to am i responsive" rel="nofollow">am i responsive</a> 
+    - Show of the mock terminal
 
 # Credit
 

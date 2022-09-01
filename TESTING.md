@@ -1,3 +1,10 @@
+# Validator
+Tested my code with <a href="http://pep8online.com/" title="Link to pep8online" rel="nofollow">PEP8</a> which showed these messages. I saw no purpose to fix those now, cause they are just recommendations.
+
+![stretch-page](assets/images/testing/pep8.png)
+
+
+# Features / Testing
 - Welcomes the player to the game and prompts you to answer the question if your a new or old player.
 
 ![stretch-page](assets/images/features/1_Welcome.png)
@@ -177,3 +184,18 @@
 - And you successfully quit the app.
 
 ![stretch-page](assets/images/features/40_final_screen.png)
+
+# Bugs
+
+## Solved bugs
+I had quite a few of bugs when programming, but here are the most annoying.
+
+- Getting the (Y) or (N) question to work properly with the input, I kept getting error when I used the approach to let the user enter by typing. So after a few hours of trying I accepted that I needed another approach which was to collect the key pressed instead. And that worked much better and was easier to catch if the the user miss typed.
+
+- Getting the data from the worksheet, but at a specific random place. This took a while to figure out, but was easy fix when it was to get it working. Simply by erasing the empty rows in the Google Sheet, and my code worked like a charm.
+
+- To center my text, this took a few hours to much to overcome. It kept moving my text to much on each side, so I made a calculationo to fix it. But was told that I used the function center() that's built in to center text. So after reading the documentation more a simple number was just needed and that fixed the problem.
+
+## Unsolved bugs
+- Could not disable the keyboard inbetween loading times, but I have an idea how to fix it. Sadly don't have enough time to fix it.
+    - The Idea is to make a function thats freeze the users input before they are prompted to enter something. And then unfreeze it when they need to enter something.
