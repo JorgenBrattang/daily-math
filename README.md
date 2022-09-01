@@ -180,13 +180,29 @@ The logic behind each function is simple but requires a bit of practice and fail
 
 ![stretch-page](assets/images/features/33_correct.png)
 
-- We get a great job, and we are free to continue. That 5 out of 5 counter will continue to count. So 6 out of 5... and so on. Now we get promted to press (Y) or (N) again. And if we press other that that the previous error we had when we tested solutions error, this will give the same so no need to show that. So lets press (N)
+- We get a great job, and we are free to continue. That 5 out of 5 counter will continue to count. So 6 out of 5... and so on. Now we get promted to press (Y) or (N) again. And if we press other that that the previous error we had when we tested solutions error, this will give the same so no need to show that. So lets press (Y) so I can show you another error message which is for the more advance questions, but still avaliable in the lower ages.
 
 ![stretch-page](assets/images/features/34_correct_finish.png)
 
-- We get a great job, and we are free to continue. That 5 out of 5 counter will continue to count. So 6 out of 5... and so on. Now we get promted to press (Y) or (N) again. And if we press other that that the previous error we had when we tested solutions error, this will give the same so no need to show that.
+- You answer includes a dot, use commas. This is done so no commas is entered when answering the harder questions on the higher age groups. I have chosen not to fix from dot to commas cause most calculations is done using commas. After that we get the 1 out of 3 error message.
 
-![stretch-page](assets/images/features/34_correct_finish.png)
+![stretch-page](assets/images/features/35_question_error.png)
+
+- So lets head back to the main menu.
+
+![stretch-page](assets/images/features/24_wrong_1.png)
+
+- So lets head back to the main menu. And press (2).
+
+![stretch-page](assets/images/features/18_menu.png)
+
+- And espected a nice motivational quote. Lets continue. And press (3) in the main menu to check my treats.
+
+![stretch-page](assets/images/features/36_another_random_quote.png)
+
+- Here we get show that we are complete with our tasks, and as you can see I cheated a little bit, now it shows 8 out of 5 and total earned 14. Just to show you that it will change over time. The total will never get reset, but the 5 out of 5 will get reset when the date is not the same as before.
+
+![stretch-page](assets/images/features/37_my_treats.png)
 
 # Testing
 To see the testing part, please follow this link: Testing.md

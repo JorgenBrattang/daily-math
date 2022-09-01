@@ -776,6 +776,7 @@ def menu(username):
                 elif k != "y":
                     loading()
                     new_screen()
+                    center_text_color("You are about to quit", "red", "bold")
                     center_text("Press Y for yes and N for no")
         else:
             new_line()
