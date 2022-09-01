@@ -221,7 +221,8 @@ def check_if_exists(new_user):
             # If it doesn't exist
             if user_cell is not None:
                 if new_user is True:
-                    new_line()
+                    clear_screen()
+                    new_screen()
                     center_text_color("This exists already, try another.",
                                       "red", "bold")
                     new_line()

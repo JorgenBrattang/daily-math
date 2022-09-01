@@ -48,6 +48,9 @@ The logic behind each function is simple but requires a bit of practice and fail
 - Back at when we were prompted to enter our name I entered more then 15 characters, which is the limit. And again it gives us the path back to previous page.
 ![stretch-page](assets/images/features/4_to_menu_characters.png)
 
+- Now I tried to enter my name "Jörgen" which I already created beforehand, to get this error.
+![stretch-page](assets/images/features/5_already_exists.png)
+
 # Testing
 To see the testing part, please follow this link: Testing.md
 
