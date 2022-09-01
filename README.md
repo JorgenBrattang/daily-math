@@ -23,6 +23,23 @@ Live app: https://daily-math.herokuapp.com/
 - [Technologies used](#technologies-used)
     - [Language](#language)
 - [Frameworks libraries and programs used](#frameworks-libraries-and-programs-used)
+- [Credit](#credit)
+    - [Deployment description](#deployment-description)
+    - [Quotes of the day](#quotes-of-the-day)
+    - [Math questions](#math-questions)
+    - [Credited Code](#credited-code)
+    - [Great Tutorial](#great-tutorial)
+- [Deployment](#deployment)
+    - [Create Repository](#create-repository)
+    - [Github Pages](#github-pages)
+    - [Forking](#forking)
+    - [Clone](#clone)
+    - [Setting up google sheets API](#setting-up-google-sheets-api)
+    - [Setting up heroku](#setting-up-heroku)
+- [Developers part](#Developers-part)
+- [What I learned](#what-i-learned)
+- [Continued development](#continued-development)
+- [Acknowledgements](#acknowledgements)
 
 
 # User experience
@@ -31,43 +48,64 @@ Live app: https://daily-math.herokuapp.com/
 - Should encurage me to complete the daily tasks
 - If the question in hand is to hard, give me the solution.
 
+[Back to top](#table-of-content)
+
 ## User feedback
 - The game keeps asking if Im sure to procceed, cause I go for the lower age group. I like it easy.. okey.
     - Keeping that feature because it should be a remainder that you need to progress even further and move up to the more challenging questions.
 
+[Back to top](#table-of-content)
+
 # Design
 I used <a href="https://lucid.app/">Lucid flowcharts</a> to help me with the flow of the project.
+
+[Back to top](#table-of-content)
 
 ## Login
 ![stretch-page](assets/images/flowchart/menu_flowchart.png)
 
+[Back to top](#table-of-content)
+
 ## Menu
 ![stretch-page](assets/images/flowchart/menu_flowchart.png)
+
+[Back to top](#table-of-content)
 
 ## Difficulty
 ![stretch-page](assets/images/flowchart/difficulty_flowchart.png)
 
+[Back to top](#table-of-content)
 
 # Development
 To Develop this app, the developer had to think how the app would progress throughout it steps which required a bit of thinking and learning how the code flowed. The logic behind all the functions is quite easy if you break them down to smaller chunks, but a bit of thinking is required to make it functional.
+
+[Back to top](#table-of-content)
 
 # Strategy
 The logic behind each function is simple but requires a bit of practice and failure to reach the final product. As mentioned before by breaking down the code into smaller chunks and each function to its core, it is quite easy to code this. But to make it work the developer needs to read documents and tutorials to grasp the concept and the fundamentals.
 
 Everything that is entered, like username, age and so on. Will be stored on a seperate server Google sheet API. Which will be read and changed through out the code.
 
+[Back to top](#table-of-content)
+
 ## Feature and Testing
 I have combined these two to make space here, cause feature contains of 40 images. So by combining them will make it easier to follow along instead of contant repetition.
 
 Follow this <a href="https://github.com/JorgenBrattang/daily-math/blob/main/TESTING.md">Testing.md</a> to go there.
 
+[Back to top](#table-of-content)
+
 ## Unsolved bugs
 - Could not disable the keyboard inbetween loading times, but I have an idea how to fix it. Sadly don't have enough time to fix it.
     - The Idea is to make a function thats freeze the users input before they are prompted to enter something. And then unfreeze it when they need to enter something.
 
+[Back to top](#table-of-content)
+
 # Technologies used
 ## Language
 - Python
+
+[Back to top](#table-of-content)
 
 ## Frameworks libraries and programs used
 
@@ -96,18 +134,24 @@ Follow this <a href="https://github.com/JorgenBrattang/daily-math/blob/main/TEST
 - <a href="https://ui.dev/amiresponsive" title="Link to am i responsive" rel="nofollow">am i responsive</a> 
     - Show of the mock terminal
 
+[Back to top](#table-of-content)
+
 # Credit
 
 ## Deployment description
 Huge thank you to <a href="https://github.com/Delboy/Fruit-Hunter">Delboy</a> with the excellent description on how the deployment went. 
 
-## Quotes of the day:
+[Back to top](#table-of-content)
+
+## Quotes of the day
 https://www.brainyquote.com/topics/motivational-quotes
 
 ```
 "Ever tried. Ever failed. No matter. Try Again. Fail again. Fail better." 
 - Samuel Beckett
 ```
+
+[Back to top](#table-of-content)
 
 ## Math questions
 
@@ -122,6 +166,8 @@ Ben has 4 peaches. Sarah has 3 peaches. How many peaches do they have in all?
 ```
 What is the number of the missing sequence: 16 09 68 88 ?? 98
 ```
+
+[Back to top](#table-of-content)
 
 # Credited Code
 
@@ -139,12 +185,14 @@ def create_chunk_list(my_list, chunk_size):
             yield my_list[i:i + chunk_size]
 ```
 
-- https://littlelearningcorner.com/2021/11/fun-math-questions-for-kids-k-2.html
+[Back to top](#table-of-content)
 
-## Great Tutorials
+## Great Tutorial
 
 - Register Keypresses
 https://pypi.org/project/readchar/
+
+[Back to top](#table-of-content)
 
 # Deployment
 To make this project I used the Code Institute's mock terminal for Heroku and their way of linking to Google Sheet API.
@@ -158,6 +206,8 @@ For this I used Github.
 5. Then clicked on "Create repository".
 6. Onces created, I opened the repository and clicked on "Gitpod" to create a new workplace.
 
+[Back to top](#table-of-content)
+
 ## Github Pages
 1. Went to my repository "daily-math".
 2. Settings tab.
@@ -165,11 +215,15 @@ For this I used Github.
 4. Chose my branch to be main.
 5. Hit save and a couple of minutes later it was deployed.
 
+[Back to top](#table-of-content)
+
 ## Forking
 1. Login to Github and go to my <a href="https://github.com/JorgenBrattang/daily-math">repository</a>
 2. Find the Fork button o the top right corner.
 3. Press it.
 4. The fork is now in your own repository.
+
+[Back to top](#table-of-content)
 
 ## Clone
 - Credit to <a href="https://github.com/Delboy/Fruit-Hunter">Delboy</a> for the magnificent description!
@@ -179,6 +233,8 @@ For this I used Github.
 3. This will bring up a few options as to how you would like to clone. You can 4. select HTTPS, SSH or Github CLI, then click the clipboard icon to copy the URL.
 4. Open git bash
 5. Type ‘git clone’ and then paste the URL you copied. Press Enter.
+
+[Back to top](#table-of-content)
 
 ## Setting up google sheets API
 - Credit to <a href="https://github.com/Delboy/Fruit-Hunter">Delboy</a> for the excellent description!
@@ -222,6 +278,8 @@ CREDS = Credentials.from_service_account_file('creds.json') SCOPED_CREDS = CREDS
 
 28. Your APIs will now be linked to your project.
 
+[Back to top](#table-of-content)
+
 ## Setting up heroku
 - Credit to <a href="https://github.com/Delboy/Fruit-Hunter">Delboy</a> for the beautiful description!
 
@@ -246,13 +304,19 @@ To set up heroku you must;
 17. Heroku will notify you that the app was successfully deployed with a button to view the app.
 18. If you want to rebuild your app automatically you can also select the 'Enable Automatic Deploys' button which will then rebuild the app every time you push any changes.
 
-# Developer's part
+[Back to top](#table-of-content)
+
+# Developers part
 
 ## What I learned
 The developer learn basic Python coding and how to implement libarys to make life a little easier, and not invent the wheel again.
 
+[Back to top](#table-of-content)
+
 ## Continued development
 To further develop this game, it would be to add even more questions and improve the solution to make a step by step guide to show the user how it was solved.
+
+[Back to top](#table-of-content)
 
 ## Acknowledgements
 I would like to acknowledge my mentor <a href="https://github.com/seunkoko" title="Link to GitHub profile" rel="nofollow">Oluwaseun Owonikoko</a> which guided me to make the app more interesting and threw me idea's that I did not think about.
@@ -260,3 +324,5 @@ I would like to acknowledge my mentor <a href="https://github.com/seunkoko" titl
  My family for helping me progress and support me, and not to forget the tutors and community of slack that helped me alot to understand the concepts of programming and hardship of debugging.
 
  And can't thank <a href="https://github.com/Delboy/Fruit-Hunter">Delboy</a> enough for the time saver with the informative description for deployment, saved me hours of writing and I'm so thankfull!
+
+ [Back to top](#table-of-content)
