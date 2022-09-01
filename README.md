@@ -200,9 +200,18 @@ The logic behind each function is simple but requires a bit of practice and fail
 
 ![stretch-page](assets/images/features/36_another_random_quote.png)
 
-- Here we get show that we are complete with our tasks, and as you can see I cheated a little bit, now it shows 8 out of 5 and total earned 14. Just to show you that it will change over time. The total will never get reset, but the 5 out of 5 will get reset when the date is not the same as before.
+- Here we get show that we are complete with our tasks, and as you can see I cheated a little bit, now it shows 8 out of 5 and total earned 14. Just to show you that it will change over time. The total will never get reset, but the 5 out of 5 will get reset when the date is not the same as before. Now all its left to press is 4. Quit.
 
 ![stretch-page](assets/images/features/37_my_treats.png)
+
+- And we get prompt to anser yes or no.
+
+![stretch-page](assets/images/features/38_quit.png)
+
+- If we missclick this happens. So if we press (N) we simply go back to main menu. Lets press (Y).
+
+![stretch-page](assets/images/features/39_quit_error.png)
+
 
 # Testing
 To see the testing part, please follow this link: Testing.md

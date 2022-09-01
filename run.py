@@ -769,6 +769,9 @@ def menu(username):
                 if k == "y":
                     loading()
                     clear_screen()
+                    new_screen()
+                    message = "You have succesfully quit, see you next time!"
+                    center_text_color(message, "green", "bold")
                     quit()
                 elif k == "n":
                     loading()
