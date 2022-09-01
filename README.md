@@ -66,8 +66,11 @@ The logic behind each function is simple but requires a bit of practice and fail
 - I now entered "1991" which is when I was born, which led us to this page. That tells us the account is setup and ready to start using. And prompts us back to enter name, but with a difference. Now we have entered if we went the route of (N), so we are now a user that already got an account.
 ![stretch-page](assets/images/features/10_account_setup.png)
 
-- Lets see what happens if we write "random".
-![stretch-page](assets/images/features/2_newuser.png)
+- Lets see what happens if we write "random". We get told that the account don't exist and get promted to try again. Lets press (N)
+![stretch-page](assets/images/features/11_random_entry.png)
+
+- We get sent back to the start page. And to get back were we where we just press (N) for new user.
+![stretch-page](assets/images/features/1_Welcome.png)
 
 
 

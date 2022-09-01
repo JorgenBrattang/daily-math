@@ -292,7 +292,8 @@ def check_if_exists(new_user):
                             new_screen()
                             center_text("Press Y for yes and N for no")
                 else:
-                    new_line()
+                    clear_screen()
+                    new_screen()
                     center_text(str(num_tries) + " of 3 tries!")
                     center_text_color("Wrong pin code, try again!",
                                       "red", "bold")
