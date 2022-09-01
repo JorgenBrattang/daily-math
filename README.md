@@ -176,6 +176,10 @@ The logic behind each function is simple but requires a bit of practice and fail
 
 ![stretch-page](assets/images/features/32_question_again.png)
 
+- First we get greeted that we are correct, and gets a treat for our accomplishment. And displays our todays effort and total. And as you can see that is 3 out of 5 now, and I played two times before this to show one other then 1 out of 5. Lets make it so we get 5 out of 5 to see what happens.
+
+![stretch-page](assets/images/features/33_correct.png)
+
 
 # Testing
 To see the testing part, please follow this link: Testing.md

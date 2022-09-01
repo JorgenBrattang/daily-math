@@ -522,7 +522,7 @@ def answer_question(username, num):
             today_user_treats = users_wks.cell(row_select, 5).value
             total_user_treats = users_wks.cell(row_select, 6).value
             user = make_capitalize(username)
-            if int(today_user_treats) > 5:
+            if int(today_user_treats) >= 5:
                 new_line()
                 center_text_color("Great job " + user, "green", "bold")
                 done = "You are done for today, but feel free to continue!"
