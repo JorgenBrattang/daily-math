@@ -35,33 +35,45 @@ To Develop this app, the developer had to think how the app would progress throu
 # Strategy
 The logic behind each function is simple but requires a bit of practice and failure to reach the final product. As mentioned before by breaking down the code into smaller chunks and each function to its core, it is quite easy to code this. But to make it work the developer needs to read documents and tutorials to grasp the concept and the fundamentals.
 
+Everything that is entered, like username, age and so on. Will be stored on a seperate server Google sheet API. Which will be read and changed through out the code.
+
 ## Feature / Testing
 I have combined these two to make space here, cause feature contains of 40 images. So by combining them will make it easier to follow along instead of contant repetition.
 
+Follow this <a href="https://github.com/JorgenBrattang/daily-math/blob/main/TESTING.md">Testing.md</a> to go there.
+
 ## Unsolved bugs
-- Could not disable the keyboard while the sleep() was working it's magic. Tried different approaces but none that I could implement.
+- Could not disable the keyboard inbetween loading times, but I have an idea how to fix it. Sadly don't have enough time to fix it.
+    - The Idea is to make a function thats freeze the users input before they are prompted to enter something. And then unfreeze it when they need to enter something.
 
 # Technologies used
 ## Language
 - Python
 
 ## Frameworks libraries and programs Used
+
+- <a href="https://git-scm.com/" title="Link to git" rel="nofollow">Git</a>
+    - For version control
 - <a href="https://gitpod.io/" title="Link to gitpod" rel="nofollow">GitPod</a>
     - GitPod was used for writing code, committing, and then pushing to GitHub.
 - <a href="https://github.com/" title="Link to github" rel="nofollow">Github</a>
     - GitHub was used to store the project after pushing
-
-```python
-from random import randint # For random numbers
-
-from datetime import date # To get the date
-
-from time import sleep # To sleep in between, for UX
-
-import os # To clear the screen in between text
-
-from readchar import readkey, key # To get read keyboard presses, instead of using input
-```
+- <a href="https://docs.google.com/spreadsheets/u/0/" title="Link to google spreadsheet" rel="nofollow">Google Sheets</a>
+    - To store information
+- <a href="https://docs.gspread.org/en/latest/" title="Link to Gspread documentation" rel="nofollow">Gspread</a>
+    - To store information
+- <a href="https://dashboard.heroku.com/" title="Link to Heroku" rel="nofollow">Heroku</a>
+    - To deploy project.
+- <a href="https://lucid.app/" title="Link to lucid" rel="nofollow">>Lucid</a> 
+    - To make flowcharts for the project
+- <a href="https://docs.python.org/3/library/random.html" title="Link to python random" rel="nofollow">>Random libary</a> 
+    - To make random questions / quotes
+- <a href="https://docs.python.org/3/library/datetime.html" title="Link to python datetime" rel="nofollow">>Datetime libary</a> 
+    - To display current date
+- <a href="https://docs.python.org/3/library/os.html" title="Link to python os" rel="nofollow">>Os libary</a> 
+    - To clear the screen
+- <a href="https://pypi.org/project/readchar/" title="Link to python readchar" rel="nofollow">>Readchar libary</a> 
+    - To get the user's keyboard presses
 
 # Credit
 
