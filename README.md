@@ -37,40 +37,64 @@ The logic behind each function is simple but requires a bit of practice and fail
 
 ## Feature
 - Welcomes the player to the game and prompts you to answer the question if your a new or old player.
+
 ![stretch-page](assets/images/features/1_Welcome.png)
 
 - Here we took the route (Y) for yes we are a new user. And here we are prompted to enter our name. Which accepts alphabetic and numeric characters.
+
 ![stretch-page](assets/images/features/2_newuser.png)
 
 - Tried to enter (!) which is not alphabetic or numeric character, to return we simply press any key. Which sends us back to the previous page.
+
 ![stretch-page](assets/images/features/3_alphanumeric.png)
 
 - Back at when we were prompted to enter our name I entered more then 15 characters, which is the limit. And again it gives us the path back to previous page.
+
 ![stretch-page](assets/images/features/4_to_menu_characters.png)
 
 - Now I tried to enter my name "Jörgen" which I already created beforehand, to get this error. Again, we get the path back to previous page.
+
 ![stretch-page](assets/images/features/5_already_exists.png)
 
 - Now I entered "Brattäng" instead, and that went through. So now I'm prompt to enter a pin code.
+
 ![stretch-page](assets/images/features/6_enter_pinCode.png)
 
 - I tested to write just "1" and you get an error, this will happen until you enter a 4 digit pin code. No matter what you enter, so it only checks for example: 1234 which I entered.
+
 ![stretch-page](assets/images/features/7_pin_not_valid.png)
 
 - Here we get prompt to enter our year of birth, and it will give out the same error as before. But with a difference.
+
 ![stretch-page](assets/images/features/8_year_of_birth.png)
 
 - And as you might have guess, this is the key difference "year of birth". I have chosen not to display that you need to enter a specific year, cause this app will live on forever and I don't want to destroy it for future users.
+
 ![stretch-page](assets/images/features/9_year_not_valid.png)
 
 - I now entered "1991" which is when I was born, which led us to this page. That tells us the account is setup and ready to start using. And prompts us back to enter name, but with a difference. Now we have entered if we went the route of (N), so we are now a user that already got an account.
+
 ![stretch-page](assets/images/features/10_account_setup.png)
 
 - Lets see what happens if we write "random". We get told that the account don't exist and get promted to try again. Lets press (N)
+
 ![stretch-page](assets/images/features/11_random_entry.png)
 
-- We get sent back to the start page. And to get back were we where we just press (N) for new user.
+- We get sent back to the start page. And to get back were we where we just press (N) for new user. And this gives the same errors as before if you enter not alphabetic or numeric, likewise with to many characters. Lets enter "Brattäng" now.
+
 ![stretch-page](assets/images/features/1_Welcome.png)
+
+- Now we are back to enter our pin code, and the same errors before if you try something else that isn't ours. But a key difference.
+
+![stretch-page](assets/images/features/6_enter_pinCode.png)
+
+- I entered not "1234" but "5648" instead and get this, and this will continue until you get it right or fail three times. Lets see what happens after three times.
+
+![stretch-page](assets/images/features/12_wrong_pin.png)
+
+- Second try
+
+![stretch-page](assets/images/features/13_wrong_pin.png)
 
 
 
