@@ -677,7 +677,7 @@ def choose_difficulty(username):
             message = "It's not that hard "
             center_text_color(message + user + "...",
                               "yellow", "bold")
-            center_text("Pick a number between 1 and 3!")
+            center_text("Pick a number between 1 and 4!")
             press_any_key()
             instructions(username)
 

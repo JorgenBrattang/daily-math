@@ -35,7 +35,7 @@ To Develop this app, the developer had to think how the app would progress throu
 # Strategy
 The logic behind each function is simple but requires a bit of practice and failure to reach the final product. As mentioned before by breaking down the code into smaller chunks and each function to its core, it is quite easy to code this. But to make it work the developer needs to read documents and tutorials to grasp the concept and the fundamentals.
 
-## Feature
+## Feature / Testing
 - Welcomes the player to the game and prompts you to answer the question if your a new or old player.
 
 ![stretch-page](assets/images/features/1_Welcome.png)
@@ -118,7 +118,11 @@ The logic behind each function is simple but requires a bit of practice and fail
 
 - As suspected we made the wrong choice and gets greeted by an error, lets press any key to continue. And press (1) instead.
 
-![stretch-page](assets/images/features/18_menu.png)
+![stretch-page](assets/images/features/19_menu_wrong.png)
+
+- Now we have a though choice, as we entered year of birth 1991 our age is now "31" at the time of writing this. But first lets check if you press (5) or any other then 1 - 4.
+
+![stretch-page](assets/images/features/20_difficulty_menu.png)
 
 
 # Testing
