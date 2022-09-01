@@ -505,6 +505,8 @@ def answer_question(username, num):
                 message = "Your answer contains a dot, please use commas."
                 new_line()
                 center_text_color(message, "yellow", "bold")
+                press_any_key()
+                break
             else:
                 break
         if user_input == question_list[1]:

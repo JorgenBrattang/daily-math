@@ -180,6 +180,13 @@ The logic behind each function is simple but requires a bit of practice and fail
 
 ![stretch-page](assets/images/features/33_correct.png)
 
+- We get a great job, and we are free to continue. That 5 out of 5 counter will continue to count. So 6 out of 5... and so on. Now we get promted to press (Y) or (N) again. And if we press other that that the previous error we had when we tested solutions error, this will give the same so no need to show that. So lets press (N)
+
+![stretch-page](assets/images/features/34_correct_finish.png)
+
+- We get a great job, and we are free to continue. That 5 out of 5 counter will continue to count. So 6 out of 5... and so on. Now we get promted to press (Y) or (N) again. And if we press other that that the previous error we had when we tested solutions error, this will give the same so no need to show that.
+
+![stretch-page](assets/images/features/34_correct_finish.png)
 
 # Testing
 To see the testing part, please follow this link: Testing.md
