@@ -648,7 +648,6 @@ def choose_difficulty(username):
     your_age = calculate_age(username)
     instructions(username)
     user = make_capitalize(username)
-    center_text_color("Pick a number between 1 and 3", "cyan", "bold")
     while True:
         k = readkey()
         if k == "1":
@@ -679,6 +678,7 @@ def choose_difficulty(username):
             center_text_color(message + user + "...",
                               "yellow", "bold")
             center_text("Pick a number between 1 and 3!")
+            press_any_key()
             instructions(username)
 
 

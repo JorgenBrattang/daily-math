@@ -116,6 +116,10 @@ The logic behind each function is simple but requires a bit of practice and fail
 
 ![stretch-page](assets/images/features/18_menu.png)
 
+- As suspected we made the wrong choice and gets greeted by an error, lets press any key to continue. And press (1) instead.
+
+![stretch-page](assets/images/features/18_menu.png)
+
 
 # Testing
 To see the testing part, please follow this link: Testing.md
