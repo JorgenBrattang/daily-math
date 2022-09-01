@@ -279,6 +279,7 @@ def check_if_exists(new_user):
                     while True:
                         new_line()
                         clear_screen()
+                        new_screen()
                         center_text_color("You tried 3 times, are you "
                                           + user + "?", "yellow", "bold")
                         center_text("Try again? Y or N")
