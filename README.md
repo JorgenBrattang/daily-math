@@ -48,8 +48,24 @@ The logic behind each function is simple but requires a bit of practice and fail
 - Back at when we were prompted to enter our name I entered more then 15 characters, which is the limit. And again it gives us the path back to previous page.
 ![stretch-page](assets/images/features/4_to_menu_characters.png)
 
-- Now I tried to enter my name "Jörgen" which I already created beforehand, to get this error.
+- Now I tried to enter my name "Jörgen" which I already created beforehand, to get this error. Again, we get the path back to previous page.
 ![stretch-page](assets/images/features/5_already_exists.png)
+
+- Now I entered "Brattäng" instead, and that went through. So now I'm prompt to enter a pin code.
+![stretch-page](assets/images/features/6_enter_pinCode.png)
+
+- I tested to write just "1" and you get an error, this will happen until you enter a 4 digit pin code. No matter what you enter, so it only checks for example: 1234 which I entered.
+![stretch-page](assets/images/features/7_pin_not_valid.png)
+
+- Here we get prompt to enter our year of birth, and it will give out the same error as before. But with a difference.
+![stretch-page](assets/images/features/8_year_of_birth.png)
+
+- And as you might have guess, this is the key difference "year of birth". I have chosen not to display that you need to enter a specific year, cause this app will live on forever and I don't want to destroy it for future users.
+![stretch-page](assets/images/features/9_year_not_valid.png)
+
+- I now entered "1991" which is when I was born, which led us to this page. That tells us the account is setup and ready to start using.
+![stretch-page](assets/images/features/10_account_setup.png)
+
 
 # Testing
 To see the testing part, please follow this link: Testing.md
