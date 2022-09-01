@@ -551,6 +551,7 @@ def answer_question(username, num):
                             chunk_list = list(create_chunk_list
                                               (question_list[0], 12))
                             display_chunk_list(chunk_list)
+                            new_line()
                             center_text(f"The answer is {question_list[1]}")
                             another_question(username, num)
                         elif k == "2":
