@@ -35,6 +35,12 @@ def create_chunk_list(my_list, chunk_size):
 # -------- ___________ ----------
 
 
+def loading():
+    """ Shows a loading text, so the user knows its working """
+    new_line()
+    center_text_color("Loading...", "green", "bold")
+
+
 def center_text(message):
     """
     Center the text
@@ -94,6 +100,7 @@ def ask_new_user():
         center_text("Y or N")
         k = readkey()
         if k == "y":
+            loading()
             check_if_exists(new_user)
         elif k == "n":
             new_user = False
@@ -125,6 +132,7 @@ def create_username():
                 new_line()
                 press_any_key()
             else:
+                loading()
                 return username.lower()
         new_screen()
         center_text("Please try again")
@@ -143,10 +151,12 @@ def create_user_pin():
             user_pin = int(input(input_message()))
             test_pin_lenght = len(str(user_pin))
             if test_pin_lenght == 4:
+                loading()
                 return user_pin
             else:
                 raise ValueError
         except ValueError:
+            loading()
             new_screen()
             center_text_color("That's not a valid option!",
                               "red", "bold")
@@ -164,6 +174,7 @@ def create_birth_year():
             birth_year = int(input(input_message()))
             test_pin_lenght = len(str(birth_year))
             if test_pin_lenght == 4:
+                loading()
                 return birth_year
             else:
                 raise ValueError
@@ -232,9 +243,11 @@ def check_if_exists(new_user):
                             center_text("Try again? Y or N")
                             k = readkey()
                             if k == "y":
+                                loading()
                                 check_if_exists(False)
                                 break
                             elif k == "n":
+                                loading()
                                 login_screen()
                                 break
                             elif k != "y":
@@ -271,6 +284,7 @@ def check_if_exists(new_user):
                             num_tries = 0
                             break
                         if k == "n":
+                            loading()
                             login_screen()
                         if k != "y":
                             new_screen()
@@ -284,6 +298,7 @@ def check_if_exists(new_user):
                     press_any_key()
         # If username don't exist do this
         else:
+            loading()
             birth_year = create_birth_year()
             update_users_worksheet(username, user_pin,
                                    birth_year, date_today())
@@ -321,9 +336,11 @@ def welcome_to_daily_math(username):
     center_text("Todays date is: " + date_today())
     new_line()
     press_any_key()
+    loading()
     random_qoutes()
     new_line()
     press_any_key()
+    loading()
 
 
 def latest_login(username):
@@ -396,6 +413,7 @@ def random_qoutes():
     """
     Gives you an random qoute from google sheets
     """
+    new_screen()
     # Gets the lenght of qoutes and gives a random number
     length = quotes_wks.row_count
     random_number = randint(2, length)
@@ -521,10 +539,13 @@ def answer_question(username, num):
                             new_screen()
                             print(question_list[0])
                             center_text(f"The answer is {question_list[1]}")
+                            loading()
                             another_question(username, num)
                         elif k == "2":
+                            loading()
                             answer_question(username, num)
                         elif k == "3":
+                            loading()
                             menu(username)
                         else:
                             text = "Did not press 1, 2 or 3... Try again"
@@ -549,9 +570,11 @@ def another_question(username, num):
     while True:
         k = readkey()
         if k == "y":
+            loading()
             answer_question(username, num)
             break
         if k == "n":
+            loading()
             menu(username)
             break
         if k != "y":
@@ -583,18 +606,23 @@ def check_your_age(username, your_age, age, user, num):
             k = readkey()
             if k == "y":
                 clear_screen()
+                loading()
                 answer_question(username, num)
                 break
             if k == "n":
+                loading()
                 choose_difficulty(username)
                 break
             if k != "y":
+                loading()
                 if_your_age()
     if age == 13:
         clear_screen()
+        loading()
         answer_question(username, num)
     else:
         if your_age > age:
+            loading()
             if_your_age()
 
 
@@ -615,16 +643,19 @@ def choose_difficulty(username):
         if k == "1":
             age = 5
             num = 1
+            loading()
             check_your_age(username, your_age, age, user, num)
             break
         elif k == "2":
             age = 12
             num = 2
+            loading()
             check_your_age(username, your_age, age, user, num)
             break
         elif k == "3":
             age = 13
             num = 3
+            loading()
             check_your_age(username, your_age, age, user, num)
             break
         elif k != "y":
@@ -672,6 +703,7 @@ def login_screen():
     """
     First thing you see and that you need to login / register to move on.
     """
+    loading()
     welcome_message()
     ask_new_user()
 
@@ -689,14 +721,18 @@ def menu(username):
     while True:
         k = readkey()
         if k == "1":
+            loading()
             choose_difficulty(username)
         elif k == "2":
             new_screen()
+            loading()
             random_qoutes()
             new_line()
             press_any_key()
+            loading()
             menu(username)
         elif k == "3":
+            loading()
             latest_login(username)
         elif k == "4":
             new_line()
@@ -704,11 +740,14 @@ def menu(username):
             while True:
                 k = readkey()
                 if k == "y":
+                    loading()
                     clear_screen()
                     quit()
                 elif k == "n":
+                    loading()
                     menu(username)
                 elif k != "y":
+                    loading()
                     new_screen()
                     center_text("Press Y for yes and N for no")
         else:
