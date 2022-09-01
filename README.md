@@ -20,13 +20,13 @@ Live app: https://daily-math.herokuapp.com/
 I used <a href="https://lucid.app/">Lucid flowcharts</a> to help me with the flow of the project.
 
 ## Login
-![stretch-page](assets/images/menu_flowchart.png)
+![stretch-page](assets/images/flowchart/menu_flowchart.png)
 
 ## Menu
-![stretch-page](assets/images/menu_flowchart.png)
+![stretch-page](assets/images/flowchart/menu_flowchart.png)
 
 ## Difficulty
-![stretch-page](assets/images/difficulty_flowchart.png)
+![stretch-page](assets/images/flowchart/difficulty_flowchart.png)
 
 
 # Development
@@ -35,33 +35,18 @@ To Develop this app, the developer had to think how the app would progress throu
 # Strategy
 The logic behind each function is simple but requires a bit of practice and failure to reach the final product. As mentioned before by breaking down the code into smaller chunks and each function to its core, it is quite easy to code this. But to make it work the developer needs to read documents and tutorials to grasp the concept and the fundamentals.
 
-## Feature / Task list
-- Welcome message
-- Enter user name
-    - Explain that user input i stored in non secured fasion, use fictional enquiry.
-    - If first time, create account otherwise move on.
-- User login
-- Welcome message, maybe qoute of the day.
-- Display how many points you need for today.
-- Choose diffuculty level.
-     - Level 1, preschool
-     - Level 2, school
-     - Level 3, Real life
-           - Score increases per level of       diffuculty.
-- Question:
-     - Level 1 question, whole text with numbers.
-     - Level 2 question, just names and numbers.
-     - Level 3 question, equation only.
-     - Level 4, still needs help, display part solution.
-- Different score for each level, the higher level the lower score.
-- Once done, grant a thank you note or similar for completing this weeks homework.
-Google sheet tasks:
-- Save the user login.
-- Keep record of score.
-- Level questions.
-    - Different score on each level.
-- Corresponding equations on the questions for each level.
-- Different messages, example "Welcome message".
+## Feature
+- Welcomes the player to the game and prompts you to answer the question if your a new or old player.
+![stretch-page](assets/images/features/1_Welcome.png)
+
+- Here we took the route (Y) for yes we are a new user. And here we are prompted to enter our name. Which accepts alphabetic and numeric characters.
+![stretch-page](assets/images/features/2_newuser.png)
+
+- Tried to enter (!) which is not alphabetic or numeric character, to return we simply press any key. Which sends us back to the previous page.
+![stretch-page](assets/images/features/3_alphanumeric.png)
+
+- Back at when we were prompted to enter our name I entered more then 15 characters, which is the limit. And again it gives us the path back to previous page.
+![stretch-page](assets/images/features/4_to_menu_characters.png)
 
 # Testing
 To see the testing part, please follow this link: Testing.md
