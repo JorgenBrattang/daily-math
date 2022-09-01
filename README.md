@@ -16,6 +16,19 @@ Live app: https://daily-math.herokuapp.com/
 - The game keeps asking if Im sure to procceed, cause I go for the lower age group. I like it easy.. okey.
     - Keeping that feature because it should be a remainder that you need to progress even further and move up to the more challenging questions.
 
+# Design
+I used <a href="https://lucid.app/">Lucid flowcharts</a> to help me with the flow of the project.
+
+## Login
+![stretch-page](assets/images/menu_flowchart.png)
+
+## Menu
+![stretch-page](assets/images/menu_flowchart.png)
+
+## Difficulty
+![stretch-page](assets/images/difficulty_flowchart.png)
+
+
 # Development
 To Develop this app, the developer had to think how the app would progress throughout it steps which required a bit of thinking and learning how the code flowed. The logic behind all the functions is quite easy if you break them down to smaller chunks, but a bit of thinking is required to make it functional.
 
