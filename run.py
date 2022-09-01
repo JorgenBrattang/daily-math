@@ -101,7 +101,7 @@ def ask_new_user():
         elif k != "y":
             new_screen()
             center_text_color("Press Y for yes and N for no",
-                                   "yellow", "bold")
+                              "yellow", "bold")
 
 
 def create_username():
@@ -112,9 +112,11 @@ def create_username():
                           "yellow", "bold")
         new_line()
         center_text_color("Please enter your name.", "green", "bold")
+        # Strip takes away the spaces when writing the name
         username = input(input_message()).strip()
         if len(username) == 0:
             login_screen()
+        # Asks if there is alphanumeric chararacters only
         if username.isalnum():
             if len(username) > 15:
                 new_screen()
@@ -238,15 +240,13 @@ def check_if_exists(new_user):
                             elif k != "y":
                                 space_top()
                                 message = ("Press Y for yes and N for no")
-                                center_text_color(message, "yellow",
-                                                  "bold")
+                                center_text_color(message, "yellow", "bold")
                 else:
                     return [username, user_cell]
 
     value = user_cell(new_user)
     username = value[0]
     user_cell = value[1]
-
     user = make_capitalize(username)
     num_tries = 0
     while True:
@@ -316,8 +316,7 @@ def welcome_to_daily_math(username):
     """
     new_screen()
     user = make_capitalize(username)
-    center_text_color("Welcome to Daily Math " + user,
-                      "green", "bold")
+    center_text_color("Welcome to Daily Math " + user, "green", "bold")
     center_text("May your calculations be true!")
     center_text("Todays date is: " + date_today())
     new_line()
@@ -336,19 +335,20 @@ def latest_login(username):
     row_select = find_user(username)
     # checks the value of date in google sheets
     users_latest_login = users_wks.cell(row_select, 4).value
+    # Checks the value of the treats
     today_user_treats = users_wks.cell(row_select, 5).value
     total_user_treats = users_wks.cell(row_select, 6).value
     user = make_capitalize(username)
     if date_today() == users_latest_login:
         new_screen()
         if int(today_user_treats) > 5:
-            center_text_color_attr("Great job " + user, "green", "bold")
+            center_text_color("Great job " + user, "green", "bold")
             center_text("You are done for today, but feel free to continue!")
         new_line()
         center_text("Todays earned treats: "
                     + str(today_user_treats) + " out of 5")
-        center_text_color_attr("This is your total amount of treats earned: "
-                               + str(total_user_treats), "cyan", "bold")
+        center_text_color("This is your total amount of treats earned: "
+                          + str(total_user_treats), "cyan", "bold")
         new_line()
         press_any_key()
         menu(username)
@@ -380,7 +380,6 @@ def find_user(username):
     """
     # Finds the user
     user_cell = users_wks.find(username, in_column=1)
-
     # Selects the row
     return user_cell.row
 
@@ -400,14 +399,11 @@ def random_qoutes():
     # Gets the lenght of qoutes and gives a random number
     length = quotes_wks.row_count
     random_number = randint(2, length)
-
     # Gets the Qoute from Google sheet
     qoutes = quotes_wks.cell(random_number, 1).value
-
     # Creates a new list and prints it out
     chunk_list = list(create_chunk_list(qoutes, 8))
     display_chunk_list(chunk_list)
-
     # Gets the Author from Google sheet
     author = quotes_wks.cell(random_number, 2).value
     center_text_color("- " + author, "cyan", "bold")
@@ -440,6 +436,7 @@ def random_questions(num):
     """
     Random question
     """
+    # Gets the num and selects the appropiet worksheet
     if num == 1:
         worksheet = questions_1_wks
     elif num == 2:
@@ -447,8 +444,11 @@ def random_questions(num):
     elif num == 3:
         worksheet = questions_3_wks
     new_line()
+    # Gets the amount of rows
     length = worksheet.row_count
+    # Creates a random number
     random_number = randint(2, length)
+    # Selects a random question and the corresponing answer
     question = worksheet.cell(random_number, 1).value
     answer = worksheet.cell(random_number, 2).value
     return [question, answer]
@@ -465,10 +465,12 @@ def answer_question(username, num):
     user = make_capitalize(username)
     tries = 0
     while True:
+        # Creates smaller chunks, so the center text can work is magic
         chunk_list = list(create_chunk_list(question_list[0], 12))
         display_chunk_list(chunk_list)
         while True:
             new_line()
+            # Strip away the spaces from user input
             user_input = input(input_message()).strip()
             if len(user_input) == 0:
                 menu(username)
@@ -574,8 +576,7 @@ def check_your_age(username, your_age, age, user, num):
         """ Creates smaller code, for more readability """
         new_screen()
         message = "Your age is not recommended for this difficulty, "
-        center_text_color_attr(message + user + ".",
-                               "red", "bold")
+        center_text_color(message + user + ".", "red", "bold")
         center_text("Do you want to continue?")
         center_text("Press Y for yes and N for no")
         while True:
@@ -642,15 +643,12 @@ def earn_treats(username):
     """
     # Finds the users row
     row_select = find_user(username)
-
     # checks the value of treats in google sheets
     user_treats = users_wks.cell(row_select, 5).value
     total_user_treats = users_wks.cell(row_select, 6).value
-
     # Sets the users_treats to be int and adds more readability
     increase_treats = int(user_treats)
     total_increase_treats = int(total_user_treats)
-
     # Access the users worksheets and increases the treats by 1
     users_wks.update_cell(row_select, 5, increase_treats+1)
     users_wks.update_cell(row_select, 6, total_increase_treats+1)
@@ -662,10 +660,8 @@ def reset_treats(username):
     """
     # Finds the users row
     row_select = find_user(username)
-
     # Access the users worksheets and sets the treats back to 0
     users_wks.update_cell(row_select, 5, 0)
-
     # Checks if users got total users treats
     total_user_treats = users_wks.cell(row_select, 6).value
     if total_user_treats is None:
@@ -685,8 +681,7 @@ def menu(username):
     This is where you return to when your done with certain things
     """
     new_screen()
-    center_text_color("Menu, press the number to continue",
-                      "green", "bold")
+    center_text_color("Menu, press the number to continue", "green", "bold")
     center_text("1. Question")
     center_text("2. Motivational quote")
     center_text("3. Check my treats")
