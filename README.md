@@ -96,6 +96,25 @@ The logic behind each function is simple but requires a bit of practice and fail
 
 ![stretch-page](assets/images/features/13_wrong_pin.png)
 
+- Now we get that we tried 3 times, and get asked if we are "Brattäng" which we entered. And to try again, we will say (Y) to continue, otherwise we will just go back to start screen.
+
+![stretch-page](assets/images/features/14_are_you_name.png)
+
+- Now we are finaly logged in, and gets greeted with our name and gets the current date. And to continue on our adventure.
+
+![stretch-page](assets/images/features/15_login_welcome.png)
+
+- And we get an inspiring quote that is motivational. This is random, so it's different each time. And again press to continue.
+
+![stretch-page](assets/images/features/16_random_quote.png)
+
+- And now we get our goal of our adventure, to gain 5 treats each day. And it tells us our total amount that we accumulate over time. For now these are empty.
+
+![stretch-page](assets/images/features/17_treats_earned.png)
+
+- Now we are finally at the menu, where we get choices to make. Lets press (5) to start!
+
+![stretch-page](assets/images/features/18_menu.png)
 
 
 # Testing

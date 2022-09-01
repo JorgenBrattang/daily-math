@@ -729,12 +729,12 @@ def menu(username):
     This is where you return to when your done with certain things
     """
     new_screen()
-    center_text_color("Menu, press the number to continue", "green", "bold")
-    center_text("1. Question")
-    center_text("2. Motivational quote")
-    center_text("3. Check my treats")
-    center_text("4. Quit")
     while True:
+        center_text_color("Menu, press the number to continue", "green", "bold")
+        center_text("1. Question")
+        center_text("2. Motivational quote")
+        center_text("3. Check my treats")
+        center_text("4. Quit")
         k = readkey()
         if k == "1":
             loading()
@@ -770,6 +770,8 @@ def menu(username):
             new_line()
             center_text_color("Did not press 1, 2 or 3.. Try again",
                               "yellow", "bold")
+            press_any_key()
+            new_screen()
 
 
 login_screen()
