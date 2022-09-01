@@ -539,11 +539,11 @@ def answer_question(username, num):
             tries += 1
             if tries == 3:
                 while True:
-                    new_screen()
-                    center_text("Press 1 for solution.")
-                    center_text("Press 2 for to keep trying.")
-                    center_text("Press 3 to go back to menu")
                     while True:
+                        new_screen()
+                        center_text("Press 1 for solution.")
+                        center_text("Press 2 for to keep trying.")
+                        center_text("Press 3 to go back to menu")
                         k = readkey()
                         if k == "1":
                             new_screen()
@@ -559,7 +559,9 @@ def answer_question(username, num):
                             menu(username)
                         else:
                             text = "Did not press 1, 2 or 3... Try again"
+                            new_line()
                             center_text_color(text, "yellow", "bold")
+                            press_any_key()
             new_screen()
             center_text_color("Wrong answer, keep trying " + user + "!",
                               "red", "bold")

@@ -124,6 +124,35 @@ The logic behind each function is simple but requires a bit of practice and fail
 
 ![stretch-page](assets/images/features/20_difficulty_menu.png)
 
+- As suspected we get an error message, that we didn't enter the right number. Lets try again with age 3-5 to see what happens.
+
+![stretch-page](assets/images/features/21_difficulty_menu_wrong.png)
+
+- Because of my age "31" I get asked if I want to continue on this difficulty cause it was for age 3-5, and same goes for age 6-12 (no difference). So if we press (N) we get thrown back to the difficulty menu. So lets press (Y).
+
+![stretch-page](assets/images/features/22_difficulty_menu_age.png)
+
+- First we get asked if we want to go back, and to do that just leave the input field empty and press "Enter". Lets try to answer wrong first.
+
+![stretch-page](assets/images/features/23_age3-5.png)
+
+- We are now told that we got the wrong answer, and got three tries and a choice to be made after that. Lets continue.
+
+![stretch-page](assets/images/features/24_wrong_1.png)
+
+- We get thrown back to the question, but without the return. Cause we already know that. Lets continue to answer wrong.
+
+![stretch-page](assets/images/features/25_continue_question.png)
+
+- As suspected 2 out of 3. Lets do that again.
+
+![stretch-page](assets/images/features/26_wrong_1.png)
+
+- Now we get our choice that was promised.
+
+![stretch-page](assets/images/features/27_choice.png)
+
+
 
 # Testing
 To see the testing part, please follow this link: Testing.md
