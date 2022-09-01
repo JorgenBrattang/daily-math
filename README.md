@@ -63,8 +63,12 @@ The logic behind each function is simple but requires a bit of practice and fail
 - And as you might have guess, this is the key difference "year of birth". I have chosen not to display that you need to enter a specific year, cause this app will live on forever and I don't want to destroy it for future users.
 ![stretch-page](assets/images/features/9_year_not_valid.png)
 
-- I now entered "1991" which is when I was born, which led us to this page. That tells us the account is setup and ready to start using.
+- I now entered "1991" which is when I was born, which led us to this page. That tells us the account is setup and ready to start using. And prompts us back to enter name, but with a difference. Now we have entered if we went the route of (N), so we are now a user that already got an account.
 ![stretch-page](assets/images/features/10_account_setup.png)
+
+- Lets see what happens if we write "random".
+![stretch-page](assets/images/features/2_newuser.png)
+
 
 
 # Testing

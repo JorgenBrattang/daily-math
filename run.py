@@ -238,6 +238,7 @@ def check_if_exists(new_user):
                         return [username, user_cell]
                     else:
                         new_line()
+                        new_screen()
                         center_text_color("This account don't exist",
                                           "red", "bold")
                         while True:
