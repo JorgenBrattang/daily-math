@@ -448,6 +448,7 @@ def instructions(username):
     center_text("1. Age 3-5")
     center_text(" 2. Age 6-12")
     center_text("3. Age 12+")
+    center_text("4. Go back to menu")
 
 
 def random_questions(num):
@@ -632,6 +633,7 @@ def choose_difficulty(username):
         - Age 3-5
         - Age 6-12
         - Age 12+
+        - Menu
     """
     new_screen()
     your_age = calculate_age(username)
@@ -658,6 +660,9 @@ def choose_difficulty(username):
             loading()
             check_your_age(username, your_age, age, user, num)
             break
+        elif k == "4":
+            loading()
+            menu(username)
         elif k != "y":
             clear_screen()
             space_top()
